@@ -9,6 +9,7 @@ import styles from './App.module.css';
 import {faAward, faBiking, faBook, faDumbbell, faMoneyBillAlt} from "@fortawesome/free-solid-svg-icons";
 import CardDeck from "./components/CardDeck/CardDeck";
 import {faCalendar, faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 class App extends Component {
 
@@ -42,25 +43,37 @@ class App extends Component {
       const { habits, cards } = this.state;
 
       return (
-          <div className="App">
-              <div className={styles.wrapper}>
-                  <Sidebar />
-                  <Container fluid>
-                      {/*<Navbar*/}
-                      {/*    onAddHabit = { this.handleAddHabit }*/}
-                      {/*    onDeleteHabit = { this.handleDeleteHabit }*/}
-                      {/*/>*/}
-                      {/*<HabitList*/}
-                      {/*    habits = { habits }*/}
-                      {/*/>*/}
-                      <CollapseButton />
-                      <Chart />
-                      <CardDeck
-                        cards = { cards }
-                      />
-                  </Container>
+          <Router>
+              <div className="App">
+                  <div className={styles.wrapper}>
+                      <Sidebar />
+                      <Container fluid>
+                          <Route path="/habits" render={ () =>
+                              <Navbar
+                              onAddHabit = { this.handleAddHabit }
+                              onDeleteHabit = { this.handleDeleteHabit }
+                              />
+                          }/>
+                          <Route path="/habits" render={() =>
+                              <HabitList
+                                  habits = { habits }
+                              />
+                          }/>
+                          <Route path="/statistics" render={() =>
+                              <CollapseButton />
+                          }/>
+                          <Route path="/statistics" render={() =>
+                              <Chart />
+                          }/>
+                          <Route path="/statistics" render={() =>
+                              <CardDeck
+                                  cards = { cards }
+                              />
+                          }/>
+                      </Container>
+                  </div>
               </div>
-          </div>
+          </Router>
       );
   }
 }

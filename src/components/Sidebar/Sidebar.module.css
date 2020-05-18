@@ -34,10 +34,6 @@
     background: #878E88;
 }
 
-.sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #3b3933;
-    background: #CCCCCC;
-}
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
@@ -60,20 +56,13 @@ li a {
     padding: 15px;
 }
 
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-}
-
-a[data-toggle="collapse"] {
-    position: relative;
-}
 
 footer {
     text-align: center;
-    font-size: 0.8em;
+    font-size: 0.7em !important;
 }
 
+.collapseItem {
+    font-size: 0.85em !important;
+    padding: 12px !important;
+}

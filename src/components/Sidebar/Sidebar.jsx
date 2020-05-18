@@ -1,13 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from './Sidebar.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAddressBook, faInfoCircle, faTasks} from "@fortawesome/free-solid-svg-icons";
 import {faCalendarAlt, faCalendarCheck, faChartBar} from "@fortawesome/free-regular-svg-icons";
+import {Link} from "react-router-dom";
+import {Collapse} from "react-bootstrap";
 
 
 const Sidebar = () => {
+
+    const [open, setOpen] = useState(false);
 
     return(
             <nav className={ styles.sidebar }>
@@ -16,29 +20,31 @@ const Sidebar = () => {
                 </div>
                 <ul  className="list-unstyled">
                     <li className="active">
-                         <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" className="dropdown-toggle">
+                         <a role="button" onClick={() => setOpen(!open)} data-toggle="collapse"  aria-expanded={open} aria-controls="homeSubmenu" className="dropdown-toggle">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon icon={faAddressBook} />
                             </div>
                             Michał Zadrąg
                         </a>
-                        <ul className="collapse list-unstyled" id="homeSubmenu">
-                            <li>
-                                <a href="#">
-                                    Moje konto
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Edytuj dane
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Wyloguj
-                                </a>
-                            </li>
-                        </ul>
+                        <Collapse in={open}>
+                            <ul className="list-unstyled" id="homeSubmenu">
+                                <li>
+                                    <a href="#" className={styles.collapseItem}>
+                                        Moje konto
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className={styles.collapseItem}>
+                                        Edytuj dane
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className={styles.collapseItem}>
+                                        Wyloguj
+                                    </a>
+                                </li>
+                            </ul>
+                        </Collapse>
                     </li>
                     <li>
                         <a href="#">
@@ -57,20 +63,20 @@ const Sidebar = () => {
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="/habits">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon icon={faCalendarCheck} />
                             </div>
                             Nawyki
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="statistics.html">
+                        <Link to="/statistics">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon  icon={faChartBar} />
                             </div>
                             Statystyki
-                        </a>
+                        </Link>
                     </li>
                     <li>
                         <a href="#">
