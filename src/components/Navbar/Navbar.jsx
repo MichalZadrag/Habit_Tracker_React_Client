@@ -4,18 +4,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAlignLeft, faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
 import Nav from "react-bootstrap/Nav";
 import cx from 'classnames';
+import CollapseButton from "../CollapseButton/CollapseButton";
 
 const Navbar = ({ onAddHabit, onDeleteHabit }) => {
 
     return(
             <Nav className="navbar-expand-lg navbar-light bg-light">
                 <div className="collapse navbar-collapse">
-                    <Button variant={"secondary"} className={cx("btn", styles.btnTeal ,"mt-3")}>
-                        <FontAwesomeIcon icon={faAlignLeft}></FontAwesomeIcon>
-                    </Button>
+                    <CollapseButton />
                     <div className="navbar-nav mr-auto center">
 
                     </div>

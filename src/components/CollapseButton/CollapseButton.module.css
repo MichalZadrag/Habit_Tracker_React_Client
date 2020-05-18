@@ -1,0 +1,15 @@
+.btnTeal:hover {
+    background: #878E88;
+    color: #fff;
+}
+
+.btnTeal {
+    background: #bbbbbb;
+    margin: 10px;
+    color: #3b3933;
+    border: 0;
+
+}
+.btnTeal i {
+    color: #3b3933;
+}
