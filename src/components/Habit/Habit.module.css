@@ -1,0 +1,21 @@
+.listGroupItem {
+    background: #CCCCCC;
+    color: #3b3933;
+    transition: all 0.3s;
+    font-size: 1.1em;
+    margin: 15px;
+    border-radius: 7px !important;
+}
+.checkboxInline {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.checkbox {
+    margin: 3px;
+}
+
+.listGroupItem:hover {
+    background: #878E88;
+    color: #fff;
+}
