@@ -1,0 +1,14 @@
+.chartContainer {
+    background:  #CCCCCC;
+    padding: 25px;
+    border-radius: 7px;
+    margin: 25px 75px 85px;
+}
+.chart {
+    text-align: center;
+}
+
+.chart img {
+    width: 34%;
+    height: 34%;
+}

@@ -12,7 +12,7 @@ const HabitList = ({ habits } ) => {
     return(
             <div className={styles.listGroup}>
                 <ul className={cx(styles.listGroup, "list-unstyled")}>
-                    {habits.map((habit) => (
+                    {habits.map( (habit) => (
                         <Habit
                             key = { habit.id }
                             habit_text = { habit.habit_text }
