@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 import Container from "react-bootstrap/Container";
 
-import {Sidebar, HabitList, Navbar, CollapseButton, Chart} from "./components";
+import {Sidebar, HabitList, Navbar, CollapseButton, Chart, LoginForm, RegisterForm} from "./components";
 import styles from './App.module.css';
 import {faAward, faBiking, faBook, faDumbbell, faMoneyBillAlt} from "@fortawesome/free-solid-svg-icons";
 import CardDeck from "./components/CardDeck/CardDeck";
@@ -29,7 +29,7 @@ class App extends Component {
 
     handleAddHabit = () => {
         const habits = [...this.state.habits];
-        habits.push({ id: 4, habit_text: "Jazda na rowerze5", icon: faMoneyBillAlt });
+        habits.push({id: 4, habit_text: "Jazda na rowerze5", icon: faMoneyBillAlt});
         this.setState({habits});
     }
 
@@ -39,43 +39,45 @@ class App extends Component {
         this.setState({habits});
     }
 
-  render() {
-      const { habits, cards } = this.state;
+    render() {
+        const {habits, cards} = this.state;
 
-      return (
-          <Router>
-              <div className="App">
-                  <div className={styles.wrapper}>
-                      <Sidebar />
-                      <Container fluid>
-                          <Route path="/habits" render={ () =>
-                              <Navbar
-                              onAddHabit = { this.handleAddHabit }
-                              onDeleteHabit = { this.handleDeleteHabit }
-                              />
-                          }/>
-                          <Route path="/habits" render={() =>
-                              <HabitList
-                                  habits = { habits }
-                              />
-                          }/>
-                          <Route path="/statistics" render={() =>
-                              <CollapseButton />
-                          }/>
-                          <Route path="/statistics" render={() =>
-                              <Chart />
-                          }/>
-                          <Route path="/statistics" render={() =>
-                              <CardDeck
-                                  cards = { cards }
-                              />
-                          }/>
-                      </Container>
-                  </div>
-              </div>
-          </Router>
-      );
-  }
+        return (
+            <Router>
+                <div className="App">
+                    <div className={styles.wrapper}>
+                        <Route path="/login">
+                            <LoginForm/>
+                        </Route>
+                        <Route path="/register">
+                            <RegisterForm/>
+                        </Route>
+                        <Route path={["/", "/habits", "/statistics"]} exact>
+                            <Sidebar/>
+                            <Container fluid>
+                                <Route path={["/", "/habits"]} exact>
+                                    <Navbar
+                                        onAddHabit={this.handleAddHabit}
+                                        onDeleteHabit={this.handleDeleteHabit}
+                                    />
+                                    <HabitList
+                                        habits={habits}
+                                    />
+                                </Route>
+                                <Route path="/statistics">
+                                    <CollapseButton/>
+                                    <Chart/>
+                                    <CardDeck
+                                        cards={cards}
+                                    />
+                                </Route>
+                            </Container>
+                        </Route>
+                    </div>
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;

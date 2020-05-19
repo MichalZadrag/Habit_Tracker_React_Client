@@ -18,7 +18,7 @@ p {
 .wrapper {
     display: flex;
     width: 100%;
-    alignn-items: stretch;
+    align-items: stretch;
 }
 
 a, a:hover, a:focus {
