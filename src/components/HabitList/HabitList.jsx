@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styles from './HabitList.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -7,7 +7,6 @@ import Habit from "../Habit/Habit";
 
 
 const HabitList = ({ habits } ) => {
-
 
     return(
             <div className={styles.listGroup}>

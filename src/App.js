@@ -10,6 +10,7 @@ import {faAward, faBiking, faBook, faDumbbell, faMoneyBillAlt} from "@fortawesom
 import CardDeck from "./components/CardDeck/CardDeck";
 import {faCalendar, faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {fetchData} from "./api";
 
 class App extends Component {
 
@@ -24,8 +25,16 @@ class App extends Component {
             {id: 0, card_text: "Zadania na dzisiaj", icon: faCalendarCheck},
             {id: 1, card_text: "Osiągnięcia", icon: faAward},
             {id: 2, card_text: "Dzisiejsze wydarzenia", icon: faCalendar}
-        ]
+        ],
+        data: [],
     };
+
+    // async componentDidMount() {
+    //     const fetchedData = await fetchData();
+    //     this.setState({data: fetchedData });
+    //     console.log(fetchedData);
+    // }
+
 
     handleAddHabit = () => {
         const habits = [...this.state.habits];
@@ -40,7 +49,7 @@ class App extends Component {
     }
 
     render() {
-        const {habits, cards} = this.state;
+        const {habits, cards, data} = this.state;
 
         return (
             <Router>
