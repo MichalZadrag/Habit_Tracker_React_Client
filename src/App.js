@@ -9,8 +9,7 @@ import styles from './App.module.css';
 import {faAward, faBiking, faBook, faDumbbell, faMoneyBillAlt} from "@fortawesome/free-solid-svg-icons";
 import CardDeck from "./components/CardDeck/CardDeck";
 import {faCalendar, faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import {fetchData} from "./api";
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 class App extends Component {
 

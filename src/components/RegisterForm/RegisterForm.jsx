@@ -23,22 +23,6 @@ const RegisterForm = () => {
     })
 
 
-    // const handleChangeUsername = (event) => {
-    //     setUsername(event.target.value);
-    // }
-    // const handleChangeFirstName = (event) => {
-    //     setFirstName(event.target.value);
-    // }
-    // const handleChangeLastName = (event) => {
-    //     setLastName(event.target.value);
-    // }
-    // const handleChangeEmail = (event) => {
-    //     setEmail(event.target.value);
-    // }
-    // const handleChangePassword = (event) => {
-    //     setPassword(event.target.value);
-    // }
-
     function handleChange(evt) {
         const value = evt.target.value;
         setState({
