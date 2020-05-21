@@ -5,14 +5,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import axios from 'axios';
+import {SIGN_UP_URL} from "../../constants";
 
 const RegisterForm = () => {
 
-    // const [firstName, setFirstName] = useState('');
-    // const [lastName, setLastName] = useState('');
-    // const [username, setUsername] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
+
 
     const [state, setState] = useState({
         firstName: '',
@@ -23,7 +20,7 @@ const RegisterForm = () => {
     })
 
 
-    function handleChange(evt) {
+    const handleChange = (evt) => {
         const value = evt.target.value;
         setState({
             ...state,
@@ -37,7 +34,7 @@ const RegisterForm = () => {
 
 
 
-        axios.post(`http://localhost:8080/api/auth/signup`, {
+        axios.post(SIGN_UP_URL, {
             first_name: state.firstName,
             last_name: state.lastName,
             username: state.username,

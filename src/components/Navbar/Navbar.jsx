@@ -9,8 +9,10 @@ import Nav from "react-bootstrap/Nav";
 import cx from 'classnames';
 import CollapseButton from "../CollapseButton/CollapseButton";
 import HabitAddForm from "../HabitAddForm/HabitAddForm";
+import {Link} from "react-router-dom";
 
-const Navbar = ({ onAddHabit, onDeleteHabit }) => {
+const Navbar = () => {
+
 
     const [modalShow, setModalShow] = React.useState(false);
 
@@ -29,14 +31,6 @@ const Navbar = ({ onAddHabit, onDeleteHabit }) => {
                                 <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                             </div>
                             Dodaj
-                        </Button>
-                        <Button variant={"secondary"}
-                                className={cx("btn", styles.btnTeal ,"mt-3")}
-                                onClick={ onDeleteHabit }>
-                            <div className="mr-2 float-left" >
-                                <FontAwesomeIcon icon={faMinus}></FontAwesomeIcon>
-                            </div>
-                            Usuń
                         </Button>
                         <HabitAddForm
                             show = { modalShow }

@@ -2,7 +2,6 @@ import React from "react";
 import styles from './Card.module.css';
 import cx from "classnames";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 
 const Card = ({ card_text, icon }) => {
 

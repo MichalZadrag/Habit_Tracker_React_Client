@@ -1,16 +1,14 @@
 import axios from 'axios';
+import {GET_ALL_HABITS_URL} from "../constants";
 
-// const url = 'http://localhost:5000/api/getUsers';
 
 
-export const fetchData = async () => {
+export const fetchHabitData = async () => {
 
-    // try {
-    //     const {data} = await axios.get(url);
-    //     return data;
-    // } catch (e) {
-    //     console.log("error");
-    // }
+    try {
+        const { data } = await axios.get(GET_ALL_HABITS_URL);
+        return data;
+    } catch (e) {
+        console.log("error");
+    }
 }
-
-// export const addUser = async ()

@@ -2,17 +2,43 @@ import React, {useState} from "react";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 import styles from './HabitAddForm.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBiking, faBook, faDumbbell, faPlus, faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
-import {Link} from "react-router-dom";
+import {faBiking, faBook, faDumbbell, faMoneyBillAlt, faPlus} from "@fortawesome/free-solid-svg-icons";
+import axios from 'axios';
+import {ADD_HABIT_URL} from "../../constants";
 
 
 const HabitAddForm = (props) => {
 
-    const [radio, setState] =useState('');
+    const [habit, setHabit] = useState({
+        habitText: '',
+        icon: ''
+    })
 
-     const onClick = nr => () => {
-        setState(nr);
-    };
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
+
+
+    const  handleChange = (evt) => {
+        const value = evt.target.value;
+        setHabit({
+            ...habit,
+            [evt.target.name]: value
+        });
+    }
+
+    const handleSubmit = (evt) => {
+        evt.preventDefault();
+
+        axios.post(ADD_HABIT_URL, {
+            habit_text: habit.habitText,
+            icon: habit.icon
+        }).then(r => console.log(r.data.message))
+
+        refreshPage();
+    }
+
+
 
 
     return(
@@ -25,16 +51,16 @@ const HabitAddForm = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className={styles.mBody}>
-                <Form>
-                    <Form.Group as={Row} controlId="habit">
+                <Form onSubmit={handleSubmit} >
+                    <Form.Group as={Row} controlId={habit.habitText}>
                         <Form.Label column sm="2">
                            Nawyk
                         </Form.Label>
                         <Col sm="10">
-                            <Form.Control type="text" />
+                            <Form.Control type="text" name="habitText" onChange={handleChange} required />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row} controlId="habit" classname="display-flex">
+                    <Form.Group as={Row} controlId={habit.icon} className="display-flex">
                         <Form.Label column sm="2">
                             Ikona
                         </Form.Label>
@@ -45,8 +71,9 @@ const HabitAddForm = (props) => {
                                     inline
                                     label=<FontAwesomeIcon icon={faBiking} />
                                     id={"custom-inline-checkbox-1"}
-                                    onClick={onClick(1)}
-                                    checked={radio === 1}
+                                    onChange={handleChange}
+                                    name={"icon"}
+                                    value={"faBiking"}
                                 />
                                 <Form.Check
                                     custom
@@ -54,9 +81,9 @@ const HabitAddForm = (props) => {
                                     label=<FontAwesomeIcon icon={faBook} />
                                     type={"radio"}
                                     id={"custom-inline-checkbox-2"}
-                                    value={"test"}
-                                    onClick={onClick(2)}
-                                    checked={radio === 2}
+                                    name={"icon"}
+                                    onChange={handleChange}
+                                    value={"faBook"}
                                 />
                                 <Form.Check
                                     custom
@@ -64,14 +91,23 @@ const HabitAddForm = (props) => {
                                     label=<FontAwesomeIcon icon={faDumbbell} />
                                     type={"radio"}
                                     id={"custom-inline-checkbox-3"}
-                                    value={"test"}
-                                    onClick={onClick(3)}
-                                    checked={radio === 3}
+                                    name={"icon"}
+                                    onChange={handleChange}
+                                    value={"faDumbbell"}
+                                />
+                                <Form.Check
+                                    custom
+                                    inline
+                                    label=<FontAwesomeIcon icon={faMoneyBillAlt} />
+                                    type={"radio"}
+                                    id={"custom-inline-checkbox-4"}
+                                    name={"icon"}
+                                    onChange={handleChange}
+                                    value={"faMoneyBillAlt"}
                                 />
                             </div>
                     </Form.Group>
-
-                    <Button variant={"primary"}>
+                    <Button variant={"primary"} type={"submit"}>
                         <div className="mr-2 float-left" >
                             <FontAwesomeIcon size="lg" icon={faPlus} />
                         </div>
@@ -80,7 +116,8 @@ const HabitAddForm = (props) => {
                 </Form>
             </Modal.Body>
         </Modal>
-    )
+    );
 }
+
 
 export default HabitAddForm;
