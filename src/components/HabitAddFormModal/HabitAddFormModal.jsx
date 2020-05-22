@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
-import styles from './HabitAddForm.module.css'
+import styles from './HabitAddFormModal.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBiking, faBook, faDumbbell, faMoneyBillAlt, faPlus} from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios';
 import {ADD_HABIT_URL} from "../../constants";
 
 
-const HabitAddForm = (props) => {
+const HabitAddFormModal = (props) => {
 
     const [habit, setHabit] = useState({
         habitText: '',
@@ -120,4 +120,4 @@ const HabitAddForm = (props) => {
 }
 
 
-export default HabitAddForm;
+export default HabitAddFormModal;

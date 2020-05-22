@@ -16,6 +16,7 @@ const HabitList = ({ habits } ) => {
                             key = { habit.id }
                             habit_text = { habit.habit_text }
                             icon = { habit.icon }
+                            habit_id = {habit.id}
                         />
                     ))}
                 </ul>

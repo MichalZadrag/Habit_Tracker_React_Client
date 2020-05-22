@@ -1,0 +1,40 @@
+import React from "react";
+import styles from '../HabitAddFormModal/HabitAddFormModal.module.css';
+import {Button, Col, Modal, Row} from "react-bootstrap";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
+
+const DeleteConfirmationModal = (props) => {
+    return(
+        <Modal
+            size="sm"
+            {...props}
+        >
+            <Modal.Header className={styles.mHeader} closeButton>
+                <Modal.Title>
+                    Na pewno ?
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className={styles.mBody}>
+                <Row>
+                    <Col className="text-center">
+                        <Button variant={"danger"}
+                                className="w-100"
+                                onClick={props.handleDelete}>
+                            Potwierdź
+                        </Button>
+                    </Col>
+                    <Col className="text-center">
+                        <Button variant={"primary"}
+                                className="w-100"
+                                onClick={props.onHide}>
+                            Cofnij
+                        </Button>
+                    </Col>
+                </Row>
+            </Modal.Body>
+        </Modal>
+    )
+}
+
+export default DeleteConfirmationModal;

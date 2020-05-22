@@ -6,6 +6,7 @@ import {faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import axios from 'axios';
 import {SIGN_UP_URL} from "../../constants";
+import {postNewUser} from "../../api";
 
 const RegisterForm = () => {
 
@@ -32,19 +33,7 @@ const RegisterForm = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-
-
-        axios.post(SIGN_UP_URL, {
-            first_name: state.firstName,
-            last_name: state.lastName,
-            username: state.username,
-            email: state.email,
-            password: state.password
-        })
-            .then(r => {
-                console.log(r.data.message);
-            })
-
+        postNewUser(state.firstName, state.lastName, state.username, state.email, state.password);
      }
 
     return(

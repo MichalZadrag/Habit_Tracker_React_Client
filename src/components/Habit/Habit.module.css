@@ -19,3 +19,15 @@
     background: #878E88;
     color: #fff;
 }
+
+.deleteIcon {
+    background: darkgray;
+    border-radius: 5px;
+    color: #3b3933 ;
+    border: 0 !important;
+}
+
+.deleteIcon:hover {
+    background: #850b03;
+    color: #fff;
+}

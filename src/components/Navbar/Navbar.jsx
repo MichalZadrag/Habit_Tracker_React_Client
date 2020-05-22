@@ -8,7 +8,7 @@ import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
 import Nav from "react-bootstrap/Nav";
 import cx from 'classnames';
 import CollapseButton from "../CollapseButton/CollapseButton";
-import HabitAddForm from "../HabitAddForm/HabitAddForm";
+import HabitAddFormModal from "../HabitAddFormModal/HabitAddFormModal";
 import {Link} from "react-router-dom";
 
 const Navbar = () => {
@@ -32,7 +32,7 @@ const Navbar = () => {
                             </div>
                             Dodaj
                         </Button>
-                        <HabitAddForm
+                        <HabitAddFormModal
                             show = { modalShow }
                             onHide = { () => setModalShow(false) }
                         />
