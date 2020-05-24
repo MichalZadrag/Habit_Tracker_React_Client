@@ -1,7 +1,5 @@
 import React from "react";
 import styles from './HabitList.module.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import cx from 'classnames';
 import Habit from "../Habit/Habit";
 

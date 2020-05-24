@@ -9,7 +9,6 @@ import Nav from "react-bootstrap/Nav";
 import cx from 'classnames';
 import CollapseButton from "../CollapseButton/CollapseButton";
 import HabitAddFormModal from "../HabitAddFormModal/HabitAddFormModal";
-import {Link} from "react-router-dom";
 
 const Navbar = () => {
 

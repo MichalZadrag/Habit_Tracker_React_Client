@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import styles from './Habit.module.css';
 import cx from "classnames";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -38,7 +38,7 @@ const Habit = ({ habit_text, icon, habit_id }) => {
         return test;
     }
 
-    const handleDelete = () => {
+    const deleteHabit = () => {
         const id = habit_id;
         const deleteUrl = `http://localhost:8080/api/habit/delete/${id}`
         axios.delete(deleteUrl)
@@ -60,7 +60,7 @@ const Habit = ({ habit_text, icon, habit_id }) => {
 
     return(
         <div>
-            <Link to="/dupa">
+            <Link to="#">
                 <li className={cx(styles.listGroupItem, "p-3")} >
                     <div className="mr-2 float-left" >
                         <FontAwesomeIcon icon={changeToIcon(icon)}></FontAwesomeIcon>
@@ -77,9 +77,9 @@ const Habit = ({ habit_text, icon, habit_id }) => {
                     </Link>
                     <div className="checkbox-group float-right">
                         {[<Moment date={day1} format="DD.MM"/>, <Moment date={(day2)}  format="DD.MM"/>,
-                            <Moment date={day3} format="DD.MM"/>, <Moment date={day4} format="DD.MM"/>].map((date) =>(
-                            <label className={styles.checkboxInline} key={date}>
-                                <input className={styles.checkbox} type="checkbox" key={date}  value={date} />
+                            <Moment date={day3} format="DD.MM"/>, <Moment date={day4} format="DD.MM"/>].map((date, i) =>(
+                            <label className={styles.checkboxInline} key={i}>
+                                <input className={styles.checkbox} type="checkbox" key={i}  value={date} />
                                 {date}
                             </label>
                         ))}
@@ -89,7 +89,7 @@ const Habit = ({ habit_text, icon, habit_id }) => {
             <DeleteConfirmationModal
                 show = { modalShow }
                 onHide = { () => setModalShow(false) }
-                handleDelete = { handleDelete }
+                handleDelete = { deleteHabit }
             >
             </DeleteConfirmationModal>
         </div>

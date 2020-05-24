@@ -1,7 +1,5 @@
 import React, {useState} from "react";
 import styles from './Sidebar.module.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/css/bootstrap.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAddressBook, faInfoCircle, faTasks} from "@fortawesome/free-solid-svg-icons";
 import {faCalendarAlt, faCalendarCheck, faChartBar} from "@fortawesome/free-regular-svg-icons";

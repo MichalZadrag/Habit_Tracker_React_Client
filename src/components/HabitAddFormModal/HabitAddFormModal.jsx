@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 import styles from './HabitAddFormModal.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBiking, faBook, faDumbbell, faMoneyBillAlt, faPlus} from "@fortawesome/free-solid-svg-icons";
-import axios from 'axios';
-import {ADD_HABIT_URL} from "../../constants";
+import {addNewHabit} from "../../api";
+import validateHabit from "./validateHabit";
 
 
 const HabitAddFormModal = (props) => {
@@ -13,31 +13,39 @@ const HabitAddFormModal = (props) => {
         habitText: '',
         icon: ''
     })
+    const [errors, setErrors] = useState({})
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    useEffect(() => {
+        const {habitText, icon} = habit;
+        if (Object.keys(errors).length === 0 && isSubmitting) {
+            addNewHabit(habitText, icon);
+            refreshPage();
+        }
+
+    },[errors])
 
     const refreshPage = () => {
         window.location.reload(false);
     }
 
 
-    const  handleChange = (evt) => {
-        const value = evt.target.value;
+    const handleChange = (evt) => {
+        const { name, value } = evt.target;
+
         setHabit({
             ...habit,
-            [evt.target.name]: value
+            [name]: value
         });
     }
 
     const handleSubmit = (evt) => {
+
         evt.preventDefault();
+        setErrors(validateHabit(habit))
+        setIsSubmitting(true);
 
-        axios.post(ADD_HABIT_URL, {
-            habit_text: habit.habitText,
-            icon: habit.icon
-        }).then(r => console.log(r.data.message))
-
-        refreshPage();
     }
-
 
 
 
@@ -51,13 +59,18 @@ const HabitAddFormModal = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className={styles.mBody}>
-                <Form onSubmit={handleSubmit} >
+                <Form onSubmit={handleSubmit} noValidate>
                     <Form.Group as={Row} controlId={habit.habitText}>
                         <Form.Label column sm="2">
                            Nawyk
                         </Form.Label>
                         <Col sm="10">
-                            <Form.Control type="text" name="habitText" onChange={handleChange} required />
+                            <Form.Control
+                                className ={`${errors.habitText && styles.inputError}`}
+                                type="text"
+                                name="habitText"
+                                onChange={handleChange} />
+                            {errors.habitText && <p className={styles.error}>{errors.habitText}</p>}
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} controlId={habit.icon} className="display-flex">

@@ -4,3 +4,12 @@
 .mBody {
     background: #fafafa;
 }
+
+.error {
+    font-size: 15px;
+    color: red;
+}
+
+.inputError {
+    border: 1px solid red;
+}

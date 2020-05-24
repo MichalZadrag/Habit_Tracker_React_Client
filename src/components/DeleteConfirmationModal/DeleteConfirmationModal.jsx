@@ -1,8 +1,6 @@
 import React from "react";
 import styles from '../HabitAddFormModal/HabitAddFormModal.module.css';
 import {Button, Col, Modal, Row} from "react-bootstrap";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
 
 const DeleteConfirmationModal = (props) => {
     return(

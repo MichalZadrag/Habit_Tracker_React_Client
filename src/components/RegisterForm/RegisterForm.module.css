@@ -33,3 +33,17 @@ i {
 hr {
     border-top: 1px solid #999999;
 }
+
+.error {
+    font-size: 15px;
+    color: red;
+}
+
+.inputError {
+    border: 1px solid red;
+}
+
+.success {
+    font-size: 15px;
+    color: green;
+}
