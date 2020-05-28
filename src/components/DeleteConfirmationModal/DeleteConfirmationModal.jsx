@@ -18,7 +18,7 @@ const DeleteConfirmationModal = (props) => {
                     <Col className="text-center">
                         <Button variant={"danger"}
                                 className="w-100"
-                                onClick={props.handleDelete}>
+                                onClick={props.onClick}>
                             Potwierdź
                         </Button>
                     </Col>

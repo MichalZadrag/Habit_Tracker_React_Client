@@ -1,21 +1,36 @@
 import axios from 'axios';
-import {ADD_HABIT_URL, GET_ALL_HABITS_URL, SIGN_UP_URL} from "../constants";
+import {ACCESS_TOKEN, API_URL} from "../constants";
+
+let access_token = ''
+
+if (localStorage.getItem(ACCESS_TOKEN)) {
+     access_token = localStorage.getItem(ACCESS_TOKEN);
+}
+
+
+const authAxios = axios.create({
+    baseURL: API_URL,
+    headers: {
+        Authorization: `Bearer ${access_token}`
+    }
+})
 
 
 
 export const fetchHabitData = async () => {
 
+
     try {
-        const { data } = await axios.get(GET_ALL_HABITS_URL);
+        const { data } = await authAxios.get("/habit/all");
         return data;
     } catch (e) {
-        console.log("error");
+       console.log("error");
     }
 }
 
 export const addNewUser = (firstName, lastName, username, email, password, setErrors, setAlerts) => {
 
-    axios.post(SIGN_UP_URL, {
+    authAxios.post("/auth/signup", {
         first_name: firstName,
         last_name: lastName,
         username: username,
@@ -34,10 +49,23 @@ export const addNewUser = (firstName, lastName, username, email, password, setEr
         })
 }
 
-export const addNewHabit = (habitText, icon) => {
+export const addNewHabit = (habitText, icon, color) => {
 
-    axios.post(ADD_HABIT_URL, {
+    authAxios.post("/habit/add", {
         habit_text: habitText,
-        icon: icon
-    }).then(r => console.log(r.data.message))
+        icon: icon,
+        color: color
+    }).then(r => (null))
+        .catch(e => {
+            console.log("error");
+        })
 }
+
+export const deleteHabitById = (id) => {
+    authAxios.delete(`/habit/delete/${id}`)
+        .then((r) => console.log(r.data.message));
+}
+
+// export const checkUsernameAvailability = (username) => {
+//     axios.get()
+// }

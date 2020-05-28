@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 import styles from './HabitAddFormModal.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBiking, faBook, faDumbbell, faMoneyBillAlt, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faBiking, faBook, faCircle, faDumbbell, faMoneyBillAlt, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {addNewHabit} from "../../api";
 import validateHabit from "./validateHabit";
 
@@ -11,16 +11,25 @@ const HabitAddFormModal = (props) => {
 
     const [habit, setHabit] = useState({
         habitText: '',
-        icon: ''
+        icon: '',
+        color: ''
     })
     const [errors, setErrors] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     useEffect(() => {
-        const {habitText, icon} = habit;
+        console.log("USE EFFECT HABIT ADD FORM MODAL");
+
+        const {habitText, icon, color} = habit;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewHabit(habitText, icon);
-            refreshPage();
+            addNewHabit(habitText, icon, color);
+            props.handleChangeHabit();
+            setHabit({
+                habitText: '',
+                icon: '',
+                color: ''
+            })
+            props.onHide();
         }
 
     },[errors])
@@ -28,6 +37,7 @@ const HabitAddFormModal = (props) => {
     const refreshPage = () => {
         window.location.reload(false);
     }
+
 
 
     const handleChange = (evt) => {
@@ -51,7 +61,7 @@ const HabitAddFormModal = (props) => {
 
     return(
         <Modal
-            {...props}
+            show={props.show} onHide={props.onHide}
         >
             <Modal.Header closeButton className={styles.mHeader}>
                 <Modal.Title id="contained-modal-title-vcenter  ">
@@ -77,7 +87,7 @@ const HabitAddFormModal = (props) => {
                         <Form.Label column sm="2">
                             Ikona
                         </Form.Label>
-                            <div key={"custom-inline-checkbox"} className="ml-5 mt-auto mb-auto ">
+                            <div key={"custom-inline-checkbox-i"} className="ml-5 mt-auto mb-auto ">
                                 <Form.Check
                                     type={"radio"}
                                     custom
@@ -119,6 +129,53 @@ const HabitAddFormModal = (props) => {
                                     value={"faMoneyBillAlt"}
                                 />
                             </div>
+                    </Form.Group>
+                    <Form.Group as={Row} controlId={habit.color} className="display-flex">
+                        <Form.Label column sm="2">
+                            Kolor
+                        </Form.Label>
+                        <div key={"custom-inline-checkbox-c"} className="ml-5 mt-auto mb-auto ">
+                            <Form.Check
+                                type={"radio"}
+                                custom
+                                inline
+                                label=<FontAwesomeIcon className={styles.lightGreen} size="lg" icon={faCircle} />
+                                id={"custom-inline-checkbox-c1"}
+                                onChange={handleChange}
+                                name={"color"}
+                                value={"lightGreen"}
+                            />
+                            <Form.Check
+                                custom
+                                inline
+                                label=<FontAwesomeIcon className={styles.salmon} size="lg" icon={faCircle} />
+                                type={"radio"}
+                                id={"custom-inline-checkbox-c2"}
+                                name={"color"}
+                                onChange={handleChange}
+                                value={"salmon"}
+                            />
+                            <Form.Check
+                                custom
+                                inline
+                                label=<FontAwesomeIcon className={styles.lightGrey}  size="lg" icon={faCircle} />
+                                type={"radio"}
+                                id={"custom-inline-checkbox-c3"}
+                                name={"color"}
+                                onChange={handleChange}
+                                value={"lightGrey"}
+                            />
+                            <Form.Check
+                                custom
+                                inline
+                                label=<FontAwesomeIcon className={styles.lightBlue} size="lg" icon={faCircle} />
+                                type={"radio"}
+                                id={"custom-inline-checkbox-c4"}
+                                name={"color"}
+                                onChange={handleChange}
+                                value={"lightBlue"}
+                            />
+                        </div>
                     </Form.Group>
                     <Button variant={"primary"} type={"submit"}>
                         <div className="mr-2 float-left" >

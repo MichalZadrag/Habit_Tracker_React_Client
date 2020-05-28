@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import {Collapse} from "react-bootstrap";
 
 
-const Sidebar = () => {
+const Sidebar = ({ onLogout }) => {
 
     const [open, setOpen] = useState(false);
 
@@ -18,47 +18,47 @@ const Sidebar = () => {
                 </div>
                 <ul  className="list-unstyled">
                     <li className="active">
-                         <a role="button" onClick={() => setOpen(!open)} data-toggle="collapse"  aria-expanded={open} aria-controls="homeSubmenu" className="dropdown-toggle">
+                         <Link to="#" role="button" onClick={() => setOpen(!open)} data-toggle="collapse"  aria-expanded={open} aria-controls="homeSubmenu" className="dropdown-toggle">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon icon={faAddressBook} />
                             </div>
                             Michał Zadrąg
-                        </a>
+                        </Link>
                         <Collapse in={open}>
                             <ul className="list-unstyled" id="homeSubmenu">
                                 <li>
-                                    <a href="#" className={styles.collapseItem}>
+                                    <Link to="#" type="button" className={styles.collapseItem}>
                                         Moje konto
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="#" className={styles.collapseItem}>
+                                    <Link to="#" type="button" className={styles.collapseItem}>
                                         Edytuj dane
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li>
-                                    <a href="#" className={styles.collapseItem}>
+                                    <Link to="#" role="button" onClick={onLogout} className={styles.collapseItem}>
                                         Wyloguj
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </Collapse>
                     </li>
                     <li>
-                        <a href="#">
+                       <Link to="#">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon icon={faTasks} />
                             </div>
                             Zadania
-                        </a>
+                       </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="#" role="button">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon   icon={faCalendarAlt} />
                             </div>
                             Wydarzenia
-                        </a>
+                        </Link>
                     </li>
                     <li>
                         <Link to="/habits">
@@ -77,12 +77,12 @@ const Sidebar = () => {
                         </Link>
                     </li>
                     <li>
-                        <a href="#">
+                        <Link to="#" role="button">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon icon={faInfoCircle} />
                             </div>
                             Kontakt
-                        </a>
+                        </Link>
                     </li>
                 </ul>
                 <footer>

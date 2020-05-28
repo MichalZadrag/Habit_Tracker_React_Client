@@ -23,6 +23,8 @@ const RegisterForm = () => {
 
     useEffect( () => {
 
+        console.log("USE EFFECT - REGISTER FORM");
+
         const {firstName, lastName, username, email, password} = values
 
         if (Object.keys(errors).length === 0 && isSubmitting) {

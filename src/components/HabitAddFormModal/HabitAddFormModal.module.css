@@ -13,3 +13,51 @@
 .inputError {
     border: 1px solid red;
 }
+
+.lightBlue {
+    color: lightblue;
+}
+
+.lightGrey {
+    color: #CCCCCC;
+}
+
+.lightGreen {
+    color: lightgreen;
+}
+
+.salmon {
+    color: salmon;
+}
+
+.lightBlueBg {
+    background-color: #add8e6;
+}
+
+.lightGreyBg {
+    background-color: #CCCCCC;
+}
+
+.lightGreenBg {
+    background-color: lightgreen;
+}
+
+.salmonBg {
+    background-color: #fa8072;
+}
+
+.lightBlueBg:hover {
+    background-color: #93ccde;
+}
+
+.lightGreyBg:hover {
+    background-color: #878E88;
+}
+
+.lightGreenBg:hover {
+    background-color: #73e973;
+}
+
+.salmonBg:hover {
+    background-color: #f96251;
+}

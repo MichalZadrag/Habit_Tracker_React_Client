@@ -4,13 +4,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import Nav from "react-bootstrap/Nav";
 import cx from 'classnames';
 import CollapseButton from "../CollapseButton/CollapseButton";
 import HabitAddFormModal from "../HabitAddFormModal/HabitAddFormModal";
 
-const Navbar = () => {
+const Navbar = (props) => {
 
 
     const [modalShow, setModalShow] = React.useState(false);
@@ -34,6 +34,7 @@ const Navbar = () => {
                         <HabitAddFormModal
                             show = { modalShow }
                             onHide = { () => setModalShow(false) }
+                            handleChangeHabit = { props.handleChangeHabit }
                         />
                     </div>
                 </div>

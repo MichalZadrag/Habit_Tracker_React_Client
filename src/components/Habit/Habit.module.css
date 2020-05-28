@@ -31,3 +31,15 @@
     background: #850b03;
     color: #fff;
 }
+
+.infoIcon {
+    background: #24a0ed;
+    border-radius: 5px;
+    color: #3b3933 ;
+    border: 0 !important;
+}
+
+.infoIcon:hover {
+    background: #008dd8;
+    color: #fff;
+}

@@ -5,21 +5,38 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     faBiking,
     faBook,
-    faDumbbell,
+    faDumbbell, faInfo,
     faMoneyBillAlt,
     faQuestion,
     faTrashAlt
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from 'react-router-dom';
 import {Button} from "react-bootstrap";
-import axios from 'axios';
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import Moment from 'react-moment';
+import stylesCustom from '../HabitAddFormModal/HabitAddFormModal.module.css'
+import {deleteHabitById} from "../../api";
 
 
-const Habit = ({ habit_text, icon, habit_id }) => {
+const Habit = ({ habit_text, icon, habit_id, color }) => {
 
     const [modalShow, setModalShow] = useState(false);
+
+
+    const changeToCss = (color) => {
+        let cssClass = '';
+        if (color === "salmon") {
+            cssClass = stylesCustom.salmonBg;
+        } else if(color === "lightGreen") {
+            cssClass = stylesCustom.lightGreenBg;
+        } else if (color === "lightGrey") {
+            cssClass = stylesCustom.lightGreyBg;
+        } else if (color === "lightBlue") {
+            cssClass = stylesCustom.lightBlueBg;
+        } else {
+            cssClass = stylesCustom.lightGreyBg;
+        }
+        return cssClass;
+    }
 
 
     const changeToIcon = (icon) => {
@@ -40,9 +57,7 @@ const Habit = ({ habit_text, icon, habit_id }) => {
 
     const deleteHabit = () => {
         const id = habit_id;
-        const deleteUrl = `http://localhost:8080/api/habit/delete/${id}`
-        axios.delete(deleteUrl)
-            .then((r) => console.log(r.data.message))
+        deleteHabitById(id);
         refreshPage();
     }
 
@@ -60,36 +75,37 @@ const Habit = ({ habit_text, icon, habit_id }) => {
 
     return(
         <div>
-            <Link to="#">
-                <li className={cx(styles.listGroupItem, "p-3")} >
-                    <div className="mr-2 float-left" >
-                        <FontAwesomeIcon icon={changeToIcon(icon)}></FontAwesomeIcon>
-                    </div>
-                    { habit_text }
-                    <Link to="#">
-                        <div className={cx( "float-right" ,"ml-3" )}>
-                            <Button variant={"secondary"} size={"sm"}
-                                    className={cx("pl-2", "pr-2", styles.deleteIcon)}
-                                    onClick={() => setModalShow(true)}>
-                                <FontAwesomeIcon icon={faTrashAlt} />
-                            </Button>
-                        </div>
-                    </Link>
-                    <div className="checkbox-group float-right">
-                        {[<Moment date={day1} format="DD.MM"/>, <Moment date={(day2)}  format="DD.MM"/>,
-                            <Moment date={day3} format="DD.MM"/>, <Moment date={day4} format="DD.MM"/>].map((date, i) =>(
-                            <label className={styles.checkboxInline} key={i}>
-                                <input className={styles.checkbox} type="checkbox" key={i}  value={date} />
-                                {date}
-                            </label>
-                        ))}
-                    </div>
-                </li>
-            </Link>
+            <li className={cx(styles.listGroupItem, "p-3", changeToCss(color))} >
+                <div className="mr-2 float-left" >
+                    <FontAwesomeIcon icon={changeToIcon(icon)}></FontAwesomeIcon>
+                </div>
+                { habit_text }
+                <div className={cx( "float-right" ,"ml-3" )}>
+                    <Button variant={"primary"} size={"sm"}
+                            className={cx("pl-3", "pr-3", styles.infoIcon)}>
+                        <FontAwesomeIcon icon={faInfo} />
+                    </Button>
+                </div>
+                <div className={cx( "float-right" ,"ml-3" )}>
+                    <Button variant={"secondary"} size={"sm"}
+                            className={cx("pl-2", "pr-2", styles.deleteIcon)}
+                            onClick={() => setModalShow(true)}>
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                    </Button>
+                </div>
+                <div className="checkbox-group float-right">
+                    {[<Moment date={day1} format="DD.MM"/>, <Moment date={(day2)}  format="DD.MM"/>,
+                        <Moment date={day3} format="DD.MM"/>, <Moment date={day4} format="DD.MM"/>].map((date, i) =>(<label className={styles.checkboxInline} key={i}>
+                            <input className={styles.checkbox} type="checkbox" key={i}  value={date} />
+                            {date}
+                        </label>
+                    ))}
+                </div>
+            </li>
             <DeleteConfirmationModal
                 show = { modalShow }
                 onHide = { () => setModalShow(false) }
-                handleDelete = { deleteHabit }
+                onClick = { deleteHabit }
             >
             </DeleteConfirmationModal>
         </div>
