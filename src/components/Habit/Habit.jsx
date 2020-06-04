@@ -17,8 +17,9 @@ import stylesCustom from '../HabitAddFormModal/HabitAddFormModal.module.css'
 import {deleteHabitById} from "../../api";
 
 
-const Habit = ({ habit_text, icon, habit_id, color }) => {
+const Habit = ({ habit, habits, setHabits }) => {
 
+    const {id, icon, color, habit_text} = habit
     const [modalShow, setModalShow] = useState(false);
 
 
@@ -56,14 +57,12 @@ const Habit = ({ habit_text, icon, habit_id, color }) => {
     }
 
     const deleteHabit = () => {
-        const id = habit_id;
+        const temp_id = id;
         deleteHabitById(id);
-        refreshPage();
+        const newHabits = habits.filter(habit => habit.id !== temp_id);
+        setHabits(newHabits);
     }
 
-    const refreshPage = () => {
-        window.location.reload(false);
-    }
 
     const day1 = new Date();
     const day2 = new Date();
@@ -74,7 +73,7 @@ const Habit = ({ habit_text, icon, habit_id, color }) => {
     day4.setDate(day1.getDate() + 3);
 
     return(
-        <div>
+        <div className="ml-3">
             <li className={cx(styles.listGroupItem, "p-3", changeToCss(color))} >
                 <div className="mr-2 float-left" >
                     <FontAwesomeIcon icon={changeToIcon(icon)}></FontAwesomeIcon>
@@ -105,7 +104,7 @@ const Habit = ({ habit_text, icon, habit_id, color }) => {
             <DeleteConfirmationModal
                 show = { modalShow }
                 onHide = { () => setModalShow(false) }
-                onClick = { deleteHabit }
+                deleteHabit = { deleteHabit }
             >
             </DeleteConfirmationModal>
         </div>

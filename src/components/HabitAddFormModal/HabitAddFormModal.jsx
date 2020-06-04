@@ -9,10 +9,14 @@ import validateHabit from "./validateHabit";
 
 const HabitAddFormModal = (props) => {
 
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
+
     const [habit, setHabit] = useState({
         habitText: '',
         icon: '',
-        color: ''
+        color: '',
     })
     const [errors, setErrors] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,21 +26,19 @@ const HabitAddFormModal = (props) => {
 
         const {habitText, icon, color} = habit;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewHabit(habitText, icon, color);
-            props.handleChangeHabit();
+            addNewHabit(habitText, icon, color, props.currentUser.id);
             setHabit({
                 habitText: '',
                 icon: '',
-                color: ''
+                color: '',
+                user_id: ''
             })
             props.onHide();
+            refreshPage();
         }
 
     },[errors])
 
-    const refreshPage = () => {
-        window.location.reload(false);
-    }
 
 
 
@@ -61,7 +63,8 @@ const HabitAddFormModal = (props) => {
 
     return(
         <Modal
-            show={props.show} onHide={props.onHide}
+            show={props.show}
+            onHide={props.onHide}
         >
             <Modal.Header closeButton className={styles.mHeader}>
                 <Modal.Title id="contained-modal-title-vcenter  ">
@@ -69,7 +72,7 @@ const HabitAddFormModal = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className={styles.mBody}>
-                <Form onSubmit={handleSubmit} noValidate>
+                <Form onSubmit={ handleSubmit } noValidate>
                     <Form.Group as={Row} controlId={habit.habitText}>
                         <Form.Label column sm="2">
                            Nawyk

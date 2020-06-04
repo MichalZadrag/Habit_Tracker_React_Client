@@ -5,3 +5,4 @@ export { default as CollapseButton } from './CollapseButton/CollapseButton';
 export { default as Chart } from './Chart/Chart';
 export { default as LoginForm } from './LoginForm/LoginForm';
 export { default as RegisterForm } from './RegisterForm/RegisterForm';
+export { default as TaskDeck } from  './TaskDeck/TaskDeck';

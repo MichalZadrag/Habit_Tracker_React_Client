@@ -6,7 +6,8 @@ const DeleteConfirmationModal = (props) => {
     return(
         <Modal
             size="sm"
-            {...props}
+            show = { props.show }
+            onHide = { props.onHide }
         >
             <Modal.Header className={styles.mHeader} closeButton>
                 <Modal.Title>
@@ -18,7 +19,7 @@ const DeleteConfirmationModal = (props) => {
                     <Col className="text-center">
                         <Button variant={"danger"}
                                 className="w-100"
-                                onClick={props.onClick}>
+                                onClick={props.deleteHabit}>
                             Potwierdź
                         </Button>
                     </Col>

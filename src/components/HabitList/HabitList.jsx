@@ -2,45 +2,48 @@ import React, {useEffect, useState} from "react";
 import styles from './HabitList.module.css';
 import cx from 'classnames';
 import Habit from "../Habit/Habit";
-import {fetchHabitData} from "../../api";
+import {authAxios, fetchHabitData} from "../../api";
+import {Spinner} from "react-bootstrap";
 
 
 const HabitList = (props) => {
 
     const [habits, setHabits] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     useEffect(() => {
         const fetchAPI = async () => {
-
-            const result = await fetchHabitData();
-            setHabits(result);
+            setIsError(false);
+            setIsLoading(true)
+            const id = props.currentUser.id;
+            setHabits(await fetchHabitData(id, setIsError));
+            setIsLoading(false);
         }
-        console.log("USE EFFECT HABIT LIST ");
-            fetchAPI();
-        return () => {
-            console.log("USE WILL EFFECT HABIT LIST");
-            fetchAPI();
-        };
-    },[props.newHabit])
+        fetchAPI();
 
+    },[])
 
-    if(!habits) {
-        return "LOADING...";
-    }
 
 
     return(
+
          <div className={styles.listGroup}>
+             {isError && <div>Something went wrong...</div>}
                 <ul className={cx(styles.listGroup, "list-unstyled")}>
-                    {habits ? habits.map( (habit) => (
+                    {isLoading ? (<Spinner
+                        animation="border"
+                        variant={"primary"}
+                        className ={"ml-auto mr-auto"}
+                    />) :
+                        ( habits.map( (habit) => (
                         <Habit
                             key = { habit.id }
-                            habit_text = { habit.habit_text }
-                            icon = { habit.icon }
-                            habit_id = {habit.id}
-                            color= {habit.color}
+                            setHabits = { setHabits }
+                            habits = { habits }
+                            habit = { habit }
                         />
-                    )) : <div></div>}
+                    ))) }
                 </ul>
             </div>
     )

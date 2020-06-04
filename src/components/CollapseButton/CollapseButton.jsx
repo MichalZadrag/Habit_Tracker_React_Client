@@ -5,10 +5,15 @@ import cx from "classnames";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAlignLeft} from "@fortawesome/free-solid-svg-icons";
 
-const CollapseButton = () => {
+const CollapseButton = (props) => {
 
     return(
-        <Button variant={"secondary"} className={cx("btn", styles.btnTeal ,"mt-3")} id="sidebarCollapse">
+        <Button
+            variant={"secondary"}
+            className={cx("btn", styles.btnTeal ,"mt-3", "ml-4")}
+            id="sidebarCollapse"
+            onClick = { () => props.setIsSidebarActive(!props.isSidebarActive)}
+        >
             <FontAwesomeIcon icon={faAlignLeft}></FontAwesomeIcon>
         </Button>
     )

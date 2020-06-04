@@ -4,15 +4,31 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAddressBook, faInfoCircle, faTasks} from "@fortawesome/free-solid-svg-icons";
 import {faCalendarAlt, faCalendarCheck, faChartBar} from "@fortawesome/free-regular-svg-icons";
 import {Link} from "react-router-dom";
-import {Collapse} from "react-bootstrap";
+import { Collapse} from "react-bootstrap";
+import {useHistory} from "react-router";
+import {ACCESS_TOKEN} from "../../constants";
+import CurrentUserInfoModal from "../CurrentUserInfoModal/CurrentUserInfoModal";
 
 
-const Sidebar = ({ onLogout }) => {
+const Sidebar = ( props ) => {
+
+    const history = useHistory();
 
     const [open, setOpen] = useState(false);
+    const [modalShow, setModalShow] = useState(false);
+
+
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
+
+
+
 
     return(
-            <nav className={ styles.sidebar }>
+            <nav
+                className={!props.isSidebarActive ? styles.active : styles.sidebar}
+            >
                 <div className={styles.sidebarHeader}>
                     <h3>Habit Tracker</h3>
                 </div>
@@ -22,22 +38,29 @@ const Sidebar = ({ onLogout }) => {
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon icon={faAddressBook} />
                             </div>
-                            Michał Zadrąg
+                             {props.currentUser.username}
                         </Link>
-                        <Collapse in={open}>
+                        <Collapse in={ open }>
                             <ul className="list-unstyled" id="homeSubmenu">
                                 <li>
-                                    <Link to="#" type="button" className={styles.collapseItem}>
+                                    <Link to="#"  type="button"
+                                          onClick={() => {
+                                              setModalShow(true);
+                                          }}
+                                          className={styles.collapseItem}>
                                         Moje konto
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="#" type="button" className={styles.collapseItem}>
-                                        Edytuj dane
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="#" role="button" onClick={onLogout} className={styles.collapseItem}>
+                                    <Link to="#" role="button"
+                                          onClick={() =>
+                                          {
+                                              localStorage.removeItem(ACCESS_TOKEN);
+                                              history.push("/login");
+                                              refreshPage();
+                                              props.setIsAuthenticated(false);
+                                          }}
+                                          className={styles.collapseItem}>
                                         Wyloguj
                                     </Link>
                                 </li>
@@ -45,7 +68,7 @@ const Sidebar = ({ onLogout }) => {
                         </Collapse>
                     </li>
                     <li>
-                       <Link to="#">
+                       <Link to="/tasks" role="button">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon icon={faTasks} />
                             </div>
@@ -88,6 +111,12 @@ const Sidebar = ({ onLogout }) => {
                 <footer>
                     Habit Tracker ©
                 </footer>
+                <CurrentUserInfoModal
+                    show = { modalShow }
+                    onHide = { () => setModalShow(false) }
+                    currentUser = { props.currentUser }
+                />
+
             </nav>
     )
 }

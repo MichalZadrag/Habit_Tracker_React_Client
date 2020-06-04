@@ -4,7 +4,7 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
-import { addNewUser } from "../../api";
+import {addNewUser} from "../../api";
 import validateRegister from "./validateRegister";
 import cx from 'classnames';
 
@@ -20,8 +20,11 @@ const RegisterForm = () => {
     const [errors, setErrors] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [alerts, setAlerts] = useState({})
+    const [isUsernameAvailable, setIsUsernameAvailable] = useState('');
+    const [isEmailAvailable, setIsEmailAvailable] = useState('');
 
     useEffect( () => {
+
 
         console.log("USE EFFECT - REGISTER FORM");
 
@@ -34,8 +37,9 @@ const RegisterForm = () => {
 
 
 
-
     const handleChange = (evt) => {
+
+
         const { name, value } = evt.target;
 
         setValues({
@@ -45,9 +49,11 @@ const RegisterForm = () => {
     }
 
 
+
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        setErrors(validateRegister(values));
+        setErrors(validateRegister(values, setIsUsernameAvailable, setIsEmailAvailable));
         setIsSubmitting(true);
      }
 
@@ -91,12 +97,13 @@ const RegisterForm = () => {
                     <Form.Group controlId={values.username}>
                         <Form.Label>Login</Form.Label>
                         <Form.Control
-                            className ={`${errors.username && styles.inputError}`}
+                            className ={`${( errors.username || isUsernameAvailable )&& styles.inputError}`}
                             type="text"
                             name="username"
                             placeholder="Login"
                             onChange={handleChange}/>
                         {errors.username && <p className={styles.error}>{errors.username}</p>}
+                        {isUsernameAvailable && <p className={styles.error}>{isUsernameAvailable}</p>}
                     </Form.Group>
                     <Form.Group controlId={values.password}>
                         <Form.Label>Hasło</Form.Label>
@@ -111,12 +118,13 @@ const RegisterForm = () => {
                     <Form.Group controlId={values.email}>
                         <Form.Label>Email</Form.Label>
                         <Form.Control
-                            className ={`${errors.email && styles.inputError}`}
+                            className ={`${( errors.email || isEmailAvailable )&& styles.inputError}`}
                             type="text"
                             name="email"
                             placeholder="Email"
                             onChange={handleChange}/>
                         {errors.email && <p className={styles.error}>{errors.email}</p>}
+                        {isEmailAvailable && <p className={styles.error}>{isEmailAvailable}</p>}
                     </Form.Group>
                     <Button variant={"success"} type="submit" className={styles.loginButton}>
                         <div className="mr-3 ml-1 float-left" >

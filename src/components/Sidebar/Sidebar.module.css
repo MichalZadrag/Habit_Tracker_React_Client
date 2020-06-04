@@ -3,7 +3,9 @@
     min-width: 250px;
     max-width: 250px;
     min-height: 100vh;
-
+    position: sticky;
+    top: 0;
+    z-index: 1;
     background:  #CCCCCC;
     color: #3b3933;
     transition: all 0.3s;
@@ -49,9 +51,7 @@ ul ul a {
         margin-left: 0;
     }
 }
-.sidebar.active {
-    margin-left: -250px;
-}
+
 li a {
     padding: 15px;
 }
@@ -65,4 +65,17 @@ footer {
 .collapseItem {
     font-size: 0.85em !important;
     padding: 12px !important;
+}
+
+.active {
+    margin-left: -250px;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #3b3933;
+    background: #CCCCCC;
 }

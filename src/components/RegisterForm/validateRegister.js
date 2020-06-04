@@ -1,7 +1,36 @@
 import {EMAIL_REGEXP, NAME_REGEXP, PASSWORD_REGEXP, USERNAME_REGEXP} from "../../constants";
+import {checkEmailAvailability, checkUsernameAvailability} from "../../api";
 
 
-export default function  validateRegister(values) {
+
+
+
+ export const isUsernameGood = async (values, setIsUsernameAvailable) => {
+
+    const isGood = await checkUsernameAvailability(values.username);
+    if (!isGood) {
+        setIsUsernameAvailable("Login jest zajety");
+    } else {
+        setIsUsernameAvailable("");
+    }
+}
+
+export const isEmailGood = async (values, setIsEmailAvailable) => {
+
+    const isGood = await checkEmailAvailability(values.email);
+    if (!isGood) {
+        setIsEmailAvailable("Email jest zajety");
+    } else {
+        setIsEmailAvailable("");
+    }
+}
+
+
+
+
+
+export default  function validateRegister(values, setIsUsernameAvailable, setIsEmailAvailable) {
+
 
     let errors = {};
 
@@ -17,11 +46,15 @@ export default function  validateRegister(values) {
         errors.lastName = "Nazwisko jest nieprawidłowe";
     }
 
+    isUsernameGood(values, setIsUsernameAvailable);
+
     if (!values.username) {
         errors.username = "Login jest wymagany";
     } else if (!USERNAME_REGEXP.test(values.username)) {
         errors.username = "Login jest nieprawidłowy";
     }
+
+    isEmailGood(values, setIsEmailAvailable);
 
     if (!values.email) {
         errors.email = "Email jest wymagany";
@@ -34,6 +67,8 @@ export default function  validateRegister(values) {
     } else if (!PASSWORD_REGEXP.test(values.password)) {
         errors.password = "Minimum 8 znaków, duża i mała litera, liczba, znak specjalny";
     }
+
+
 
     return errors;
 

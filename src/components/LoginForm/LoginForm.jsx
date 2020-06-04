@@ -9,6 +9,7 @@ import {useHistory} from 'react-router';
 import cx from 'classnames';
 import axios from "axios";
 import {ACCESS_TOKEN, LOGIN_URL} from "../../constants";
+import {login} from "../../api";
 
 
 const LoginForm = (props) => {
@@ -19,33 +20,13 @@ const LoginForm = (props) => {
         window.location.reload(false);
     }
 
+
     const [values, setValues] = useState({
         usernameOrEmail: '',
         password: '',
     })
     const [errors, setErrors] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const login =  (usernameOrEmail, password, setErrors) => {
-
-        axios.post(LOGIN_URL, {
-            usernameOrEmail: usernameOrEmail,
-            password: password
-        }).then(r => {
-            localStorage.setItem(ACCESS_TOKEN, r.data.accessToken);
-            props.handleChangeHabit();
-            history.push("/habits");
-            refreshPage();
-        }).catch(e => {
-            if (e.response.data.status === 401) {
-                setErrors({overall: "Błędny login lub hasło"});
-            }
-        });
-    }
-
-
-
-
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
@@ -62,7 +43,7 @@ const LoginForm = (props) => {
         const { usernameOrEmail, password } = values
 
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            login(usernameOrEmail, password, setErrors, setValues);
+            login(usernameOrEmail, password, setErrors, history, props.setIsAuthenticated);
         }
     }, [errors])
 
