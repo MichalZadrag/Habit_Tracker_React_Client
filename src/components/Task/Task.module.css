@@ -1,5 +1,4 @@
 .listGroupItem {
-    background: #CCCCCC;
     color: #3b3933;
     transition: all 0.3s;
     font-size: 1.1em;
@@ -12,4 +11,8 @@
 
 .delete:hover {
     color: red !important;
+}
+
+.test {
+    text-decoration:line-through;
 }

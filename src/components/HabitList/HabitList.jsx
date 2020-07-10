@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import styles from './HabitList.module.css';
 import cx from 'classnames';
 import Habit from "../Habit/Habit";
-import {authAxios, fetchHabitData} from "../../api";
+import {fetchHabitData} from "../../api";
 import {Spinner} from "react-bootstrap";
 
 

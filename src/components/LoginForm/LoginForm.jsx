@@ -7,18 +7,12 @@ import {Link} from "react-router-dom";
 import validateLogin from "./validateLogin";
 import {useHistory} from 'react-router';
 import cx from 'classnames';
-import axios from "axios";
-import {ACCESS_TOKEN, LOGIN_URL} from "../../constants";
 import {login} from "../../api";
 
 
 const LoginForm = (props) => {
 
     const history = useHistory();
-
-    const refreshPage = () => {
-        window.location.reload(false);
-    }
 
 
     const [values, setValues] = useState({

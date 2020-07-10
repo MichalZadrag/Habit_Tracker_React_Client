@@ -19,14 +19,14 @@ const DeleteConfirmationModal = (props) => {
                     <Col className="text-center">
                         <Button variant={"danger"}
                                 className="w-100"
-                                onClick={props.deleteHabit}>
+                                onClick={ props.deleteHabit }>
                             Potwierdź
                         </Button>
                     </Col>
                     <Col className="text-center">
                         <Button variant={"primary"}
                                 className="w-100"
-                                onClick={props.onHide}>
+                                onClick={ props.onHide }>
                             Cofnij
                         </Button>
                     </Col>

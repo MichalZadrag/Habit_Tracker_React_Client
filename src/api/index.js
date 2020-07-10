@@ -80,7 +80,7 @@ export const getCurrentUser = async () => {
 
 }
 
-export const login =  (usernameOrEmail, password, setErrors, history, setIsAuthenticated) => {
+export const login = (usernameOrEmail, password, setErrors, history, setIsAuthenticated) => {
 
     axios.post(LOGIN_URL, {
         usernameOrEmail: usernameOrEmail,
@@ -109,4 +109,28 @@ export const fetchHabitData = async (id, setIsError) => {
         setIsError(true);
     }
 
+}
+
+export const fetchTaskData = async (id, setIsError) => {
+    try {
+        const { data } = await authAxios.get(`/task/all/${id}`);
+        return data;
+    } catch (e) {
+        setIsError(true);
+    }
+}
+
+export const addNewTask = (taskText, color, user_id, day) => {
+    authAxios.post("/task/add", {
+        task_text: taskText,
+        color: color,
+        user_id: user_id,
+        day: day
+    }).then(r => null)
+        .catch(e => console.log("error"));
+}
+
+export const deleteTaskById = (id) => {
+    authAxios.delete(`/task/delete/${id}`)
+        .then((r) => console.log(r.data.message));
 }

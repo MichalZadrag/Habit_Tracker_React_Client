@@ -18,7 +18,6 @@ const App = () => {
 
 
     useEffect(() => {
-        console.log("USE EFFECT - APP");
 
         setCards([
             {id: 0, card_text: "Zadania na dzisiaj", icon: faCalendarCheck},
@@ -87,7 +86,9 @@ const App = () => {
                                          setIsSidebarActive = { setIsSidebarActive }
                                          isSidebarActive = { isSidebarActive }
                                      />
-                                     <TaskDeck />
+                                     <TaskDeck
+                                         currentUser = { currentUser }
+                                     />
                                  </Route>
                              </Container>
                          </Route>)}

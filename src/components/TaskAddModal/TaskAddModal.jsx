@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
-import styles from './HabitAddFormModal.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBiking, faBook, faCircle, faDumbbell, faMoneyBillAlt, faPlus} from "@fortawesome/free-solid-svg-icons";
-import {addNewHabit} from "../../api";
-import validateHabit from "./validateHabit";
+import {faCircle, faPlus} from "@fortawesome/free-solid-svg-icons";
+import styles from "../HabitAddFormModal/HabitAddFormModal.module.css";
+import validateTask from "./validateTask";
+import {addNewHabit, addNewTask} from "../../api";
 
 
-const HabitAddFormModal = (props) => {
+const TaskAddModal = (props) => {
 
     const refreshPage = () => {
         window.location.reload(false);
@@ -15,16 +15,9 @@ const HabitAddFormModal = (props) => {
 
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [icons, setIcons] = useState([
-        { tag: <FontAwesomeIcon icon={faBiking}/>, string: "faBiking" },
-        { tag: <FontAwesomeIcon icon={faBook} />, string: "faBook" },
-        { tag: <FontAwesomeIcon icon={faDumbbell} />, string: "faDumbbell" },
-        { tag: <FontAwesomeIcon icon={faMoneyBillAlt} />, string: "faMoneyBillAlt" },
-        ]);
-    const [habit, setHabit] = useState({
-        habitText: '',
-        icon: '',
-        color: '',
+    const [task, setTask] = useState({
+        taskText: '',
+        color: ''
     });
     const [colors, setColors] = useState([
         { tag: <FontAwesomeIcon className={styles.lightGreen} size="lg" icon={faCircle} />, string: "lightGreen" },
@@ -35,44 +28,36 @@ const HabitAddFormModal = (props) => {
     ]);
 
     useEffect(() => {
-        console.log("USE EFFECT HABIT ADD FORM MODAL");
 
-        const {habitText, icon, color} = habit;
+        const { taskText, color } = task;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewHabit(habitText, icon, color, props.currentUser.id);
-            setHabit({
-                habitText: '',
-                icon: '',
+            addNewTask(taskText, color, props.currentUser.id, props.day);
+            setTask({
+                taskText: '',
                 color: '',
-                user_id: ''
+                user_id: '',
+                day: '',
             })
             props.onHide();
             refreshPage();
         }
-
     },[errors])
-
-
-
 
     const handleChange = (evt) => {
         const { name, value } = evt.target;
 
-        setHabit({
-            ...habit,
+        setTask({
+            ...task,
             [name]: value
         });
     }
 
     const handleSubmit = (evt) => {
-
         evt.preventDefault();
-        setErrors(validateHabit(habit))
+        setErrors(validateTask(task));
         setIsSubmitting(true);
 
     }
-
-
 
     return(
         <Modal
@@ -80,50 +65,29 @@ const HabitAddFormModal = (props) => {
             onHide={props.onHide}
         >
             <Modal.Header closeButton className={styles.mHeader}>
-                <Modal.Title id="contained-modal-title-vcenter  ">
-                    Dodaj nawyk do śledzenia
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Dodaj zadanie
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className={styles.mBody}>
-                <Form onSubmit={ handleSubmit } noValidate>
-                    <Form.Group as={Row} controlId={habit.habitText}>
+                <Form noValidate onSubmit={handleSubmit}>
+                    <Form.Group as={Row} controlId={task.taskText}>
                         <Form.Label column sm="2">
-                           Nawyk
+                            Zadanie
                         </Form.Label>
                         <Col sm="10">
                             <Form.Control
-                                className ={`${errors.habitText && styles.inputError}`}
                                 type="text"
-                                name="habitText"
-                                onChange={ handleChange } />
-                            {errors.habitText && <p className={styles.error}>{errors.habitText}</p>}
+                                name="taskText"
+                                onChange={ handleChange }
+                                 />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row} controlId={habit.icon} className="display-flex">
-                        <Form.Label column sm="2">
-                            Ikona
-                        </Form.Label>
-                            <div key={"habit-icon"} className="ml-5 mt-auto mb-auto ">
-                                {icons.map((icon, i) => (
-                                    <Form.Check
-                                        type = {"radio"}
-                                        custom
-                                        inline
-                                        label = { icon.tag }
-                                        id = {`icon ${i}`}
-                                        key = {`icon ${i}`}
-                                        onChange = { handleChange }
-                                        name = {"icon"}
-                                        value = { icon.string }
-                                    />
-                                ))}
-                            </div>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId={habit.color} className="display-flex">
+                    <Form.Group as={Row} controlId={task.color} className="display-flex">
                         <Form.Label column sm="2">
                             Kolor
                         </Form.Label>
-                        <div key={"habit-color"} className="ml-5 mt-auto mb-auto ">
+                        <div key={"task-color"} className="ml-5 mt-auto mb-auto ">
                             {colors.map((color, i) => (
                                 <Form.Check
                                     type = {"radio"}
@@ -152,4 +116,4 @@ const HabitAddFormModal = (props) => {
 }
 
 
-export default HabitAddFormModal;
+export default TaskAddModal;
