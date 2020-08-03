@@ -8,7 +8,7 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import TaskAddModal from "../TaskAddModal/TaskAddModal";
 import {fetchTaskData} from "../../api";
 
-const TaskCard = ({ day, currentUser }) => {
+const TaskCard = ({ day, currentUserId, date }) => {
 
     const [tasks, setTasks] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -17,9 +17,8 @@ const TaskCard = ({ day, currentUser }) => {
     useEffect(() => {
         const fetchAPI = async () => {
             setIsError(false);
-            setIsLoading(true)
-            const id = currentUser.id;
-            setTasks(await fetchTaskData(id, setIsError));
+            setIsLoading(true);
+            setTasks(await fetchTaskData(currentUserId, setIsError));
             setIsLoading(false);
         }
         fetchAPI();
@@ -28,33 +27,9 @@ const TaskCard = ({ day, currentUser }) => {
 
     const [modalShow, setModalShow] = useState(false);
 
-    const currentTasks = (day) => {
+    const currentTasks = (date) => {
 
-        let currentTasks = [];
-
-        switch (day) {
-            case "Monday":
-                currentTasks = tasks.filter(task => task.day === "Monday");
-                break
-            case "Tuesday":
-                currentTasks = tasks.filter(task => task.day === "Tuesday");
-                break
-            case "Wednesday":
-                currentTasks = tasks.filter(task => task.day === "Wednesday");
-                break
-            case "Thursday":
-                currentTasks = tasks.filter(task => task.day === "Thursday");
-                break
-            case "Friday":
-                currentTasks = tasks.filter(task => task.day === "Friday");
-                break
-            case "Saturday":
-                currentTasks = tasks.filter(task => task.day === "Saturday");
-                break
-            case "Sunday":
-                currentTasks = tasks.filter(task => task.day === "Sunday");
-                break
-        }
+        let currentTasks = tasks.filter(task => task.date === date);
 
         return currentTasks;
     }
@@ -98,7 +73,9 @@ const TaskCard = ({ day, currentUser }) => {
                         variant={"secondary"}
                         size={"sm"}
                         className={"pl-2 pr-2 float-right"}
-                        onClick={ () => setModalShow(true) }>
+                        onClick={ () => {
+                            setModalShow(true);
+                        }}>
                         <FontAwesomeIcon icon={faPlus} />
                     </Button>
                 </Card.Footer>
@@ -110,11 +87,11 @@ const TaskCard = ({ day, currentUser }) => {
                             className ={"ml-auto mr-auto"}
                         />) :
                         (<ul className={cx(styles.listGroup, "list-unstyled")}>
-                            {currentTasks(day).map(task => (
+                            {currentTasks(date).map(task => (
                                 <Task
                                     key = { task.id }
                                     task = { task }
-                                    tasks = { currentTasks(day) }
+                                    tasks = { currentTasks(date) }
                                     setTasks = { setTasks }
                                 />))}
                         </ul>)}
@@ -122,8 +99,9 @@ const TaskCard = ({ day, currentUser }) => {
                 <TaskAddModal
                     show = { modalShow }
                     onHide = { () => setModalShow(false) }
-                    currentUser = { currentUser }
+                    currentUserId = { currentUserId }
                     day = { day }
+                    date = { date }
                 />
             </Card>
     )

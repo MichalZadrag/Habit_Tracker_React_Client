@@ -10,7 +10,7 @@ import cx from 'classnames';
 import {login} from "../../api";
 
 
-const LoginForm = (props) => {
+const LoginForm = ({setIsAuthenticated}) => {
 
     const history = useHistory();
 
@@ -37,7 +37,7 @@ const LoginForm = (props) => {
         const { usernameOrEmail, password } = values
 
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            login(usernameOrEmail, password, setErrors, history, props.setIsAuthenticated);
+            login(usernameOrEmail, password, setErrors, history, setIsAuthenticated);
         }
     }, [errors])
 

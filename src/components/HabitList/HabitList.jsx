@@ -6,7 +6,7 @@ import {fetchHabitData} from "../../api";
 import {Spinner} from "react-bootstrap";
 
 
-const HabitList = (props) => {
+const HabitList = ({currentUserId}) => {
 
     const [habits, setHabits] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -16,8 +16,7 @@ const HabitList = (props) => {
         const fetchAPI = async () => {
             setIsError(false);
             setIsLoading(true)
-            const id = props.currentUser.id;
-            setHabits(await fetchHabitData(id, setIsError));
+            setHabits(await fetchHabitData(currentUserId, setIsError));
             setIsLoading(false);
         }
         fetchAPI();

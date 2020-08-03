@@ -10,7 +10,7 @@ import {ACCESS_TOKEN} from "../../constants";
 import CurrentUserInfoModal from "../CurrentUserInfoModal/CurrentUserInfoModal";
 
 
-const Sidebar = ( props ) => {
+const Sidebar = ({setIsAuthenticated, currentUser, isSidebarActive}) => {
 
     const history = useHistory();
 
@@ -23,11 +23,9 @@ const Sidebar = ( props ) => {
     }
 
 
-
-
     return(
             <nav
-                className={!props.isSidebarActive ? styles.active : styles.sidebar}
+                className={!isSidebarActive ? styles.active : styles.sidebar}
             >
                 <div className={styles.sidebarHeader}>
                     <h3>Habit Tracker</h3>
@@ -38,7 +36,7 @@ const Sidebar = ( props ) => {
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon icon={faAddressBook} />
                             </div>
-                             {props.currentUser.username}
+                             {currentUser.username}
                         </Link>
                         <Collapse in={ open }>
                             <ul className="list-unstyled" id="homeSubmenu">
@@ -58,7 +56,7 @@ const Sidebar = ( props ) => {
                                               localStorage.removeItem(ACCESS_TOKEN);
                                               history.push("/login");
                                               refreshPage();
-                                              props.setIsAuthenticated(false);
+                                              setIsAuthenticated(false);
                                           }}
                                           className={styles.collapseItem}>
                                         Wyloguj
@@ -114,7 +112,7 @@ const Sidebar = ( props ) => {
                 <CurrentUserInfoModal
                     show = { modalShow }
                     onHide = { () => setModalShow(false) }
-                    currentUser = { props.currentUser }
+                    currentUser = { currentUser }
                 />
 
             </nav>

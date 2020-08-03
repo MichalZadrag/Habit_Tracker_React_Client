@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCircle, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import styles from "../HabitAddFormModal/HabitAddFormModal.module.css";
 import validateTask from "./validateTask";
-import {addNewHabit, addNewTask} from "../../api";
+import {addNewTask} from "../../api";
+import {COLORS} from "../../constants";
 
 
-const TaskAddModal = (props) => {
+const TaskAddModal = ({show, onHide, currentUserId, day, date}) => {
 
     const refreshPage = () => {
         window.location.reload(false);
@@ -17,28 +18,23 @@ const TaskAddModal = (props) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [task, setTask] = useState({
         taskText: '',
-        color: ''
+        color: '',
+        user_id: '',
+        date: ''
     });
-    const [colors, setColors] = useState([
-        { tag: <FontAwesomeIcon className={styles.lightGreen} size="lg" icon={faCircle} />, string: "lightGreen" },
-        { tag: <FontAwesomeIcon className={styles.salmon} size="lg" icon={faCircle} />, string: "salmon" },
-        { tag: <FontAwesomeIcon className={styles.lightGrey} size="lg" icon={faCircle} />, string: "lightGrey" },
-        { tag: <FontAwesomeIcon className={styles.lightBlue} size="lg" icon={faCircle} />, string: "lightBlue" },
-
-    ]);
 
     useEffect(() => {
 
         const { taskText, color } = task;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewTask(taskText, color, props.currentUser.id, props.day);
+            addNewTask(taskText, color, currentUserId, date);
             setTask({
                 taskText: '',
                 color: '',
                 user_id: '',
-                day: '',
+                date: '',
             })
-            props.onHide();
+            onHide();
             refreshPage();
         }
     },[errors])
@@ -61,8 +57,8 @@ const TaskAddModal = (props) => {
 
     return(
         <Modal
-            show={props.show}
-            onHide={props.onHide}
+            show={show}
+            onHide={onHide}
         >
             <Modal.Header closeButton className={styles.mHeader}>
                 <Modal.Title id="contained-modal-title-vcenter">
@@ -88,7 +84,7 @@ const TaskAddModal = (props) => {
                             Kolor
                         </Form.Label>
                         <div key={"task-color"} className="ml-5 mt-auto mb-auto ">
-                            {colors.map((color, i) => (
+                            {COLORS.map((color, i) => (
                                 <Form.Check
                                     type = {"radio"}
                                     custom

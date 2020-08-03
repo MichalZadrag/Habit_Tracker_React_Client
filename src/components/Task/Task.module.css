@@ -1,7 +1,7 @@
 .listGroupItem {
     color: #3b3933;
     transition: all 0.3s;
-    font-size: 1.1em;
+    font-size: 1.2em;
     margin: 15px;
     border-radius: 7px !important;
 }
@@ -13,6 +13,8 @@
     color: red !important;
 }
 
-.test {
+.isDone {
     text-decoration:line-through;
+    background: #bbbbbb !important;
+
 }

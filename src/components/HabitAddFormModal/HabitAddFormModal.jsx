@@ -2,12 +2,13 @@ import React, {useEffect, useState} from "react";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 import styles from './HabitAddFormModal.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBiking, faBook, faCircle, faDumbbell, faMoneyBillAlt, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {addNewHabit} from "../../api";
 import validateHabit from "./validateHabit";
+import {COLORS, ICONS} from "../../constants";
 
 
-const HabitAddFormModal = (props) => {
+const HabitAddFormModal = ({show, onHide, currentUserId}) => {
 
     const refreshPage = () => {
         window.location.reload(false);
@@ -15,38 +16,24 @@ const HabitAddFormModal = (props) => {
 
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [icons, setIcons] = useState([
-        { tag: <FontAwesomeIcon icon={faBiking}/>, string: "faBiking" },
-        { tag: <FontAwesomeIcon icon={faBook} />, string: "faBook" },
-        { tag: <FontAwesomeIcon icon={faDumbbell} />, string: "faDumbbell" },
-        { tag: <FontAwesomeIcon icon={faMoneyBillAlt} />, string: "faMoneyBillAlt" },
-        ]);
     const [habit, setHabit] = useState({
         habitText: '',
         icon: '',
         color: '',
     });
-    const [colors, setColors] = useState([
-        { tag: <FontAwesomeIcon className={styles.lightGreen} size="lg" icon={faCircle} />, string: "lightGreen" },
-        { tag: <FontAwesomeIcon className={styles.salmon} size="lg" icon={faCircle} />, string: "salmon" },
-        { tag: <FontAwesomeIcon className={styles.lightGrey} size="lg" icon={faCircle} />, string: "lightGrey" },
-        { tag: <FontAwesomeIcon className={styles.lightBlue} size="lg" icon={faCircle} />, string: "lightBlue" },
-
-    ]);
-
     useEffect(() => {
         console.log("USE EFFECT HABIT ADD FORM MODAL");
 
         const {habitText, icon, color} = habit;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewHabit(habitText, icon, color, props.currentUser.id);
+            addNewHabit(habitText, icon, color, currentUserId);
             setHabit({
                 habitText: '',
                 icon: '',
                 color: '',
                 user_id: ''
             })
-            props.onHide();
+            onHide();
             refreshPage();
         }
 
@@ -76,8 +63,8 @@ const HabitAddFormModal = (props) => {
 
     return(
         <Modal
-            show={props.show}
-            onHide={props.onHide}
+            show={show}
+            onHide={onHide}
         >
             <Modal.Header closeButton className={styles.mHeader}>
                 <Modal.Title id="contained-modal-title-vcenter  ">
@@ -104,7 +91,7 @@ const HabitAddFormModal = (props) => {
                             Ikona
                         </Form.Label>
                             <div key={"habit-icon"} className="ml-5 mt-auto mb-auto ">
-                                {icons.map((icon, i) => (
+                                {ICONS.map((icon, i) => (
                                     <Form.Check
                                         type = {"radio"}
                                         custom
@@ -124,7 +111,7 @@ const HabitAddFormModal = (props) => {
                             Kolor
                         </Form.Label>
                         <div key={"habit-color"} className="ml-5 mt-auto mb-auto ">
-                            {colors.map((color, i) => (
+                            {COLORS.map((color, i) => (
                                 <Form.Check
                                     type = {"radio"}
                                     custom

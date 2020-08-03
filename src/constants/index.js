@@ -1,9 +1,27 @@
+import {changeDateBy} from "./utils";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAward, faBiking, faBook, faCircle, faDumbbell, faMoneyBillAlt} from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import styles from "../components/HabitAddFormModal/HabitAddFormModal.module.css";
+import {faCalendar, faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 
 export const LOGIN_URL = `http://localhost:8080/api/auth/signin`;
 
 export const API_URL = `http://localhost:8080/api`;
 
+export const ADD_NEW_USER_URL = `/auth/signup`;
+
+export const ADD_NEW_HABIT_URL = `/habit/add`;
+
+export const DELETE_HABIT_BY_ID_URL = `/habit/delete/`;
+
+export const GET_CURRENT_USER_URL = `/user/me`;
+
 export const ACCESS_TOKEN = "token";
+
+export const FETCH_HABIT_DATA_URL = `/habit/all/`;
+
+export const FETCH_TASK_DATA_URL = `/task/all/`;
 
 export const NAME_REGEXP = /^[a-zA-Z0-9]{3,}$/;
 
@@ -18,6 +36,38 @@ export const HABIT_REGEXP = /^[a-zA-Z]{3,}?( +[a-zA-Z]+)?( +[a-zA-Z]{2,})?$/;
 export const CHECK_EMAIL_AVAILABILITY_URL = `http://localhost:8080/api/user/checkEmailAvailability?email=`
 
 export const CHECK_USERNAME_AVAILABILITY_URL = `http://localhost:8080/api/user/checkUsernameAvailability?username=`
+
+export const ONE_DAY_IN_MS = 86400000;
+
+export const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+export const DATES = [
+    new Date(),
+    changeDateBy(new Date(), 1, "+"),
+    changeDateBy(new Date(), 2, "+"),
+    changeDateBy(new Date(), 3, "+"),
+];
+
+export const ICONS = [
+    { tag: <FontAwesomeIcon icon={faBiking}/>, string: "faBiking" },
+    { tag: <FontAwesomeIcon icon={faBook} />, string: "faBook" },
+    { tag: <FontAwesomeIcon icon={faDumbbell} />, string: "faDumbbell" },
+    { tag: <FontAwesomeIcon icon={faMoneyBillAlt} />, string: "faMoneyBillAlt" },
+];
+
+export const COLORS = [
+    { tag: <FontAwesomeIcon className={styles.lightGreen} size="lg" icon={faCircle} />, string: "lightGreen" },
+    { tag: <FontAwesomeIcon className={styles.salmon} size="lg" icon={faCircle} />, string: "salmon" },
+    { tag: <FontAwesomeIcon className={styles.lightGrey} size="lg" icon={faCircle} />, string: "lightGrey" },
+    { tag: <FontAwesomeIcon className={styles.lightBlue} size="lg" icon={faCircle} />, string: "lightBlue" },
+
+];
+
+export const CARDS = [
+    {id: 0, card_text: "Zadania na dzisiaj", icon: faCalendarCheck},
+    {id: 1, card_text: "Osiągnięcia", icon: faAward},
+    {id: 2, card_text: "Dzisiejsze wydarzenia", icon: faCalendar}
+];
 
 
 

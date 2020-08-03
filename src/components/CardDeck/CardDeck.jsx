@@ -2,15 +2,16 @@ import React from "react";
 import styles from "./CardDeck.module.css";
 import cx from "classnames";
 import Card from "../Card/Card";
+import {CARDS} from "../../constants";
 
 
-const CardDeck = ({ cards }) => {
+const CardDeck = () => {
 
 
 
     return(
         <div className={cx("card-deck", styles.cardDeck)}>
-            {cards.map( (card) => (
+            {CARDS.map( (card) => (
                 <Card
                     key = { card.id }
                     card_text = { card.card_text }

@@ -1,14 +1,14 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import styles from './ChangeTaskView.module.css';
 import {Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretLeft, faCaretRight} from "@fortawesome/free-solid-svg-icons";
 import cx from 'classnames';
-import {appendLeadingZeroes} from "../../constants/utils";
+import {appendLeadingZeroes, changeDateBy} from "../../constants/utils";
 
 
 
-const ChangeTaskView = ({todayDate, setTodayDate, oneDayInMs, laterDate,  setLaterDate}) => {
+const ChangeTaskView = ({todayDate, setTodayDate, laterDate,  setLaterDate}) => {
 
 
     useEffect(() => {
@@ -31,24 +31,18 @@ const ChangeTaskView = ({todayDate, setTodayDate, oneDayInMs, laterDate,  setLat
 
     }
 
-    const changeData = (action) => {
-        if (action === "+") {
-            setTodayDate(new Date(todayDate.getTime() + (3 * oneDayInMs)));
-            setLaterDate(new Date(laterDate.getTime() + (3 * oneDayInMs)));
-        } else if (action === "-") {
-            setTodayDate(new Date(todayDate.getTime() - (3 * oneDayInMs)));
-            setLaterDate(new Date(laterDate.getTime() - (3 * oneDayInMs)));
-        }
-
+    const changeDate = (action) => {
+        setTodayDate(changeDateBy(todayDate, 3, action));
+        setLaterDate(changeDateBy(laterDate, 3, action));
     }
 
 
     const onClickData = (id) => {
 
         if (id === "left") {
-           changeData("-");
+           changeDate("-");
         } else if (id === "right") {
-            changeData("+");
+            changeDate("+");
         }
 
     }

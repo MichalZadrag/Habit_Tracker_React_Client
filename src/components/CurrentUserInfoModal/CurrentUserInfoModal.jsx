@@ -3,14 +3,14 @@ import styles from "./CurrentUserInfoModal.module.css";
 import React from "react";
 
 
-const CurrentUserInfoModal = (props) => {
+const CurrentUserInfoModal = ({show, onHide, currentUser}) => {
 
 
 
     return(
         <Modal
-            show = { props.show }
-            onHide = { props.onHide }
+            show = { show }
+            onHide = { onHide }
         >
             <Modal.Header className={styles.mHeader} closeButton>
                 <Modal.Title>
@@ -24,7 +24,7 @@ const CurrentUserInfoModal = (props) => {
                             Imie
                         </InputGroup.Text>
                     </InputGroup.Prepend>
-                    <FormControl type="text" value={props.currentUser.first_name} readOnly className={"text-center"}/>
+                    <FormControl type="text" value={currentUser.first_name} readOnly className={"text-center"}/>
                 </InputGroup>
                 <InputGroup className="mb-3">
                     <InputGroup.Prepend>
@@ -32,7 +32,7 @@ const CurrentUserInfoModal = (props) => {
                             Nazwisko
                         </InputGroup.Text>
                     </InputGroup.Prepend>
-                    <FormControl type="text" value={props.currentUser.last_name} readOnly className={"text-center"}/>
+                    <FormControl type="text" value={currentUser.last_name} readOnly className={"text-center"}/>
                 </InputGroup>
                 <InputGroup className="mb-3">
                     <InputGroup.Prepend>
@@ -40,7 +40,7 @@ const CurrentUserInfoModal = (props) => {
                             Login
                         </InputGroup.Text>
                     </InputGroup.Prepend>
-                    <FormControl type="text" value={props.currentUser.username} readOnly className={"text-center"}/>
+                    <FormControl type="text" value={currentUser.username} readOnly className={"text-center"}/>
                 </InputGroup>
                 <InputGroup className="mb-3">
                 <InputGroup.Prepend>
@@ -48,7 +48,7 @@ const CurrentUserInfoModal = (props) => {
                         Email
                     </InputGroup.Text>
                 </InputGroup.Prepend>
-                <FormControl type="text" value={props.currentUser.email} readOnly className={"text-center"} />
+                <FormControl type="text" value={currentUser.email} readOnly className={"text-center"} />
             </InputGroup>
 
             </Modal.Body>

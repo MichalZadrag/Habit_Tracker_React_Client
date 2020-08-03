@@ -2,29 +2,31 @@ import React, {useEffect, useState} from "react";
 import {CardGroup} from "react-bootstrap";
 import TaskCard from "../TaskCard/TaskCard";
 import ChangeTaskView from "../ChangeTaskView/ChangeTaskView";
+import {changeDateBy, formatDate} from "../../constants/utils";
+import {DAYS} from "../../constants";
 
 
 
-const TaskDeck = (props) => {
+const TaskDeck = ({currentUserId}) => {
 
     const [todayDate, setTodayDate] = useState(new Date());
-    const [oneDayInMs, setOneDayInMs] = useState(86400000);
-    const [laterDate, setLaterDate] = useState(new Date((new Date()).getTime() + (2 * oneDayInMs)));
-    const [days, setDays] = useState(["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]);
-    const [currentDays, setCurrentDays] = useState([]);
+    const [laterDate, setLaterDate] = useState(changeDateBy(new Date(), 2, "+"));
+    const [currentDays, setCurrentDays] = useState([{day: '', date: ''}]);
 
 
 
     const setCurrentDaysDependOnDate = () => {
         let tempDays = [];
         let currentDay = todayDate.getDay();
-        let i = 0;
-        while (i < 3) {
-            tempDays.push(days[currentDay]);
+        let currentDate = todayDate;
+        let i = 1;
+        while (i < 4) {
+            tempDays.push({day: DAYS[currentDay], date: currentDate});
             if (currentDay === 6) {
                 currentDay = 0;
             } else {
                 currentDay++;
+                currentDate = changeDateBy(todayDate, i, "+");
             }
             i++;
         }
@@ -41,16 +43,16 @@ const TaskDeck = (props) => {
             <ChangeTaskView
                 todayDate = { todayDate }
                 setTodayDate = { setTodayDate }
-                oneDayInMs = { oneDayInMs }
                 laterDate = { laterDate }
                 setLaterDate = { setLaterDate }
             />
             <CardGroup className={"ml-2 mr-2"}>
-                {currentDays.map((day, i) => (
+                {currentDays.map((currentDay, i) => (
                     <TaskCard
                         key = { i }
-                        day = { day }
-                        currentUser = { props.currentUser }
+                        date = { formatDate(currentDay.date) }
+                        day = { currentDay.day }
+                        currentUserId = { currentUserId }
                     />
                 ))}
             </CardGroup>

@@ -8,7 +8,7 @@ import Nav from "react-bootstrap/Nav";
 import CollapseButton from "../CollapseButton/CollapseButton";
 import HabitAddFormModal from "../HabitAddFormModal/HabitAddFormModal";
 
-const Navbar = (props) => {
+const Navbar = ({currentUserId, setIsSidebarActive, isSidebarActive}) => {
 
 
     const [modalShow, setModalShow] = React.useState(false);
@@ -17,8 +17,8 @@ const Navbar = (props) => {
             <Nav className="navbar-expand-lg navbar-light bg-light">
                 <div className="collapse navbar-collapse">
                     <CollapseButton
-                        setIsSidebarActive = { props.setIsSidebarActive }
-                        isSidebarActive = { props.isSidebarActive }
+                        setIsSidebarActive = { setIsSidebarActive }
+                        isSidebarActive = { isSidebarActive }
                     />
                     <div className="navbar-nav mr-auto center">
 
@@ -35,8 +35,7 @@ const Navbar = (props) => {
                         <HabitAddFormModal
                             show = { modalShow }
                             onHide = { () => setModalShow(false) }
-                            handleChangeHabit = { props.handleChangeHabit }
-                            currentUser= { props.currentUser }
+                            currentUserId = { currentUserId }
                         />
                     </div>
                 </div>

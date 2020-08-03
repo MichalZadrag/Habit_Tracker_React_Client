@@ -1,13 +1,19 @@
 import axios from 'axios';
 import {
     ACCESS_TOKEN,
+    ADD_NEW_HABIT_URL,
+    ADD_NEW_USER_URL,
     API_URL,
     CHECK_EMAIL_AVAILABILITY_URL,
     CHECK_USERNAME_AVAILABILITY_URL,
+    DELETE_HABIT_BY_ID_URL,
+    FETCH_HABIT_DATA_URL,
+    FETCH_TASK_DATA_URL,
+    GET_CURRENT_USER_URL,
     LOGIN_URL
 } from "../constants";
 
-let access_token = ''
+let access_token = '';
 
 if (localStorage.getItem(ACCESS_TOKEN)) {
      access_token = localStorage.getItem(ACCESS_TOKEN);
@@ -26,7 +32,7 @@ export const authAxios = axios.create({
 
 export const addNewUser = (firstName, lastName, username, email, password, setErrors, setAlerts) => {
 
-    authAxios.post("/auth/signup", {
+    authAxios.post(ADD_NEW_USER_URL, {
         first_name: firstName,
         last_name: lastName,
         username: username,
@@ -43,7 +49,7 @@ export const addNewUser = (firstName, lastName, username, email, password, setEr
 
 export const addNewHabit = (habitText, icon, color, user_id) => {
 
-    authAxios.post("/habit/add", {
+    authAxios.post(ADD_NEW_HABIT_URL, {
         habit_text: habitText,
         icon: icon,
         color: color,
@@ -55,7 +61,7 @@ export const addNewHabit = (habitText, icon, color, user_id) => {
 }
 
 export const deleteHabitById = (id) => {
-    authAxios.delete(`/habit/delete/${id}`)
+    authAxios.delete(`${DELETE_HABIT_BY_ID_URL}${id}`)
         .then((r) => console.log(r.data.message));
 }
 
@@ -74,7 +80,7 @@ export const getCurrentUser = async () => {
     if(!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     } else {
-        const { data } = await authAxios.get("/user/me")
+        const { data } = await authAxios.get(GET_CURRENT_USER_URL)
         return data;
     }
 
@@ -94,7 +100,7 @@ export const login = (usernameOrEmail, password, setErrors, history, setIsAuthen
         }
     }).catch(e => {
         if (e.response.data.status === 401) {
-            setErrors({overall: "Błędny login lub hasło"});
+            setErrors({ overall: "Błędny login lub hasło" });
         }
     });
     console.log("ZALOGOWANO");
@@ -103,7 +109,7 @@ export const login = (usernameOrEmail, password, setErrors, history, setIsAuthen
 export const fetchHabitData = async (id, setIsError) => {
 
     try {
-        const { data } = await authAxios.get(`/habit/all/${id}`);
+        const { data } = await authAxios.get(`${FETCH_HABIT_DATA_URL}${id}`);
         return data;
     } catch (e) {
         setIsError(true);
@@ -113,19 +119,19 @@ export const fetchHabitData = async (id, setIsError) => {
 
 export const fetchTaskData = async (id, setIsError) => {
     try {
-        const { data } = await authAxios.get(`/task/all/${id}`);
+        const { data } = await authAxios.get(`${FETCH_TASK_DATA_URL}${id}`);
         return data;
     } catch (e) {
         setIsError(true);
     }
 }
 
-export const addNewTask = (taskText, color, user_id, day) => {
+export const addNewTask = (taskText, color, user_id, date) => {
     authAxios.post("/task/add", {
         task_text: taskText,
         color: color,
         user_id: user_id,
-        day: day
+        date: date
     }).then(r => null)
         .catch(e => console.log("error"));
 }

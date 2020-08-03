@@ -2,12 +2,12 @@ import React from "react";
 import styles from '../HabitAddFormModal/HabitAddFormModal.module.css';
 import {Button, Col, Modal, Row} from "react-bootstrap";
 
-const DeleteConfirmationModal = (props) => {
+const DeleteConfirmationModal = ({show, onHide, deleteData}) => {
     return(
         <Modal
             size="sm"
-            show = { props.show }
-            onHide = { props.onHide }
+            show = { show }
+            onHide = { onHide }
         >
             <Modal.Header className={styles.mHeader} closeButton>
                 <Modal.Title>
@@ -19,14 +19,14 @@ const DeleteConfirmationModal = (props) => {
                     <Col className="text-center">
                         <Button variant={"danger"}
                                 className="w-100"
-                                onClick={ props.deleteHabit }>
+                                onClick={ deleteData }>
                             Potwierdź
                         </Button>
                     </Col>
                     <Col className="text-center">
                         <Button variant={"primary"}
                                 className="w-100"
-                                onClick={ props.onHide }>
+                                onClick={ onHide }>
                             Cofnij
                         </Button>
                     </Col>

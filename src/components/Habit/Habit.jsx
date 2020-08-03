@@ -8,23 +8,17 @@ import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmati
 import Moment from 'react-moment';
 import {deleteHabitById} from "../../api";
 import {changeToCss, changeToIcon} from "../../constants/utils";
+import {DATES} from "../../constants";
 
 
 const Habit = ({ habit, habits, setHabits }) => {
 
-    const [oneDayInMs, setOneDayInMs] = useState(86400000);
-    const [dates, setDates] = useState([
-        new Date(),
-        new Date((new Date()).getTime() + (1 * oneDayInMs)),
-        new Date((new Date()).getTime() + (2 * oneDayInMs)),
-        new Date((new Date()).getTime() + (3 * oneDayInMs)),
-    ]);
     const {id, icon, color, habit_text} = habit;
     const [modalShow, setModalShow] = useState(false);
 
     const datesToMoment = () => {
 
-        let momentArray = dates.map((date) => <Moment date={date} format="DD.MM"/>);
+        let momentArray = DATES.map((date) => <Moment date={date} format="DD.MM"/>);
 
         return momentArray;
     }
@@ -67,7 +61,7 @@ const Habit = ({ habit, habits, setHabits }) => {
             <DeleteConfirmationModal
                 show = { modalShow }
                 onHide = { () => setModalShow(false) }
-                deleteHabit = { deleteHabit }
+                deleteData = { deleteHabit }
             >
             </DeleteConfirmationModal>
         </div>

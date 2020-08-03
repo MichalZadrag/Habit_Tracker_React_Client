@@ -2,28 +2,19 @@ import React, { useEffect, useState } from 'react';
 import Container from "react-bootstrap/Container";
 import {Sidebar, HabitList, Navbar, CollapseButton, Chart, LoginForm, RegisterForm, TaskDeck} from "./components";
 import styles from './App.module.css';
-import {faAward} from "@fortawesome/free-solid-svg-icons";
 import CardDeck from "./components/CardDeck/CardDeck";
-import {faCalendar, faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import {getCurrentUser} from "./api";
 import {Spinner} from "react-bootstrap";
 
 const App = () => {
 
-    const [cards, setCards] = useState([]);
     const [currentUser, setCurrentUser] = useState({id: '', username: '', first_name: '',last_name: '', email: ''})
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isSidebarActive, setIsSidebarActive] = useState(true);
 
 
     useEffect(() => {
-
-        setCards([
-            {id: 0, card_text: "Zadania na dzisiaj", icon: faCalendarCheck},
-            {id: 1, card_text: "Osiągnięcia", icon: faAward},
-            {id: 2, card_text: "Dzisiejsze wydarzenia", icon: faCalendar}
-            ]);
 
        const fetchCurrentUser = async () => {
            setCurrentUser(await getCurrentUser());
@@ -63,12 +54,12 @@ const App = () => {
                              >
                                  <Route path="/habits" exact>
                                      <Navbar
-                                         currentUser = { currentUser }
+                                         currentUserId = { currentUser.id }
                                          setIsSidebarActive = { setIsSidebarActive }
                                          isSidebarActive = { isSidebarActive }
                                      />
                                      <HabitList
-                                        currentUser = { currentUser }
+                                        currentUserId = { currentUser.id }
                                      />
                                  </Route>
                                  <Route path="/statistics">
@@ -78,7 +69,6 @@ const App = () => {
                                      />
                                      <Chart/>
                                      <CardDeck
-                                         cards={ cards }
                                      />
                                  </Route>
                                  <Route path="/tasks">
@@ -87,7 +77,7 @@ const App = () => {
                                          isSidebarActive = { isSidebarActive }
                                      />
                                      <TaskDeck
-                                         currentUser = { currentUser }
+                                         currentUserId = { currentUser.id }
                                      />
                                  </Route>
                              </Container>
