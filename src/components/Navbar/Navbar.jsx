@@ -6,7 +6,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import Nav from "react-bootstrap/Nav";
 import CollapseButton from "../CollapseButton/CollapseButton";
-import HabitAddFormModal from "../HabitAddFormModal/HabitAddFormModal";
+import HabitAddModal from "../HabitAddModal/HabitAddModal";
 
 const Navbar = ({currentUserId, setIsSidebarActive, isSidebarActive}) => {
 
@@ -32,7 +32,7 @@ const Navbar = ({currentUserId, setIsSidebarActive, isSidebarActive}) => {
                             </div>
                             Dodaj
                         </Button>
-                        <HabitAddFormModal
+                        <HabitAddModal
                             show = { modalShow }
                             onHide = { () => setModalShow(false) }
                             currentUserId = { currentUserId }

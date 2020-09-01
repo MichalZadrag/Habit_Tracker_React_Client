@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
-import styles from './HabitAddFormModal.module.css'
+import styles from './HabitAddModal.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {addNewHabit} from "../../api";
@@ -8,7 +8,7 @@ import validateHabit from "./validateHabit";
 import {COLORS, ICONS} from "../../constants";
 
 
-const HabitAddFormModal = ({show, onHide, currentUserId}) => {
+const HabitAddModal = ({show, onHide, currentUserId}) => {
 
     const refreshPage = () => {
         window.location.reload(false);
@@ -139,4 +139,4 @@ const HabitAddFormModal = ({show, onHide, currentUserId}) => {
 }
 
 
-export default HabitAddFormModal;
+export default HabitAddModal;

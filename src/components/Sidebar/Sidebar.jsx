@@ -74,7 +74,7 @@ const Sidebar = ({setIsAuthenticated, currentUser, isSidebarActive}) => {
                        </Link>
                     </li>
                     <li>
-                        <Link to="#" role="button">
+                        <Link to="/events" role="button">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon   icon={faCalendarAlt} />
                             </div>

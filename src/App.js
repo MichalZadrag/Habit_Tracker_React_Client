@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import Container from "react-bootstrap/Container";
-import {Sidebar, HabitList, Navbar, CollapseButton, Chart, LoginForm, RegisterForm, TaskDeck} from "./components";
+import {
+    Sidebar,
+    HabitList,
+    Navbar,
+    CollapseButton,
+    Chart,
+    LoginForm,
+    RegisterForm,
+    TaskDeck,
+    EventDeck
+} from "./components";
 import styles from './App.module.css';
 import CardDeck from "./components/CardDeck/CardDeck";
 import {BrowserRouter as Router, Route} from 'react-router-dom';
@@ -35,14 +45,14 @@ const App = () => {
                      <Route path="/register">
                          <RegisterForm/>
                      </Route>
-                     <Route path={["/habits", "/statistics","/tasks"]} exact>
+                     <Route path={["/habits", "/statistics","/tasks", "/events"]} exact>
                          {(!currentUser.id ) ?
                              (<Spinner
                                  animation="border"
                                  variant={"primary"}
                                  className ={"mt-5 ml-auto mr-auto"}
                              /> ) :
-                             (<Route path={["/habits", "/statistics", "/tasks"]} exact>
+                             (<Route path={["/habits", "/statistics", "/tasks", "/events"]} exact>
                              <Sidebar
                                  setIsAuthenticated = { setIsAuthenticated }
                                  currentUser = { currentUser }
@@ -79,6 +89,15 @@ const App = () => {
                                      <TaskDeck
                                          currentUserId = { currentUser.id }
                                      />
+                                 </Route>
+                                 <Route path="/events">
+                                     <CollapseButton
+                                         setIsSidebarActive = { setIsSidebarActive }
+                                         isSidebarActive = { isSidebarActive }
+                                     />
+                                    <EventDeck
+                                        currentUserId = { currentUser.id }
+                                    />
                                  </Route>
                              </Container>
                          </Route>)}

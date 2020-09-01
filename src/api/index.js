@@ -140,3 +140,13 @@ export const deleteTaskById = (id) => {
     authAxios.delete(`/task/delete/${id}`)
         .then((r) => console.log(r.data.message));
 }
+
+export const addNewEvent = (eventText, color, user_id, date) => {
+    authAxios.post("/event/add", {
+        event_text: eventText,
+        color: color,
+        user_id: user_id,
+        date: date
+    }).then(r => null)
+        .catch(e => console.log("error"));
+}

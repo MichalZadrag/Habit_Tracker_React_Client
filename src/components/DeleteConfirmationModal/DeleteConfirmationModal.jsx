@@ -1,5 +1,5 @@
 import React from "react";
-import styles from '../HabitAddFormModal/HabitAddFormModal.module.css';
+import styles from '../HabitAddModal/HabitAddModal.module.css';
 import {Button, Col, Modal, Row} from "react-bootstrap";
 
 const DeleteConfirmationModal = ({show, onHide, deleteData}) => {

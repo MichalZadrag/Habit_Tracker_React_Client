@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import styles from './ChangeTaskView.module.css';
+import styles from './ChangeDataView.module.css';
 import {Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretLeft, faCaretRight} from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,7 @@ import {appendLeadingZeroes, changeDateBy} from "../../constants/utils";
 
 
 
-const ChangeTaskView = ({todayDate, setTodayDate, laterDate,  setLaterDate}) => {
+const ChangeDataView = ({todayDate, setTodayDate, laterDate,  setLaterDate}) => {
 
 
     useEffect(() => {
@@ -73,4 +73,4 @@ const ChangeTaskView = ({todayDate, setTodayDate, laterDate,  setLaterDate}) => 
 
 }
 
-export default ChangeTaskView;
+export default ChangeDataView;

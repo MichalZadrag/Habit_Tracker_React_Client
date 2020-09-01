@@ -2,7 +2,7 @@ import {changeDateBy} from "./utils";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAward, faBiking, faBook, faCircle, faDumbbell, faMoneyBillAlt} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
-import styles from "../components/HabitAddFormModal/HabitAddFormModal.module.css";
+import styles from "../components/HabitAddModal/HabitAddModal.module.css";
 import {faCalendar, faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 
 export const LOGIN_URL = `http://localhost:8080/api/auth/signin`;

@@ -1,18 +1,18 @@
 import React, {useEffect, useState} from "react";
 import {CardGroup} from "react-bootstrap";
-import TaskCard from "../TaskCard/TaskCard";
-import ChangeDataView from "../ChangeDataView/ChangeDataView";
+import EventCard from "../EventCard/EventCard";
 import {changeDateBy, formatDate, setCurrentDaysDependOnDate} from "../../constants/utils";
+import ChangeDataView from "../ChangeDataView/ChangeDataView";
 
 
 
-const TaskDeck = ({currentUserId}) => {
+
+const EventDeck = ({currentUserId}) => {
+
 
     const [todayDate, setTodayDate] = useState(new Date());
     const [laterDate, setLaterDate] = useState(changeDateBy(new Date(), 2, "+"));
     const [currentDays, setCurrentDays] = useState([{day: '', date: ''}]);
-
-
 
     useEffect(() => {
         setCurrentDays(setCurrentDaysDependOnDate(todayDate));
@@ -29,17 +29,17 @@ const TaskDeck = ({currentUserId}) => {
             />
             <CardGroup className={"ml-2 mr-2"}>
                 {currentDays.map((currentDay, i) => (
-                    <TaskCard
+                    <EventCard
                         key = { i }
                         date = { formatDate(currentDay.date) }
                         day = { currentDay.day }
                         currentUserId = { currentUserId }
                     />
+
                 ))}
             </CardGroup>
         </div>
     )
 }
 
-
-export default TaskDeck;
+export default EventDeck;

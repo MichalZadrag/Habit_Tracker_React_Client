@@ -1,14 +1,13 @@
-import React, {useEffect, useState} from "react";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import styles from "../HabitAddModal/HabitAddModal.module.css";
+import {COLORS} from "../../constants";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import styles from "../HabitAddModal/HabitAddModal.module.css";
-import validateTask from "./validateTask";
-import {addNewTask} from "../../api";
-import {COLORS} from "../../constants";
+import validateEvent from "./validateEvent";
+import {addNewEvent} from "../../api";
 
-
-const TaskAddModal = ({show, onHide, currentUserId, date}) => {
+const EventAddModal = ({show, onHide, currentUserId, date}) => {
 
     const refreshPage = () => {
         window.location.reload(false);
@@ -16,8 +15,8 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
 
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [task, setTask] = useState({
-        taskText: '',
+    const [event, setEvent] = useState({
+        eventText: '',
         color: '',
         user_id: '',
         date: ''
@@ -25,11 +24,11 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
 
     useEffect(() => {
 
-        const { taskText, color } = task;
+        const { eventText, color } = event;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewTask(taskText, color, currentUserId, date);
-            setTask({
-                taskText: '',
+            addNewEvent(eventText, color, currentUserId, date);
+            setEvent({
+                eventText: '',
                 color: '',
                 user_id: '',
                 date: '',
@@ -42,50 +41,51 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
     const handleChange = (evt) => {
         const { name, value } = evt.target;
 
-        setTask({
-            ...task,
+        setEvent({
+            ...event,
             [name]: value
         });
     }
 
+
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        setErrors(validateTask(task));
+        setErrors(validateEvent(event));
         setIsSubmitting(true);
 
     }
 
-    return(
+    return (
         <Modal
-            show={show}
-            onHide={onHide}
+            show={ show }
+            onHide={ onHide }
         >
             <Modal.Header closeButton className={styles.mHeader}>
                 <Modal.Title id="contained-modal-title-vcenter">
-                    Dodaj zadanie
+                    Dodaj wydarzenie
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className={styles.mBody}>
                 <Form noValidate onSubmit={handleSubmit}>
-                    <Form.Group as={Row} controlId={task.taskText}>
+                    <Form.Group as={Row} controlId={event.eventText}>
                         <Form.Label column sm="3">
-                            Zadanie
+                            Wydarzenie
                         </Form.Label>
                         <Col sm="9">
                             <Form.Control
-                                className ={`${errors.taskText && styles.inputError}`}
+                                className ={`${errors.eventText && styles.inputError}`}
                                 type="text"
-                                name="taskText"
+                                name="eventText"
                                 onChange={ handleChange }
-                                 />
-                            {errors.taskText && <p className={styles.error}>{errors.taskText}</p>}
+                            />
+                            {errors.eventText && <p className={styles.error}>{errors.eventText}</p>}
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row} controlId={task.color} className="display-flex">
+                    <Form.Group as={Row} controlId={event.color} className="display-flex">
                         <Form.Label column sm="3">
                             Kolor
                         </Form.Label>
-                        <div key={"task-color"} className="ml-5 mt-auto mb-auto ">
+                        <div key={"event-color"} className="ml-5 mt-auto mb-auto ">
                             {COLORS.map((color, i) => (
                                 <Form.Check
                                     type = {"radio"}
@@ -110,8 +110,7 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
                 </Form>
             </Modal.Body>
         </Modal>
-    );
+    )
 }
 
-
-export default TaskAddModal;
+export default EventAddModal;
