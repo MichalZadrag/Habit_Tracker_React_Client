@@ -5,15 +5,22 @@ import React from "react";
 import styles from "../components/HabitAddModal/HabitAddModal.module.css";
 import {faCalendar, faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 
-export const LOGIN_URL = `http://localhost:8080/api/auth/signin`;
+
+
+// export const API_URL = `https://habt-tracker.herokuapp.com/api`;
 
 export const API_URL = `http://localhost:8080/api`;
+
+
+export const LOGIN_URL = `/auth/signin`;
 
 export const ADD_NEW_USER_URL = `/auth/signup`;
 
 export const ADD_NEW_HABIT_URL = `/habit/add`;
 
 export const DELETE_HABIT_BY_ID_URL = `/habit/delete/`;
+
+export const DELETE_USER_BY_ID_URL = `/user/delete/`;
 
 export const GET_CURRENT_USER_URL = `/user/me`;
 
@@ -22,6 +29,8 @@ export const ACCESS_TOKEN = "token";
 export const FETCH_HABIT_DATA_URL = `/habit/all/`;
 
 export const FETCH_TASK_DATA_URL = `/task/all/`;
+
+export const FETCH_EVENT_DATA_URL = `/event/all/`;
 
 export const NAME_REGEXP = /^[a-zA-Z0-9]{3,}$/;
 

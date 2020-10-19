@@ -9,6 +9,8 @@ import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmati
 
 const Task = ({ task, tasks, setTasks }) => {
 
+    const {task_text, color} = task
+
     const [isDone, setIsDone] = useState(false);
     const [modalShow, setModalShow] = useState(false);
 
@@ -22,14 +24,14 @@ const Task = ({ task, tasks, setTasks }) => {
 
     return(
         <div>
-            <li className={cx(styles.listGroupItem, "p-2", "text-center", isDone && styles.isDone, changeToCss(task.color))} >
+            <li className={cx(styles.listGroupItem, "p-2", "text-center", isDone && styles.isDone, changeToCss(color))} >
                 <div
                     role={"button"}
                     className={cx( "float-left" ,"pl-2", "pr-2", "text-success", styles.check)}
                     onClick={() => setIsDone(!isDone)}>
                     <FontAwesomeIcon icon={faCheck} />
                 </div>
-                <small>{task.task_text}</small>
+                <small>{task_text}</small>
                 <div
                     role={"button"}
                     className={cx( "float-right" ,"pl-2", "pr-2", "text-danger", styles.delete)}

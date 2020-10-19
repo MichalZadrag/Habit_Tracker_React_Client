@@ -1,16 +1,42 @@
-import React, {useState} from "react";
-import {Button, Card} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Button, Card, Spinner} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import styles from "../TaskCard/TaskCard.module.css";
 import {currentDayToString} from "../../constants/utils";
 import EventAddModal from "../EventAddModal/EventAddModal";
+import Task from "../Task/Task";
+import {fetchEventData} from "../../api";
 
 
 const EventCard = ({ day, currentUserId, date }) => {
 
+
+    const [events, setEvents] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
     const [modalShow, setModalShow] = useState(false);
+
+    useEffect(() => {
+        const fetchAPI = async () => {
+            setIsError(false);
+            setIsLoading(true);
+            setEvents(await fetchEventData(currentUserId, setIsError));
+            setIsLoading(false);
+        }
+        fetchAPI();
+
+    },[])
+
+
+    const currentEvents = (date) => {
+
+        let currentEvents = events.filter(event => event.date === date);
+
+        return currentEvents;
+
+    }
 
     return (
         <Card>
@@ -28,9 +54,21 @@ const EventCard = ({ day, currentUserId, date }) => {
                 </Button>
             </Card.Footer>
             <Card.Body className="p-0">
-                <ul className={cx(styles.listGroup, "list-unstyled")}>
-                    <li>dupa</li>
-                </ul>
+                {isError && <div>Something went wrong...</div>}
+                {isLoading ? (<Spinner
+                        animation="border"
+                        variant={"primary"}
+                        className ={"ml-auto mr-auto"}
+                    />) :
+                    (<ul className={cx(styles.listGroup, "list-unstyled")}>
+                        {currentEvents(date).map(event => (
+                            <Task
+                                key = { event.id }
+                                event = { event }
+                                tasks = { currentEvents(date) }
+                                setEvents = { setEvents }
+                            />))}
+                    </ul>)}
             </Card.Body>
             <EventAddModal
                 show = { modalShow }

@@ -6,7 +6,7 @@ import {
     API_URL,
     CHECK_EMAIL_AVAILABILITY_URL,
     CHECK_USERNAME_AVAILABILITY_URL,
-    DELETE_HABIT_BY_ID_URL,
+    DELETE_HABIT_BY_ID_URL, DELETE_USER_BY_ID_URL, FETCH_EVENT_DATA_URL,
     FETCH_HABIT_DATA_URL,
     FETCH_TASK_DATA_URL,
     GET_CURRENT_USER_URL,
@@ -65,6 +65,11 @@ export const deleteHabitById = (id) => {
         .then((r) => console.log(r.data.message));
 }
 
+export const deleteUserById = (id) => {
+    authAxios.delete(`${DELETE_USER_BY_ID_URL}${id}`)
+        .then((r) => console.log(r.data.message));
+}
+
 export const checkUsernameAvailability = async (username) => {
     const { data } = await axios.get(`${CHECK_USERNAME_AVAILABILITY_URL}${username}`)
     return data.available;
@@ -88,7 +93,7 @@ export const getCurrentUser = async () => {
 
 export const login = (usernameOrEmail, password, setErrors, history, setIsAuthenticated) => {
 
-    axios.post(LOGIN_URL, {
+    authAxios.post(LOGIN_URL, {
         usernameOrEmail: usernameOrEmail,
         password: password
     }).then(r => {
@@ -141,12 +146,22 @@ export const deleteTaskById = (id) => {
         .then((r) => console.log(r.data.message));
 }
 
-export const addNewEvent = (eventText, color, user_id, date) => {
+export const addNewEvent = (eventText, color, user_id, date, location) => {
     authAxios.post("/event/add", {
         event_text: eventText,
         color: color,
         user_id: user_id,
-        date: date
+        date: date,
+        location: location
     }).then(r => null)
         .catch(e => console.log("error"));
+}
+
+export const fetchEventData = async (id, setIsError) => {
+    try {
+        const { data } = await authAxios.get(`${FETCH_EVENT_DATA_URL}${id}`);
+        return data;
+    } catch (e) {
+        setIsError(true);
+    }
 }

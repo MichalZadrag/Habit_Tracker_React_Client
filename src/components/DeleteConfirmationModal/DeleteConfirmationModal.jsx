@@ -18,20 +18,22 @@ const DeleteConfirmationModal = ({show, onHide, deleteData}) => {
                 <Row>
                     <Col className="text-center">
                         <Button variant={"danger"}
-                                className="w-100"
+                                className="w-75"
                                 onClick={ deleteData }>
-                            Potwierdź
+                            <small>Potwierdź</small>
                         </Button>
                     </Col>
                     <Col className="text-center">
                         <Button variant={"primary"}
-                                className="w-100"
+                                className="w-75"
                                 onClick={ onHide }>
-                            Cofnij
+                            <small>Cofnij</small>
                         </Button>
                     </Col>
                 </Row>
             </Modal.Body>
+
+
         </Modal>
     )
 }

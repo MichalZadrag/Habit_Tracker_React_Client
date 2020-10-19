@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faAngleRight, faPalette, faPlus} from "@fortawesome/free-solid-svg-icons";
 import styles from "../HabitAddModal/HabitAddModal.module.css";
 import validateTask from "./validateTask";
 import {addNewTask} from "../../api";
@@ -68,10 +68,10 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
             <Modal.Body className={styles.mBody}>
                 <Form noValidate onSubmit={handleSubmit}>
                     <Form.Group as={Row} controlId={task.taskText}>
-                        <Form.Label column sm="3">
-                            Zadanie
+                        <Form.Label className="text-center" column sm="2">
+                            <FontAwesomeIcon icon={faAngleRight} />
                         </Form.Label>
-                        <Col sm="9">
+                        <Col sm="8">
                             <Form.Control
                                 className ={`${errors.taskText && styles.inputError}`}
                                 type="text"
@@ -82,8 +82,8 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} controlId={task.color} className="display-flex">
-                        <Form.Label column sm="3">
-                            Kolor
+                        <Form.Label column className="text-center" sm="2">
+                            <FontAwesomeIcon icon={faPalette} />
                         </Form.Label>
                         <div key={"task-color"} className="ml-5 mt-auto mb-auto ">
                             {COLORS.map((color, i) => (

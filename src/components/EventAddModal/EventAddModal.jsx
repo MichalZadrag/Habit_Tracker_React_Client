@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import styles from "../HabitAddModal/HabitAddModal.module.css";
 import {COLORS} from "../../constants";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faAngleRight, faMapPin, faPalette, faPlus} from "@fortawesome/free-solid-svg-icons";
 import validateEvent from "./validateEvent";
 import {addNewEvent} from "../../api";
 
@@ -19,19 +19,21 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
         eventText: '',
         color: '',
         user_id: '',
-        date: ''
+        date: '',
+        location: '',
     });
 
     useEffect(() => {
 
-        const { eventText, color } = event;
+        const { eventText, color, location } = event;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewEvent(eventText, color, currentUserId, date);
+            addNewEvent(eventText, color, currentUserId, date, location);
             setEvent({
                 eventText: '',
                 color: '',
                 user_id: '',
                 date: '',
+                location: '',
             })
             onHide();
             refreshPage();
@@ -68,10 +70,10 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
             <Modal.Body className={styles.mBody}>
                 <Form noValidate onSubmit={handleSubmit}>
                     <Form.Group as={Row} controlId={event.eventText}>
-                        <Form.Label column sm="3">
-                            Wydarzenie
+                        <Form.Label className="text-center" column sm="2">
+                            <FontAwesomeIcon icon={faAngleRight} />
                         </Form.Label>
-                        <Col sm="9">
+                        <Col sm="8">
                             <Form.Control
                                 className ={`${errors.eventText && styles.inputError}`}
                                 type="text"
@@ -81,9 +83,23 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
                             {errors.eventText && <p className={styles.error}>{errors.eventText}</p>}
                         </Col>
                     </Form.Group>
+                    <Form.Group as={Row} controlId={event.location}>
+                        <Form.Label className="text-center" column  sm="2">
+                            <FontAwesomeIcon icon={faMapPin} />
+                        </Form.Label>
+                        <Col sm="8">
+                            <Form.Control
+                                className ={`${errors.location && styles.inputError}`}
+                                type="text"
+                                name="location"
+                                onChange={ handleChange }
+                            />
+                            {errors.location && <p className={styles.error}>{errors.location}</p>}
+                        </Col>
+                    </Form.Group>
                     <Form.Group as={Row} controlId={event.color} className="display-flex">
-                        <Form.Label column sm="3">
-                            Kolor
+                        <Form.Label column className="text-center" sm="2">
+                            <FontAwesomeIcon icon={faPalette} />
                         </Form.Label>
                         <div key={"event-color"} className="ml-5 mt-auto mb-auto ">
                             {COLORS.map((color, i) => (

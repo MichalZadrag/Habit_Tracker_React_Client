@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 import styles from './HabitAddModal.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faAngleDoubleRight, faAngleRight, faPalette, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {addNewHabit} from "../../api";
 import validateHabit from "./validateHabit";
 import {COLORS, ICONS} from "../../constants";
@@ -74,10 +74,10 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
             <Modal.Body className={styles.mBody}>
                 <Form onSubmit={ handleSubmit } noValidate>
                     <Form.Group as={Row} controlId={habit.habitText}>
-                        <Form.Label column sm="2">
-                           Nawyk
+                        <Form.Label className="text-center" column sm="2">
+                            <FontAwesomeIcon icon={faAngleRight} />
                         </Form.Label>
-                        <Col sm="10">
+                        <Col sm="8">
                             <Form.Control
                                 className ={`${errors.habitText && styles.inputError}`}
                                 type="text"
@@ -87,8 +87,8 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} controlId={habit.icon} className="display-flex">
-                        <Form.Label column sm="2">
-                            Ikona
+                        <Form.Label column className="text-center" sm="2">
+                            <FontAwesomeIcon icon={faAngleDoubleRight} />
                         </Form.Label>
                             <div key={"habit-icon"} className="ml-5 mt-auto mb-auto ">
                                 {ICONS.map((icon, i) => (
@@ -107,8 +107,8 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
                             </div>
                     </Form.Group>
                     <Form.Group as={Row} controlId={habit.color} className="display-flex">
-                        <Form.Label column sm="2">
-                            Kolor
+                        <Form.Label column className="text-center" sm="2">
+                            <FontAwesomeIcon icon={faPalette} />
                         </Form.Label>
                         <div key={"habit-color"} className="ml-5 mt-auto mb-auto ">
                             {COLORS.map((color, i) => (
