@@ -1,37 +1,31 @@
 import React, {useEffect, useState} from "react";
-import styles from './RegisterForm.module.css';
+import styles from "./UserEditForm.module.css"
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
-import {Link} from "react-router-dom";
-import {addNewUser} from "../../api";
-import validateRegister from "./validateRegister";
-import cx from 'classnames';
+import {faPen} from "@fortawesome/free-solid-svg-icons";
+import {changeDataUser} from "../../api";
+import validateNewData from "./validateNewData";
+import cx from "classnames";
 
-const RegisterForm = () => {
+
+const UserEditForm = ({currentUser}) => {
+
+    const {id, first_name, last_name, username, email} = currentUser;
 
     const [values, setValues] = useState({
-        firstName: '',
-        lastName: '',
-        username: '',
-        email: '',
+        firstName: first_name,
+        lastName: last_name,
+        username: username,
+        email: email,
         password: '',
     })
+
+
     const [errors, setErrors] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [alerts, setAlerts] = useState({})
     const [isUsernameAvailable, setIsUsernameAvailable] = useState('');
     const [isEmailAvailable, setIsEmailAvailable] = useState('');
-
-    useEffect( () => {
-
-        const {firstName, lastName, username, email, password} = values
-
-        if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewUser(firstName, lastName, username, email, password, setErrors, setAlerts);
-        }
-        }, [errors])
-
 
 
     const handleChange = (evt) => {
@@ -43,23 +37,28 @@ const RegisterForm = () => {
     }
 
 
+    useEffect( () => {
 
+        const {firstName, lastName, username, email, password} = values
+
+        if (Object.keys(errors).length === 0 && isSubmitting) {
+            changeDataUser(id, firstName, lastName, username, email, password, setErrors, setAlerts);
+        }
+    }, [errors]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setErrors(validateRegister(values, setIsUsernameAvailable, setIsEmailAvailable));
+        setErrors(validateNewData(currentUser, values, setIsUsernameAvailable, setIsEmailAvailable));
         setIsSubmitting(true);
-     }
+    }
 
-    return(
+
+    return (
         <div className={styles.wrapper}>
-            <div className={styles.headerContainer}>
-                <h2>Habit Tracker</h2>
-            </div>
             {alerts.success && <p className={cx("text-center", styles.success)}>{alerts.success}</p>}
             <div className={styles.formContainer}>
                 <div className={styles.formHeader}>
-                    <h5>Rejestracja</h5>
+                    <h5>Edycja danych</h5>
                 </div>
                 <Form onSubmit={handleSubmit} noValidate>
                     <Row>
@@ -70,8 +69,9 @@ const RegisterForm = () => {
                                     className ={`${errors.firstName && styles.inputError}`}
                                     type="text"
                                     name="firstName"
-                                    placeholder="Imie"
-                                    onChange={handleChange}/>
+                                    value={values.firstName}
+                                    onChange={handleChange}
+                                />
                                 {errors.firstName && <p className={styles.error}>{errors.firstName}</p>}
                             </Form.Group>
                         </Col>
@@ -82,8 +82,9 @@ const RegisterForm = () => {
                                     className ={`${errors.lastName && styles.inputError}`}
                                     type="text"
                                     name="lastName"
-                                    placeholder="Nazwisko"
-                                    onChange={handleChange}/>
+                                    value={values.lastName}
+                                    onChange={handleChange}
+                                />
                                 {errors.lastName && <p className={styles.error}>{errors.lastName}</p>}
                             </Form.Group>
                         </Col>
@@ -94,8 +95,9 @@ const RegisterForm = () => {
                             className ={`${( errors.username || isUsernameAvailable )&& styles.inputError}`}
                             type="text"
                             name="username"
-                            placeholder="Login"
-                            onChange={handleChange}/>
+                            value={values.username}
+                            onChange={handleChange}
+                        />
                         {errors.username && <p className={styles.error}>{errors.username}</p>}
                         {isUsernameAvailable && <p className={styles.error}>{isUsernameAvailable}</p>}
                     </Form.Group>
@@ -106,39 +108,34 @@ const RegisterForm = () => {
                             type="password"
                             name="password"
                             placeholder="*********"
-                            onChange={handleChange}/>
+                            onChange={handleChange}
+                        />
                         {errors.password && <p className={styles.error}>{errors.password}</p>}
                     </Form.Group>
                     <Form.Group controlId={values.email}>
                         <Form.Label>Email</Form.Label>
                         <Form.Control
-                            className ={`${( errors.email || isEmailAvailable )&& styles.inputError}`}
+                            className ={`${( errors.email || isEmailAvailable ) && styles.inputError}`}
                             type="text"
                             name="email"
-                            placeholder="Email"
-                            onChange={handleChange}/>
+                            value={values.email}
+                            onChange={handleChange}
+                        />
                         {errors.email && <p className={styles.error}>{errors.email}</p>}
                         {isEmailAvailable && <p className={styles.error}>{isEmailAvailable}</p>}
                     </Form.Group>
-                    <Button variant={"success"} type="submit" className={styles.loginButton}>
-                        <div className="mr-3 ml-1 float-left" >
-                            <FontAwesomeIcon icon={faUserPlus} />
-                        </div>
-                        Zarejestruj
-                    </Button>
-                    <hr/>
-                    <Link to="/login">
-                        <Button variant={"primary"} className={styles.loginButton}>
+                    <div className={styles.buttonContainer}>
+                        <Button variant={"success"} type="submit" className={styles.editButton}>
                             <div className="mr-3 ml-1 float-left" >
-                                <FontAwesomeIcon icon={faSignInAlt} />
+                                <FontAwesomeIcon icon={faPen} />
                             </div>
-                            Zaloguj
+                            Edytuj
                         </Button>
-                    </Link>
+                    </div>
                 </Form>
             </div>
         </div>
     )
 }
 
-export default RegisterForm;
+export default UserEditForm;

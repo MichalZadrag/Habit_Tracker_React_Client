@@ -6,4 +6,5 @@ export { default as Chart } from './Chart/Chart';
 export { default as LoginForm } from './LoginForm/LoginForm';
 export { default as RegisterForm } from './RegisterForm/RegisterForm';
 export { default as TaskDeck } from './TaskDeck/TaskDeck';
-export { default as EventDeck} from './EventDeck/EventDeck';
+export { default as EventDeck } from './EventDeck/EventDeck';
+export { default as UserEditForm } from './UserEditForm/UserEditForm';

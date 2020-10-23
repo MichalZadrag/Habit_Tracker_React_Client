@@ -3,7 +3,7 @@ import {
     ACCESS_TOKEN,
     ADD_NEW_HABIT_URL,
     ADD_NEW_USER_URL,
-    API_URL,
+    API_URL, CHANGE_DATA_USER_URL,
     CHECK_EMAIL_AVAILABILITY_URL,
     CHECK_USERNAME_AVAILABILITY_URL,
     DELETE_HABIT_BY_ID_URL, DELETE_USER_BY_ID_URL, FETCH_EVENT_DATA_URL,
@@ -43,7 +43,24 @@ export const addNewUser = (firstName, lastName, username, email, password, setEr
             setAlerts({success: r.data.message});
         })
         .catch(e => {
-           console.log(e.response.data);
+           setErrors({ overall: "Wystąpił błąd" });
+        })
+}
+
+export const changeDataUser = (oldUserId,firstName, lastName, username, email, password, setErrors, setAlerts) => {
+
+    authAxios.put(`${CHANGE_DATA_USER_URL}${oldUserId}`, {
+        first_name: firstName,
+        last_name: lastName,
+        username: username,
+        email: email,
+        password: password
+    })
+        .then(r => {
+            setAlerts({success: r.data.message});
+        })
+        .catch(e => {
+            setErrors({ overall: "Wystąpił błąd" });
         })
 }
 

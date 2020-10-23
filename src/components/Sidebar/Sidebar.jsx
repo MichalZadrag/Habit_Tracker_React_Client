@@ -5,22 +5,16 @@ import {faAddressBook, faInfoCircle, faTasks} from "@fortawesome/free-solid-svg-
 import {faCalendarAlt, faCalendarCheck, faChartBar} from "@fortawesome/free-regular-svg-icons";
 import {Link} from "react-router-dom";
 import { Collapse} from "react-bootstrap";
-import {useHistory} from "react-router";
 import {ACCESS_TOKEN} from "../../constants";
 import CurrentUserInfoModal from "../CurrentUserInfoModal/CurrentUserInfoModal";
 
 
 const Sidebar = ({setIsAuthenticated, currentUser, isSidebarActive}) => {
 
-    const history = useHistory();
 
     const [open, setOpen] = useState(false);
     const [modalShow, setModalShow] = useState(false);
 
-
-    const refreshPage = () => {
-        window.location.reload(false);
-    }
 
 
     return(
@@ -50,12 +44,10 @@ const Sidebar = ({setIsAuthenticated, currentUser, isSidebarActive}) => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="#" role="button"
+                                    <Link to="/login" role="button"
                                           onClick={() =>
                                           {
                                               localStorage.removeItem(ACCESS_TOKEN);
-                                              history.push("/login");
-                                              refreshPage();
                                               setIsAuthenticated(false);
                                           }}
                                           className={styles.collapseItem}>
@@ -113,6 +105,7 @@ const Sidebar = ({setIsAuthenticated, currentUser, isSidebarActive}) => {
                     show = { modalShow }
                     onHide = { () => setModalShow(false) }
                     currentUser = { currentUser }
+                    setIsAuthenticated = { setIsAuthenticated }
                 />
 
             </nav>

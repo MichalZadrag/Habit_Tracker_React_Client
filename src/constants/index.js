@@ -11,10 +11,11 @@ import {faCalendar, faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 
 export const API_URL = `http://localhost:8080/api`;
 
-
 export const LOGIN_URL = `/auth/signin`;
 
 export const ADD_NEW_USER_URL = `/auth/signup`;
+
+export const CHANGE_DATA_USER_URL = `/user/update/`;
 
 export const ADD_NEW_HABIT_URL = `/habit/add`;
 

@@ -9,7 +9,7 @@ import {
     LoginForm,
     RegisterForm,
     TaskDeck,
-    EventDeck
+    EventDeck, UserEditForm,
 } from "./components";
 import styles from './App.module.css';
 import CardDeck from "./components/CardDeck/CardDeck";
@@ -45,14 +45,14 @@ const App = () => {
                      <Route path="/register">
                          <RegisterForm/>
                      </Route>
-                     <Route path={["/habits", "/statistics","/tasks", "/events"]} exact>
+                     <Route path={["/habits", "/statistics","/tasks", "/events", "/userEditForm"]} exact>
                          {(!currentUser.id ) ?
                              (<Spinner
                                  animation="border"
                                  variant={"primary"}
                                  className ={"mt-5 ml-auto mr-auto"}
                              /> ) :
-                             (<Route path={["/habits", "/statistics", "/tasks", "/events"]} exact>
+                             (<Route path={["/habits", "/statistics", "/tasks", "/events", "/userEditForm"]} exact>
                              <Sidebar
                                  setIsAuthenticated = { setIsAuthenticated }
                                  currentUser = { currentUser }
@@ -62,6 +62,15 @@ const App = () => {
                                  fluid
                                  className={!isSidebarActive && styles.test}
                              >
+                                 <Route path="/userEditForm" exact>
+                                     <CollapseButton
+                                         setIsSidebarActive = { setIsSidebarActive }
+                                         isSidebarActive = { isSidebarActive }
+                                     />
+                                     <UserEditForm
+                                         currentUser = { currentUser }
+                                     />
+                                 </Route>
                                  <Route path="/habits" exact>
                                      <Navbar
                                          currentUserId = { currentUser.id }
