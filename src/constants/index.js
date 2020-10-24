@@ -41,7 +41,7 @@ export const EMAIL_REGEXP = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 export const PASSWORD_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$/.!%*?&])[A-Za-z\d@$!/.%*?&]{8,}$/;
 
-export const HABIT_REGEXP = /^[a-zA-Z]{3,}?( +[a-zA-Z]+)?( +[a-zA-Z]{2,})?$/;
+export const HABIT_AND_TASK_REGEXP = /^[a-zA-Z]{3,}?( +[a-zA-Z]+)?( +[a-zA-Z]{2,})?$/;
 
 export const CHECK_EMAIL_AVAILABILITY_URL = `http://localhost:8080/api/user/checkEmailAvailability?email=`
 

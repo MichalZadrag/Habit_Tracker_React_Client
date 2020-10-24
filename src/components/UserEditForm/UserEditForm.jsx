@@ -4,8 +4,8 @@ import {Button, Col, Form, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen} from "@fortawesome/free-solid-svg-icons";
 import {changeDataUser} from "../../api";
-import validateNewData from "./validateNewData";
 import cx from "classnames";
+import {validateNewData} from "../../constants/validation";
 
 
 const UserEditForm = ({currentUser}) => {
@@ -18,6 +18,7 @@ const UserEditForm = ({currentUser}) => {
         username: username,
         email: email,
         password: '',
+        confirmPassword: '',
     })
 
 
@@ -55,7 +56,6 @@ const UserEditForm = ({currentUser}) => {
 
     return (
         <div className={styles.wrapper}>
-            {alerts.success && <p className={cx("text-center", styles.success)}>{alerts.success}</p>}
             <div className={styles.formContainer}>
                 <div className={styles.formHeader}>
                     <h5>Edycja danych</h5>
@@ -112,6 +112,16 @@ const UserEditForm = ({currentUser}) => {
                         />
                         {errors.password && <p className={styles.error}>{errors.password}</p>}
                     </Form.Group>
+                    <Form.Group controlId={values.confirmPassword}>
+                        <Form.Label>Powtórz hasło</Form.Label>
+                        <Form.Control
+                            className ={`${errors.password && styles.inputError}`}
+                            type="password"
+                            name="confirmPassword"
+                            placeholder="*********"
+                            onChange={handleChange}
+                        />
+                    </Form.Group>
                     <Form.Group controlId={values.email}>
                         <Form.Label>Email</Form.Label>
                         <Form.Control
@@ -132,6 +142,7 @@ const UserEditForm = ({currentUser}) => {
                             Edytuj
                         </Button>
                     </div>
+                    {alerts.success && <p className={cx("text-center", styles.success)}>{alerts.success}</p>}
                 </Form>
             </div>
         </div>

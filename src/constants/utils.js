@@ -4,7 +4,7 @@ import {DAYS, ONE_DAY_IN_MS} from "./index";
 
 
 
-export function changeToCss(color) {
+export const changeToCss = (color) => {
     let cssClass = '';
     switch (color) {
         case "salmon":
@@ -26,37 +26,37 @@ export function changeToCss(color) {
     return cssClass;
 }
 
-export function changeToIcon(icon) {
-    let test = '';
+export const changeToIcon = (icon) => {
+    let iconToString = '';
 
     switch (icon) {
         case "faBook":
-            test = faBook;
+            iconToString = faBook;
             break
         case "faBiking":
-            test = faBiking;
+            iconToString = faBiking;
             break
         case "faDumbbell":
-            test = faDumbbell;
+            iconToString = faDumbbell;
             break
         case "faMoneyBillAlt":
-            test = faMoneyBillAlt;
+            iconToString = faMoneyBillAlt;
             break
         default:
-            test = faQuestion;
+            iconToString = faQuestion;
             break
     }
-    return test;
+    return iconToString;
 }
 
-export function appendLeadingZeroes(n) {
+export const appendLeadingZeroes = (n) => {
     if(n <= 9){
         return "0" + n;
     }
     return n
 }
 
-export function formatDate(date) {
+export const formatDate = (date) => {
     let d = new Date(date),
         month = '' + (d.getMonth() + 1),
         day = '' + d.getDate(),
@@ -70,7 +70,7 @@ export function formatDate(date) {
     return [year, month, day].join('-');
 }
 
-export function changeDateBy(date, times, action) {
+export const changeDateBy = (date, times, action) => {
     let newDate;
     if (action === "+") {
          newDate = new Date(date.getTime() + (times * ONE_DAY_IN_MS));
@@ -80,7 +80,7 @@ export function changeDateBy(date, times, action) {
     return newDate;
 }
 
-export function setCurrentDaysDependOnDate(todayDate) {
+export const setCurrentDaysDependOnDate = (todayDate) => {
     let tempDays = [];
     let currentDay = todayDate.getDay();
     let currentDate = todayDate;
@@ -98,7 +98,7 @@ export function setCurrentDaysDependOnDate(todayDate) {
    return tempDays;
 }
 
-export function currentDayToString(day) {
+export const currentDayToString = (day) => {
     let dayToString = "";
 
     switch (day) {

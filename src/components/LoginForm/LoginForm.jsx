@@ -4,10 +4,10 @@ import {Button, Form} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
-import validateLogin from "./validateLogin";
 import {useHistory} from 'react-router';
 import cx from 'classnames';
 import {login} from "../../api";
+import {validateLogin} from "../../constants/validation";
 
 
 const LoginForm = ({setIsAuthenticated}) => {
@@ -33,7 +33,6 @@ const LoginForm = ({setIsAuthenticated}) => {
 
     useEffect( () => {
 
-        console.log("USE EFFECT - LOGIN FORM");
         const { usernameOrEmail, password } = values
 
         if (Object.keys(errors).length === 0 && isSubmitting) {

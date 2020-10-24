@@ -3,9 +3,9 @@ import {Button, Col, Form, Modal, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleRight, faPalette, faPlus} from "@fortawesome/free-solid-svg-icons";
 import styles from "../HabitAddModal/HabitAddModal.module.css";
-import validateTask from "./validateTask";
 import {addNewTask} from "../../api";
 import {COLORS} from "../../constants";
+import {validateTask} from "../../constants/validation";
 
 
 const TaskAddModal = ({show, onHide, currentUserId, date}) => {

@@ -4,7 +4,7 @@ import React from "react";
 import {deleteUserById} from "../../api";
 import DelayLink from 'react-delay-link';
 import {Link} from "react-router-dom";
-import {Sidebar} from "../index";
+
 import {ACCESS_TOKEN} from "../../constants";
 
 const CurrentUserInfoModal = ({show, onHide, currentUser, setIsAuthenticated}) => {

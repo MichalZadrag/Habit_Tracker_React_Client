@@ -4,8 +4,8 @@ import styles from "../HabitAddModal/HabitAddModal.module.css";
 import {COLORS} from "../../constants";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleRight, faMapPin, faPalette, faPlus} from "@fortawesome/free-solid-svg-icons";
-import validateEvent from "./validateEvent";
 import {addNewEvent} from "../../api";
+import {validateEvent} from "../../constants/validation";
 
 const EventAddModal = ({show, onHide, currentUserId, date}) => {
 

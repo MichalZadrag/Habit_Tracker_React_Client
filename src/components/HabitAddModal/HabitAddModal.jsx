@@ -4,8 +4,8 @@ import styles from './HabitAddModal.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleDoubleRight, faAngleRight, faPalette, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {addNewHabit} from "../../api";
-import validateHabit from "./validateHabit";
 import {COLORS, ICONS} from "../../constants";
+import {validateHabit} from "../../constants/validation";
 
 
 const HabitAddModal = ({show, onHide, currentUserId}) => {

@@ -5,8 +5,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {addNewUser} from "../../api";
-import validateRegister from "./validateRegister";
 import cx from 'classnames';
+import {validateRegister} from "../../constants/validation";
 
 const RegisterForm = () => {
 
@@ -16,6 +16,7 @@ const RegisterForm = () => {
         username: '',
         email: '',
         password: '',
+        confirmPassword: '',
     })
     const [errors, setErrors] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -91,7 +92,7 @@ const RegisterForm = () => {
                     <Form.Group controlId={values.username}>
                         <Form.Label>Login</Form.Label>
                         <Form.Control
-                            className ={`${( errors.username || isUsernameAvailable )&& styles.inputError}`}
+                            className ={`${( errors.username || isUsernameAvailable ) && styles.inputError}`}
                             type="text"
                             name="username"
                             placeholder="Login"
@@ -108,6 +109,15 @@ const RegisterForm = () => {
                             placeholder="*********"
                             onChange={handleChange}/>
                         {errors.password && <p className={styles.error}>{errors.password}</p>}
+                    </Form.Group>
+                    <Form.Group controlId={values.confirmPassword}>
+                        <Form.Label>Potwierdź hasło</Form.Label>
+                        <Form.Control
+                            className ={`${errors.password && styles.inputError}`}
+                            type="password"
+                            name="confirmPassword"
+                            placeholder="*********"
+                            onChange={handleChange}/>
                     </Form.Group>
                     <Form.Group controlId={values.email}>
                         <Form.Label>Email</Form.Label>
