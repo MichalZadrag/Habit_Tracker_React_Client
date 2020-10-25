@@ -33,7 +33,7 @@ export const FETCH_TASK_DATA_URL = `/task/all/`;
 
 export const FETCH_EVENT_DATA_URL = `/event/all/`;
 
-export const NAME_REGEXP = /^[a-zA-Z0-9]{3,}$/;
+export const NAME_REGEXP = /^[a-zA-Z0-9ąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,}$/;
 
 export const USERNAME_REGEXP = /^[a-zA-Z0-9]{4,}$/;
 
@@ -41,7 +41,7 @@ export const EMAIL_REGEXP = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 export const PASSWORD_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$/.!%*?&])[A-Za-z\d@$!/.%*?&]{8,}$/;
 
-export const HABIT_AND_TASK_REGEXP = /^[a-zA-Z]{3,}?( +[a-zA-Z]+)?( +[a-zA-Z]{2,})?$/;
+export const HABIT_AND_TASK_AND_EVENT_REGEXP = /^[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,}?( +[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]+)?( +[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{2,})?$/;
 
 export const CHECK_EMAIL_AVAILABILITY_URL = `http://localhost:8080/api/user/checkEmailAvailability?email=`
 

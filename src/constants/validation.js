@@ -1,5 +1,11 @@
 import {checkEmailAvailability, checkUsernameAvailability} from "../api";
-import {EMAIL_REGEXP, HABIT_AND_TASK_REGEXP, NAME_REGEXP, PASSWORD_REGEXP, USERNAME_REGEXP} from "./index";
+import {
+    EMAIL_REGEXP,
+    HABIT_AND_TASK_AND_EVENT_REGEXP,
+    NAME_REGEXP,
+    PASSWORD_REGEXP,
+    USERNAME_REGEXP
+} from "./index";
 
 const isUsernameAvailable = async (values, setIsUsernameAvailable) => {
 
@@ -119,7 +125,7 @@ export const validateTask = (task) => {
 
     if (!task.taskText) {
         errors.taskText = "Zadanie jest wymagane";
-    } else if (!HABIT_AND_TASK_REGEXP.test(task.taskText)) {
+    } else if (!HABIT_AND_TASK_AND_EVENT_REGEXP.test(task.taskText)) {
         errors.taskText = "Zadanie jest nieprawidłowe";
     }
     return errors;
@@ -145,7 +151,7 @@ export const validateHabit = (habit) => {
 
     if (!habit.habitText) {
         errors.habitText = "Nawyk jest wymagany";
-    } else if (!HABIT_AND_TASK_REGEXP.test(habit.habitText)) {
+    } else if (!HABIT_AND_TASK_AND_EVENT_REGEXP.test(habit.habitText)) {
         errors.habitText = "Nawyk jest nieprawidłowy";
     }
     return errors;
@@ -156,6 +162,8 @@ export const validateEvent = (event) => {
 
     if (!event.eventText) {
         errors.eventText = "Wydarzenie jest wymagane";
+    } else if (!HABIT_AND_TASK_AND_EVENT_REGEXP.test(event.habitText)) {
+        errors.eventText = "Wydarzenie jest nieprawidłowe";
     }
     if (!event.location) {
         errors.location = "Lokalizacja jest wymagana";
