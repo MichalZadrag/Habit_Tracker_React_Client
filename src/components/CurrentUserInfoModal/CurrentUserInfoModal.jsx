@@ -66,7 +66,14 @@ const CurrentUserInfoModal = ({show, onHide, currentUser, setIsAuthenticated}) =
                         </Link>
                     </Col>
                     <Col className="text-center">
-                        <DelayLink delay={500} to="/login">
+                        <DelayLink delay={500} to={
+                            {
+                                pathname: "/login",
+                                state: {
+                                    message: "Konto zostało usunięte pomyślnie"
+                                }
+                            }
+                        }>
                             <Button variant={"danger"}
                                     onClick={() => {
                                         deleteUserById(id);

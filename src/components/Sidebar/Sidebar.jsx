@@ -44,7 +44,15 @@ const Sidebar = ({setIsAuthenticated, currentUser, isSidebarActive}) => {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/login" role="button"
+                                    <Link to={
+                                        {
+                                            pathname: "/login",
+                                            state: {
+                                                message: "Wylogowano"
+                                            }
+                                        }
+                                    }
+                                          role="button"
                                           onClick={() =>
                                           {
                                               localStorage.removeItem(ACCESS_TOKEN);

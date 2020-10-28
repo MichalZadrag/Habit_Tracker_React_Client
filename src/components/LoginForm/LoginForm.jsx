@@ -3,7 +3,7 @@ import styles from './LoginForm.module.css';
 import {Button, Form} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import {useHistory} from 'react-router';
 import cx from 'classnames';
 import {login} from "../../api";
@@ -13,6 +13,8 @@ import {validateLogin} from "../../constants/validation";
 const LoginForm = ({setIsAuthenticated}) => {
 
     const history = useHistory();
+    const location = useLocation();
+
 
 
     const [values, setValues] = useState({
@@ -34,6 +36,7 @@ const LoginForm = ({setIsAuthenticated}) => {
     useEffect( () => {
 
         const { usernameOrEmail, password } = values
+        console.log(location);
 
         if (Object.keys(errors).length === 0 && isSubmitting) {
             login(usernameOrEmail, password, setErrors, history, setIsAuthenticated);
@@ -53,6 +56,7 @@ const LoginForm = ({setIsAuthenticated}) => {
             <div className={styles.headerContainer}>
                 <h2>Habit Tracker</h2>
             </div>
+            {(location.state) ? <p className={cx(styles.success, "text-center", "mt-1")}>{location.state.message}</p> : <p></p>}
             <div className={styles.formContainer}>
                 <div className={styles.formHeader}>
                     <h5>Logowanie</h5>

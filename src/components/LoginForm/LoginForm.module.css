@@ -40,6 +40,11 @@ hr {
     color: red;
 }
 
+.success {
+    font-size: 15px;
+    color: green;
+}
+
 .inputError {
     border: 1px solid red;
 }
