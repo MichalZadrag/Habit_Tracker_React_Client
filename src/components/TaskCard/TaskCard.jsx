@@ -8,6 +8,7 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import TaskAddModal from "../TaskAddModal/TaskAddModal";
 import {fetchTaskData} from "../../api";
 import {currentDayToString} from "../../constants/utils";
+import ListGroup from "react-bootstrap/ListGroup";
 
 const TaskCard = ({ day, currentUserId, date }) => {
 
@@ -30,7 +31,6 @@ const TaskCard = ({ day, currentUserId, date }) => {
     const currentTasks = (date) => {
 
         let currentTasks = tasks.filter(task => task.date === date);
-
         return currentTasks;
     }
 
@@ -58,7 +58,7 @@ const TaskCard = ({ day, currentUserId, date }) => {
                             variant={"primary"}
                             className ={"ml-auto mr-auto"}
                         />) :
-                        (<ul className={cx(styles.listGroup, "list-unstyled")}>
+                        (<ListGroup>
                             {currentTasks(date).map(task => (
                                 <Task
                                     key = { task.id }
@@ -66,7 +66,7 @@ const TaskCard = ({ day, currentUserId, date }) => {
                                     tasks = { currentTasks(date) }
                                     setTasks = { setTasks }
                                 />))}
-                        </ul>)}
+                        </ListGroup>)}
                 </Card.Body>
                 <TaskAddModal
                     show = { modalShow }

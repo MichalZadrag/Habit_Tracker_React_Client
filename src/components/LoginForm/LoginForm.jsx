@@ -36,7 +36,6 @@ const LoginForm = ({setIsAuthenticated}) => {
     useEffect( () => {
 
         const { usernameOrEmail, password } = values
-        console.log(location);
 
         if (Object.keys(errors).length === 0 && isSubmitting) {
             login(usernameOrEmail, password, setErrors, history, setIsAuthenticated);

@@ -24,7 +24,6 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
     });
 
     useEffect(() => {
-
         const { taskText, color } = task;
         if (Object.keys(errors).length === 0 && isSubmitting) {
             addNewTask(taskText, color, currentUserId, date);

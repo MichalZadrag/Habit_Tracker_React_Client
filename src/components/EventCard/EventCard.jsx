@@ -2,12 +2,11 @@ import React, {useEffect, useState} from "react";
 import {Button, Card, Spinner} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
-import cx from "classnames";
-import styles from "../TaskCard/TaskCard.module.css";
 import {currentDayToString} from "../../constants/utils";
 import EventAddModal from "../EventAddModal/EventAddModal";
-import Task from "../Task/Task";
 import {fetchEventData} from "../../api";
+import Event from "../Event/Event";
+import ListGroup from "react-bootstrap/ListGroup";
 
 
 const EventCard = ({ day, currentUserId, date }) => {
@@ -32,9 +31,28 @@ const EventCard = ({ day, currentUserId, date }) => {
 
     const currentEvents = (date) => {
 
-        let currentEvents = events.filter(event => event.date === date);
+        let currentEvents = events.filter(event => event.date === date).sort();
 
-        return currentEvents;
+        return currentEvents.sort((a,b) => {
+            let startTimeA = a.startTime.toUpperCase();
+            let startTimeB = b.startTime.toUpperCase();
+            let endTimeA = a.endTime.toUpperCase();
+            let endTimeB = b.endTime.toUpperCase();
+            if (startTimeA < startTimeB) {
+                return -1;
+            }
+            if (startTimeA > startTimeB) {
+                return 1;
+            }
+            if (startTimeA === startTimeB) {
+                if (endTimeA < endTimeB) {
+                    return -1;
+                }
+                if (endTimeA > endTimeB) {
+                    return 1;
+                }
+            }
+        });
 
     }
 
@@ -55,20 +73,20 @@ const EventCard = ({ day, currentUserId, date }) => {
             </Card.Footer>
             <Card.Body className="p-0">
                 {isError && <div>Something went wrong...</div>}
-                {isLoading ? (<Spinner
+                {isLoading ? (<Spinnerg
                         animation="border"
                         variant={"primary"}
                         className ={"ml-auto mr-auto"}
                     />) :
-                    (<ul className={cx(styles.listGroup, "list-unstyled")}>
+                    (<ListGroup>
                         {currentEvents(date).map(event => (
-                            <Task
+                            <Event
                                 key = { event.id }
                                 event = { event }
-                                tasks = { currentEvents(date) }
+                                events = { currentEvents(date) }
                                 setEvents = { setEvents }
                             />))}
-                    </ul>)}
+                    </ListGroup>)}
             </Card.Body>
             <EventAddModal
                 show = { modalShow }

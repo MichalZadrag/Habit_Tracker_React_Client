@@ -1,12 +1,12 @@
 import axios from 'axios';
 import {
-    ACCESS_TOKEN,
-    ADD_NEW_HABIT_URL,
+    ACCESS_TOKEN, ADD_NEW_EVENT_URL,
+    ADD_NEW_HABIT_URL, ADD_NEW_TASK_URL,
     ADD_NEW_USER_URL,
     API_URL, CHANGE_DATA_USER_URL,
     CHECK_EMAIL_AVAILABILITY_URL,
-    CHECK_USERNAME_AVAILABILITY_URL,
-    DELETE_HABIT_BY_ID_URL, DELETE_USER_BY_ID_URL, FETCH_EVENT_DATA_URL,
+    CHECK_USERNAME_AVAILABILITY_URL, DELETE_EVENT_BY_ID_URL,
+    DELETE_HABIT_BY_ID_URL, DELETE_TASK_BY_ID_URL, DELETE_USER_BY_ID_URL, FETCH_EVENT_DATA_URL,
     FETCH_HABIT_DATA_URL,
     FETCH_TASK_DATA_URL,
     GET_CURRENT_USER_URL,
@@ -115,6 +115,7 @@ export const login = (usernameOrEmail, password, setErrors, history, setIsAuthen
         password: password
     }).then(r => {
         if (r.data.accessToken) {
+            console.log(r.data);
             localStorage.setItem(ACCESS_TOKEN, r.data.accessToken);
             history.push("/habits");
             refreshPage();
@@ -122,10 +123,10 @@ export const login = (usernameOrEmail, password, setErrors, history, setIsAuthen
         }
     }).catch(e => {
         if (e.response.data.status === 401) {
+            console.log(e.response);
             setErrors({ overall: "Błędny login lub hasło" });
         }
     });
-    console.log("ZALOGOWANO");
 }
 
 export const fetchHabitData = async (id, setIsError) => {
@@ -149,7 +150,7 @@ export const fetchTaskData = async (id, setIsError) => {
 }
 
 export const addNewTask = (taskText, color, user_id, date) => {
-    authAxios.post("/task/add", {
+    authAxios.post(ADD_NEW_TASK_URL, {
         task_text: taskText,
         color: color,
         user_id: user_id,
@@ -159,18 +160,20 @@ export const addNewTask = (taskText, color, user_id, date) => {
 }
 
 export const deleteTaskById = (id) => {
-    authAxios.delete(`/task/delete/${id}`)
+    authAxios.delete(`${DELETE_TASK_BY_ID_URL}${id}`)
         .then((r) => console.log(r.data.message));
 }
 
-export const addNewEvent = (eventText, color, user_id, date, location) => {
-    authAxios.post("/event/add", {
+export const addNewEvent = (eventText, color, user_id, date, location, startTime, endTime) => {
+    authAxios.post(ADD_NEW_EVENT_URL, {
         event_text: eventText,
         color: color,
         user_id: user_id,
         date: date,
-        location: location
-    }).then(r => null)
+        location: location,
+        startTime: startTime,
+        endTime: endTime
+    }).then(r => console.log(r))
         .catch(e => console.log("error"));
 }
 
@@ -181,4 +184,9 @@ export const fetchEventData = async (id, setIsError) => {
     } catch (e) {
         setIsError(true);
     }
+}
+
+export const deleteEventById = (id) => {
+    authAxios.delete(`${DELETE_EVENT_BY_ID_URL}${id}`)
+        .then((r) => console.log(r.data.message));
 }

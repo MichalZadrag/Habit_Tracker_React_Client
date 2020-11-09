@@ -19,9 +19,17 @@ export const CHANGE_DATA_USER_URL = `/user/update/`;
 
 export const ADD_NEW_HABIT_URL = `/habit/add`;
 
+export const ADD_NEW_TASK_URL = `/task/add`;
+
+export const ADD_NEW_EVENT_URL = `/event/add`;
+
 export const DELETE_HABIT_BY_ID_URL = `/habit/delete/`;
 
 export const DELETE_USER_BY_ID_URL = `/user/delete/`;
+
+export const DELETE_TASK_BY_ID_URL = `/task/delete/`;
+
+export const DELETE_EVENT_BY_ID_URL = `/event/delete/`;
 
 export const GET_CURRENT_USER_URL = `/user/me`;
 

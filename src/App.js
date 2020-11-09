@@ -22,6 +22,7 @@ const App = () => {
     const [currentUser, setCurrentUser] = useState({id: '', username: '', first_name: '',last_name: '', email: ''})
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isSidebarActive, setIsSidebarActive] = useState(true);
+    const [isDataChange, setIsDataChange] = useState(false);
 
 
     useEffect(() => {
@@ -30,7 +31,7 @@ const App = () => {
            setCurrentUser(await getCurrentUser());
         }
         fetchCurrentUser();
-    },[isAuthenticated]);
+    },[isAuthenticated, isDataChange]);
 
 
      return (
@@ -69,6 +70,7 @@ const App = () => {
                                      />
                                      <UserEditForm
                                          currentUser = { currentUser }
+                                         setIsDataChange = { setIsDataChange }
                                      />
                                  </Route>
                                  <Route path="/habits" exact>

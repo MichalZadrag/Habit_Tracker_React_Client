@@ -15,49 +15,49 @@
 }
 
 .lightBlue {
-    color: lightblue;
+    color: lightblue !important;
 }
 
 .lightGrey {
-    color: #CCCCCC;
+    color: #CCCCCC !important;
 }
 
 .lightGreen {
-    color: lightgreen;
+    color: lightgreen !important;
 }
 
 .salmon {
-    color: salmon;
+    color: salmon !important;
 }
 
 .lightBlueBg {
-    background-color: #add8e6;
+    background-color: #add8e6 !important;
 }
 
 .lightGreyBg {
-    background-color: #CCCCCC;
+    background-color: #CCCCCC !important;
 }
 
 .lightGreenBg {
-    background-color: lightgreen;
+    background-color: lightgreen !important;
 }
 
 .salmonBg {
-    background-color: #fa8072;
+    background-color: #fa8072 !important;
 }
 
 .lightBlueBg:hover {
-    background-color: #93ccde;
+    background-color: #93ccde !important;
 }
 
 .lightGreyBg:hover {
-    background-color: #878E88;
+    background-color: #878E88 !important;
 }
 
 .lightGreenBg:hover {
-    background-color: #73e973;
+    background-color: #73e973 !important;
 }
 
 .salmonBg:hover {
-    background-color: #f96251;
+    background-color: #f96251 !important;
 }

@@ -10,6 +10,7 @@ import {validateNewData} from "../../constants/validation";
 
 const UserEditForm = ({currentUser}) => {
 
+
     const {id, first_name, last_name, username, email} = currentUser;
 
     const [values, setValues] = useState({
