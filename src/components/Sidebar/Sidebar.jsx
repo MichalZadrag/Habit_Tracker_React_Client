@@ -97,14 +97,6 @@ const Sidebar = ({setIsAuthenticated, currentUser, isSidebarActive}) => {
                             Statystyki
                         </Link>
                     </li>
-                    <li>
-                        <Link to="#" role="button">
-                            <div className="mr-3 ml-1 float-left" >
-                                <FontAwesomeIcon icon={faInfoCircle} />
-                            </div>
-                            Kontakt
-                        </Link>
-                    </li>
                 </ul>
                 <footer>
                     Habit Tracker ©

@@ -51,18 +51,18 @@ const LoginForm = ({setIsAuthenticated}) => {
     }
 
     return(
-        <div className={styles.wrapper}>
-            <div className={styles.headerContainer}>
-                <h2>Habit Tracker</h2>
-            </div>
+        <div className="mb-0 mt-0 ml-auto mr-auto text-center">
+            <h2 className="text-center p-1 mt-4 mb-2">
+                Habit Tracker
+            </h2>
             {(location.state) ? <p className={cx(styles.success, "text-center", "mt-1")}>{location.state.message}</p> : <p></p>}
             <div className={styles.formContainer}>
-                <div className={styles.formHeader}>
-                    <h5>Logowanie</h5>
-                </div>
+                <h5 className="p-1 mt-2">
+                    Logowanie
+                </h5>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId={values.usernameOrEmail}>
-                        <Form.Label>Podaj Login lub Email</Form.Label>
+                        <Form.Label>Login lub Email</Form.Label>
                         <Form.Control
                             type="text"
                             className = {`${( errors.usernameOrEmail || errors.overall ) && styles.inputError}`}
@@ -86,7 +86,7 @@ const LoginForm = ({setIsAuthenticated}) => {
                     <Button
                         variant={"success"}
                         type={"submit"}
-                        className={styles.loginButton}>
+                        className="mt-1 mb-1 w-100">
                         <div className="mr-3 ml-1 float-left" >
                             <FontAwesomeIcon icon={faSignInAlt} />
                         </div>
@@ -95,7 +95,7 @@ const LoginForm = ({setIsAuthenticated}) => {
                     {errors.overall && <p className={cx(styles.error, "text-center", "mt-1")}>{errors.overall}</p>}
                     <hr/>
                     <Link to="/register">
-                        <Button variant={"primary"} className={styles.loginButton}>
+                        <Button variant={"primary"} className="mt-1 mb-1 w-100">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon icon={faUserPlus} />
                             </div>

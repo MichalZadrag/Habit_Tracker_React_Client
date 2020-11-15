@@ -1,36 +1,9 @@
-.headerContainer {
-    padding: 5px;
-    margin: 30px auto;
-    text-align: center;
-}
-
-.wrapper {
-    margin: 0 auto;
-
-}
-
 .formContainer {
     background: #CCCCCC;
     border-radius: 20px;
     padding: 10px 50px;
 }
-.formHeader {
-    padding: 5px;
-    text-align: center;
-    margin: 20px auto 0;
-}
-form {
-    width: 100%;
-    margin: 10px auto 20px;
-}
-.loginButton {
-    width: 100%;
-    margin-top: 3px;
-    margin-bottom: 3px;
-}
-i {
-    padding:  5px 5px;
-}
+
 hr {
     border-top: 1px solid #999999;
 }

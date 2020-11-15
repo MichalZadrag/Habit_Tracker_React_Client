@@ -1,29 +1,10 @@
-
-.wrapper {
-    margin: 0 auto;
-}
-
 .formContainer {
     background: #CCCCCC;
     border-radius: 20px;
     padding: 10px 60px;
     margin: 40px 250px;
 }
-.formHeader {
-    padding: 5px;
-    text-align: center;
-    margin: 20px auto 0;
-}
-.editButton {
-    width: 40%;
-    margin-top: 3px;
-    margin-bottom: 3px;
-    text-align: center;
 
-}
-.buttonContainer {
-    text-align: center;
-}
 .error {
     font-size: 15px;
     color: red;

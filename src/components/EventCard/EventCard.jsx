@@ -73,7 +73,7 @@ const EventCard = ({ day, currentUserId, date }) => {
             </Card.Footer>
             <Card.Body className="p-0">
                 {isError && <div>Something went wrong...</div>}
-                {isLoading ? (<Spinnerg
+                {isLoading ? (<Spinner
                         animation="border"
                         variant={"primary"}
                         className ={"ml-auto mr-auto"}

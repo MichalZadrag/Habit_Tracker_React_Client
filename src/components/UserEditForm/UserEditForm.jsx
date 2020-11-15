@@ -56,11 +56,11 @@ const UserEditForm = ({currentUser}) => {
 
 
     return (
-        <div className={styles.wrapper}>
+        <div className="mb-0 mt-0 ml-auto mr-auto text-center">
             <div className={styles.formContainer}>
-                <div className={styles.formHeader}>
-                    <h5>Edycja danych</h5>
-                </div>
+                <h5 className="p-1 mt-2 mb-2">
+                    Edycja danych
+                </h5>
                 <Form onSubmit={handleSubmit} noValidate>
                     <Row>
                         <Col>
@@ -135,14 +135,12 @@ const UserEditForm = ({currentUser}) => {
                         {errors.email && <p className={styles.error}>{errors.email}</p>}
                         {isEmailAvailable && <p className={styles.error}>{isEmailAvailable}</p>}
                     </Form.Group>
-                    <div className={styles.buttonContainer}>
-                        <Button variant={"success"} type="submit" className={styles.editButton}>
-                            <div className="mr-3 ml-1 float-left" >
-                                <FontAwesomeIcon icon={faPen} />
-                            </div>
-                            Edytuj
-                        </Button>
-                    </div>
+                    <Button variant={"success"} type="submit" className="mb-1 mt-1 text-center w-50">
+                        <div className="float-left" >
+                            <FontAwesomeIcon icon={faPen} />
+                        </div>
+                        Edytuj
+                    </Button>
                     {alerts.success && <p className={cx("text-center", styles.success)}>{alerts.success}</p>}
                 </Form>
             </div>

@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react";
-import styles from './TaskCard.module.css';
 import {Button, Card, Spinner} from "react-bootstrap";
-import cx from "classnames";
 import Task from "../Task/Task";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
@@ -30,8 +28,7 @@ const TaskCard = ({ day, currentUserId, date }) => {
 
     const currentTasks = (date) => {
 
-        let currentTasks = tasks.filter(task => task.date === date);
-        return currentTasks;
+        return tasks.filter(task => task.date === date);
     }
 
 

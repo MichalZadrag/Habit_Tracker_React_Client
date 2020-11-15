@@ -53,15 +53,15 @@ const RegisterForm = () => {
      }
 
     return(
-        <div className={styles.wrapper}>
-            <div className={styles.headerContainer}>
+        <div className="mb-0 mt-0 ml-auto mr-auto text-center">
+            <div className="text-center p-1 mt-4 mb-2">
                 <h2>Habit Tracker</h2>
             </div>
             {alerts.success && <p className={cx("text-center", styles.success)}>{alerts.success}</p>}
             <div className={styles.formContainer}>
-                <div className={styles.formHeader}>
-                    <h5>Rejestracja</h5>
-                </div>
+                <h5 className="p-1 mt-2">
+                    Rejestracja
+                </h5>
                 <Form onSubmit={handleSubmit} noValidate>
                     <Row>
                         <Col>
@@ -130,7 +130,7 @@ const RegisterForm = () => {
                         {errors.email && <p className={styles.error}>{errors.email}</p>}
                         {isEmailAvailable && <p className={styles.error}>{isEmailAvailable}</p>}
                     </Form.Group>
-                    <Button variant={"success"} type="submit" className={styles.loginButton}>
+                    <Button variant={"success"} type="submit" className="mt-1 mb-1 w-100">
                         <div className="mr-3 ml-1 float-left" >
                             <FontAwesomeIcon icon={faUserPlus} />
                         </div>
@@ -138,7 +138,7 @@ const RegisterForm = () => {
                     </Button>
                     <hr/>
                     <Link to="/login">
-                        <Button variant={"primary"} className={styles.loginButton}>
+                        <Button variant={"primary"} className="mt-1 mb-1 w-100">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon icon={faSignInAlt} />
                             </div>

@@ -3,12 +3,13 @@ import styles from './Habit.module.css';
 import cx from "classnames";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faInfo, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import {Button} from "react-bootstrap";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import Moment from 'react-moment';
 import {deleteHabitById} from "../../api";
 import {changeToCss, changeToIcon} from "../../constants/utils";
 import {DATES} from "../../constants";
+import ListGroup from "react-bootstrap/ListGroup";
+import Badge from "react-bootstrap/Badge";
 
 
 const Habit = ({ habit, habits, setHabits }) => {
@@ -31,40 +32,41 @@ const Habit = ({ habit, habits, setHabits }) => {
     }
 
     return(
-        <div className="ml-3">
-            <li className={cx(styles.listGroupItem, "p-3", changeToCss(color))} >
-                <div className="mr-2 float-left" >
-                    <FontAwesomeIcon icon={changeToIcon(icon)}></FontAwesomeIcon>
+            <ListGroup.Item className="d-flex w-100 ml-auto mr-auto">
+                <div>
+                    <Badge variant="primary" className={cx("h-100", "p-1", "mr-2", changeToCss(color))}> </Badge>
+                    <div className="float-right mt-2">
+                        <FontAwesomeIcon size={"lg"} icon={changeToIcon(icon)}/>
+                        <span className="p-1 m-1">{habit_text}</span>
+                    </div>
                 </div>
-                { habit_text }
-                <div className={cx( "float-right" ,"ml-3" )}>
-                    <Button variant={"primary"} size={"sm"}
-                            className={cx("pl-3", "pr-3", styles.infoIcon)}>
-                        <FontAwesomeIcon icon={faInfo} />
-                    </Button>
+                <div className="ml-auto mt-2">
+                    <div className="checkbox-group float-left">
+                        {datesToMoment().map((date, i) =>(<label className={styles.checkboxInline} key={i}>
+                                <input className={styles.checkbox} type="checkbox" key={i}  value={date} />
+                                {date}
+                            </label>
+                        ))}
+                    </div>
+                    <div
+                        role={"button"}
+                        className={"float-left mr-3 ml-3 text-success"}>
+                        <FontAwesomeIcon size={"lg"} icon={faInfo} />
+                    </div>
+                    <div
+                        role={"button"}
+                        className={"float-left mr-1 text-danger"}
+                        onClick={() => setModalShow(true)}>
+                        <FontAwesomeIcon size={"lg"} icon={faTrashAlt} />
+                    </div>
                 </div>
-                <div className={cx( "float-right" ,"ml-3" )}>
-                    <Button variant={"secondary"} size={"sm"}
-                            className={cx("pl-2", "pr-2", styles.deleteIcon)}
-                            onClick={() => setModalShow(true)}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                    </Button>
-                </div>
-                <div className="checkbox-group float-right">
-                    {datesToMoment().map((date, i) =>(<label className={styles.checkboxInline} key={i}>
-                            <input className={styles.checkbox} type="checkbox" key={i}  value={date} />
-                            {date}
-                        </label>
-                    ))}
-                </div>
-            </li>
-            <DeleteConfirmationModal
-                show = { modalShow }
-                onHide = { () => setModalShow(false) }
-                deleteData = { deleteHabit }
-            >
-            </DeleteConfirmationModal>
-        </div>
+                <DeleteConfirmationModal
+                    show = { modalShow }
+                    onHide = { () => setModalShow(false) }
+                    deleteData = { deleteHabit }
+                >
+                </DeleteConfirmationModal>
+            </ListGroup.Item>
     )
 }
 
