@@ -1,7 +1,7 @@
 export { default as HabitList } from './HabitList/HabitList';
 export { default as Navbar } from './Navbar/Navbar';
 export { default as Sidebar } from './Sidebar/Sidebar';
-export { default as Chart } from './Chart/Chart';
+export { default as HabitSeriesSummary } from './HabitSeriesSummary/HabitSeriesSummary';
 export { default as LoginForm } from './LoginForm/LoginForm';
 export { default as RegisterForm } from './RegisterForm/RegisterForm';
 export { default as TaskDeck } from './TaskDeck/TaskDeck';

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styles from './Sidebar.module.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAddressBook, faInfoCircle, faTasks} from "@fortawesome/free-solid-svg-icons";
-import {faCalendarAlt, faCalendarCheck, faChartBar} from "@fortawesome/free-regular-svg-icons";
+import {faCalendarAlt, faCalendarCheck, faChartBar, faClock} from "@fortawesome/free-regular-svg-icons";
 import {Link} from "react-router-dom";
 import { Collapse} from "react-bootstrap";
 import {ACCESS_TOKEN} from "../../constants";
@@ -92,9 +92,9 @@ const Sidebar = ({setIsAuthenticated, currentUser, isSidebarActive}) => {
                     <li>
                         <Link to="/statistics">
                             <div className="mr-3 ml-1 float-left" >
-                                <FontAwesomeIcon  icon={faChartBar} />
+                                <FontAwesomeIcon  icon={faClock} />
                             </div>
-                            Statystyki
+                            Systematyczność
                         </Link>
                     </li>
                 </ul>

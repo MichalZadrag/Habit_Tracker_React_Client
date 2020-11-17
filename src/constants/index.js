@@ -41,6 +41,8 @@ export const FETCH_TASK_DATA_URL = `/task/all/`;
 
 export const FETCH_EVENT_DATA_URL = `/event/all/`;
 
+export const INCREMENT_SERIES_URL = `/habit/increment/`;
+
 export const NAME_REGEXP = /^[a-zA-Z0-9ąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,}$/;
 
 export const USERNAME_REGEXP = /^[a-zA-Z0-9]{4,}$/;

@@ -9,7 +9,7 @@ import {
     DELETE_HABIT_BY_ID_URL, DELETE_TASK_BY_ID_URL, DELETE_USER_BY_ID_URL, FETCH_EVENT_DATA_URL,
     FETCH_HABIT_DATA_URL,
     FETCH_TASK_DATA_URL,
-    GET_CURRENT_USER_URL,
+    GET_CURRENT_USER_URL, INCREMENT_SERIES_URL,
     LOGIN_URL
 } from "../constants";
 
@@ -188,5 +188,10 @@ export const fetchEventData = async (id, setIsError) => {
 
 export const deleteEventById = (id) => {
     authAxios.delete(`${DELETE_EVENT_BY_ID_URL}${id}`)
+        .then((r) => console.log(r.data.message));
+}
+
+export const incrementSeriesInHabit = (id) => {
+    authAxios.patch(`${INCREMENT_SERIES_URL}${id}`)
         .then((r) => console.log(r.data.message));
 }

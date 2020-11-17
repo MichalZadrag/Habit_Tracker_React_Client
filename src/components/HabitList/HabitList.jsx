@@ -6,6 +6,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTasks} from "@fortawesome/free-solid-svg-icons";
 import HabitAddModal from "../HabitAddModal/HabitAddModal";
+import {faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 
 
 const HabitList = ({currentUserId}) => {
@@ -32,7 +33,8 @@ const HabitList = ({currentUserId}) => {
 
         <Card className="w-50 ml-auto mr-auto mt-5">
             <Card.Footer>
-                <FontAwesomeIcon icon={faTasks} className={"mt-2"} />
+                <FontAwesomeIcon icon={faCalendarCheck} className={"mt-2 mr-2"} />
+                <span>Nawyki</span>
                 <Button
                     variant={"secondary"}
                     size={"sm"}

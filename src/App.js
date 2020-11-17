@@ -4,18 +4,16 @@ import {
     Sidebar,
     HabitList,
     Navbar,
-    Chart,
     LoginForm,
     RegisterForm,
     TaskDeck,
-    EventDeck, UserEditForm,
+    EventDeck, UserEditForm, HabitSeriesSummary,
 } from "./components";
 import styles from './App.module.css';
-import CardDeck from "./components/CardDeck/CardDeck";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {getCurrentUser} from "./api";
 import {Spinner} from "react-bootstrap";
-import NoMatch from "./components/NoMatch/NoMatch";
+import NoMatch from "./components/NoMatch/NoMatch"
 
 const App = () => {
 
@@ -90,9 +88,7 @@ const App = () => {
                                                  setIsSidebarActive = { setIsSidebarActive }
                                                  isSidebarActive = { isSidebarActive }
                                              />
-                                             <Chart/>
-                                             <CardDeck
-                                             />
+                                             <HabitSeriesSummary />
                                          </Route>
                                          <Route path="/tasks">
                                              <Navbar
