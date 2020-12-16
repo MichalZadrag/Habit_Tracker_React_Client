@@ -6,6 +6,7 @@ import styles from "./WeekSeries.module.css";
 import {faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";
 import cx from "classnames";
 import moment from "moment";
+
 import {Card, Spinner} from "react-bootstrap";
 
 
@@ -21,7 +22,7 @@ const WeekSeries = ({currentDays, onClickData, habit}) => {
         setCurrentHabit(habit);
         setGreen();
         setIsLoading(false);
-    },[])
+    })
 
     const setGreen = () => {
         let currentSeries = currentHabit.series;
