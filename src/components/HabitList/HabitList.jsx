@@ -45,7 +45,7 @@ const HabitList = ({currentUserId}) => {
             </Card.Footer>
 
             <Card.Body className="p-0">
-            {isError && <div>Something went wrong...</div>}
+            {isError && <div>Coś poszło nie tak ...</div>}
                 <ListGroup>
                     {isLoading ? (<Spinner
                         animation="border"

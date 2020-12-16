@@ -28,6 +28,7 @@ const TaskCard = ({ day, currentUserId, date }) => {
 
     const currentTasks = (date) => {
 
+
         return tasks.filter(task => task.date === date);
     }
 

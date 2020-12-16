@@ -1,6 +1,7 @@
 import stylesCustom from "../components/HabitAddModal/HabitAddModal.module.css";
 import {faBiking, faBook, faDumbbell, faMoneyBillAlt, faQuestion} from "@fortawesome/free-solid-svg-icons";
 import {DAYS, ONE_DAY_IN_MS} from "./index";
+import moment from "moment";
 
 
 
@@ -80,18 +81,19 @@ export const changeDateBy = (date, times, action) => {
     return newDate;
 }
 
-export const setCurrentDaysDependOnDate = (todayDate) => {
+export const setCurrentDaysDependOnDate = (todayDate, number_of_repeat) => {
     let tempDays = [];
     let currentDay = todayDate.getDay();
     let currentDate = todayDate;
     let i = 1;
-    while (i < 4) {
-        tempDays.push({day: DAYS[currentDay], date: currentDate});
+    while (i < number_of_repeat) {
+        tempDays.push({day: DAYS[currentDay], date: moment(currentDate), isSeriesGood: false});
         if (currentDay === 6) {
             currentDay = 0;
+            currentDate = changeDateBy(currentDate, 1, "+");
         } else {
             currentDay++;
-            currentDate = changeDateBy(todayDate, i, "+");
+            currentDate = changeDateBy(currentDate, 1, "+");
         }
         i++;
     }

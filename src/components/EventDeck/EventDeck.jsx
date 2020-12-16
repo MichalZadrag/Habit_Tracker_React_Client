@@ -15,7 +15,7 @@ const EventDeck = ({currentUserId}) => {
     const [currentDays, setCurrentDays] = useState([{day: '', date: ''}]);
 
     useEffect(() => {
-        setCurrentDays(setCurrentDaysDependOnDate(todayDate));
+        setCurrentDays(setCurrentDaysDependOnDate(todayDate, 4));
     }, [laterDate])
 
 

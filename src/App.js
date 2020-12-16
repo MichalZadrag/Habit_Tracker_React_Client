@@ -88,7 +88,9 @@ const App = () => {
                                                  setIsSidebarActive = { setIsSidebarActive }
                                                  isSidebarActive = { isSidebarActive }
                                              />
-                                             <HabitSeriesSummary />
+                                             <HabitSeriesSummary
+                                                 currentUserId = { currentUser.id }
+                                             />
                                          </Route>
                                          <Route path="/tasks">
                                              <Navbar

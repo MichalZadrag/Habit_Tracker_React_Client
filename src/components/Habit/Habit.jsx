@@ -1,13 +1,10 @@
 import React, {useState} from "react";
-import styles from './Habit.module.css';
 import cx from "classnames";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faInfo, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
-import Moment from 'react-moment';
 import {deleteHabitById, incrementSeriesInHabit} from "../../api";
 import {changeToCss, changeToIcon} from "../../constants/utils";
-import {DATES} from "../../constants";
 import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
 import {Button} from "react-bootstrap";
@@ -15,17 +12,36 @@ import {Button} from "react-bootstrap";
 
 const Habit = ({ habit, habits, setHabits }) => {
 
-    const {id, icon, color, habit_text} = habit;
+    const {id, icon, color, habit_text, done} = habit;
     const [modalShow, setModalShow] = useState(false);
-    const [questionButton, setQuestionButton] = useState(true);
-    const [doneButton, setDoneButton] = useState(false);
 
-    const datesToMoment = () => {
-
-        let momentArray = DATES.map((date) => <Moment date={date} format="DD.MM"/>);
-
-        return momentArray;
+    const refreshPage = () => {
+        window.location.reload(false);
     }
+
+
+
+    const renderButton = () => {
+
+        if (done) {
+            return (
+                <Button className="float-left mr-4" variant="success" disabled>
+                    Zrobione!
+                </Button>
+            )
+        } else {
+            return (
+                <Button
+                    className="float-left mr-4"
+                    variant="primary"
+                    onClick={ incrementSeries }>
+                    Zrobione?
+                </Button>
+            )
+        }
+
+    }
+
 
     const deleteHabit = () => {
         const temp_id = id;
@@ -35,10 +51,8 @@ const Habit = ({ habit, habits, setHabits }) => {
     }
 
     const incrementSeries = () => {
-        setDoneButton(true);
-        setQuestionButton(false);
         incrementSeriesInHabit(id);
-
+        refreshPage();
     }
 
     return(
@@ -51,19 +65,7 @@ const Habit = ({ habit, habits, setHabits }) => {
                     </div>
                 </div>
                 <div className="ml-auto mt-2">
-                    {questionButton && (
-                        <Button
-                            className="float-left mr-4"
-                            variant="primary"
-                            onClick={ incrementSeries }>
-                            Zrobione?
-                        </Button>
-                    )}
-                    {doneButton && (
-                        <Button className="float-left mr-4" variant="success" disabled>
-                            Zrobione!
-                        </Button>
-                    )}
+                    {renderButton()}
                     <div
                         role={"button"}
                         className={"float-left mr-1 mt-1 text-danger"}

@@ -10,13 +10,13 @@ import {
     FETCH_HABIT_DATA_URL,
     FETCH_TASK_DATA_URL,
     GET_CURRENT_USER_URL, INCREMENT_SERIES_URL,
-    LOGIN_URL
+    LOGIN_URL, TASK_DONE_URL
 } from "../constants";
 
 let access_token = '';
 
 if (localStorage.getItem(ACCESS_TOKEN)) {
-     access_token = localStorage.getItem(ACCESS_TOKEN);
+    access_token = localStorage.getItem(ACCESS_TOKEN);
 }
 
 const refreshPage = () => {
@@ -43,11 +43,11 @@ export const addNewUser = (firstName, lastName, username, email, password, setEr
             setAlerts({success: r.data.message});
         })
         .catch(e => {
-           setErrors({ overall: "Wystąpił błąd" });
+            setErrors({overall: "Wystąpił błąd"});
         })
 }
 
-export const changeDataUser = (oldUserId,firstName, lastName, username, email, password, setErrors, setAlerts) => {
+export const changeDataUser = (oldUserId, firstName, lastName, username, email, password, setErrors, setAlerts) => {
 
     authAxios.put(`${CHANGE_DATA_USER_URL}${oldUserId}`, {
         first_name: firstName,
@@ -60,7 +60,7 @@ export const changeDataUser = (oldUserId,firstName, lastName, username, email, p
             setAlerts({success: r.data.message});
         })
         .catch(e => {
-            setErrors({ overall: "Wystąpił błąd" });
+            setErrors({overall: "Wystąpił błąd"});
         })
 }
 
@@ -70,7 +70,8 @@ export const addNewHabit = (habitText, icon, color, user_id) => {
         habit_text: habitText,
         icon: icon,
         color: color,
-        user_id: user_id
+        user_id: user_id,
+        done: false
     }).then(r => (null))
         .catch(e => {
             console.log("error");
@@ -88,21 +89,21 @@ export const deleteUserById = (id) => {
 }
 
 export const checkUsernameAvailability = async (username) => {
-    const { data } = await axios.get(`${CHECK_USERNAME_AVAILABILITY_URL}${username}`)
+    const {data} = await axios.get(`${CHECK_USERNAME_AVAILABILITY_URL}${username}`)
     return data.available;
 }
 
 export const checkEmailAvailability = async (email) => {
-    const { data } = await axios.get(`${CHECK_EMAIL_AVAILABILITY_URL}${email}`)
+    const {data} = await axios.get(`${CHECK_EMAIL_AVAILABILITY_URL}${email}`)
     return data.available;
 
 }
 
 export const getCurrentUser = async () => {
-    if(!localStorage.getItem(ACCESS_TOKEN)) {
+    if (!localStorage.getItem(ACCESS_TOKEN)) {
         return Promise.reject("No access token set.");
     } else {
-        const { data } = await authAxios.get(GET_CURRENT_USER_URL)
+        const {data} = await authAxios.get(GET_CURRENT_USER_URL)
         return data;
     }
 
@@ -122,9 +123,10 @@ export const login = (usernameOrEmail, password, setErrors, history, setIsAuthen
             setIsAuthenticated(true);
         }
     }).catch(e => {
-        if (e.response.data.status === 401) {
-            console.log(e.response);
-            setErrors({ overall: "Błędny login lub hasło" });
+        if (!e.response) {
+            setErrors({overall: "Brak połączenia z API"});
+        } else if (e.response.data.status === 401) {
+            setErrors({overall: "Błędny login lub hasło"});
         }
     });
 }
@@ -132,7 +134,7 @@ export const login = (usernameOrEmail, password, setErrors, history, setIsAuthen
 export const fetchHabitData = async (id, setIsError) => {
 
     try {
-        const { data } = await authAxios.get(`${FETCH_HABIT_DATA_URL}${id}`);
+        const {data} = await authAxios.get(`${FETCH_HABIT_DATA_URL}${id}`);
         return data;
     } catch (e) {
         setIsError(true);
@@ -142,7 +144,7 @@ export const fetchHabitData = async (id, setIsError) => {
 
 export const fetchTaskData = async (id, setIsError) => {
     try {
-        const { data } = await authAxios.get(`${FETCH_TASK_DATA_URL}${id}`);
+        const {data} = await authAxios.get(`${FETCH_TASK_DATA_URL}${id}`);
         return data;
     } catch (e) {
         setIsError(true);
@@ -154,7 +156,8 @@ export const addNewTask = (taskText, color, user_id, date) => {
         task_text: taskText,
         color: color,
         user_id: user_id,
-        date: date
+        date: date,
+        isDone: false
     }).then(r => null)
         .catch(e => console.log("error"));
 }
@@ -179,7 +182,7 @@ export const addNewEvent = (eventText, color, user_id, date, location, startTime
 
 export const fetchEventData = async (id, setIsError) => {
     try {
-        const { data } = await authAxios.get(`${FETCH_EVENT_DATA_URL}${id}`);
+        const {data} = await authAxios.get(`${FETCH_EVENT_DATA_URL}${id}`);
         return data;
     } catch (e) {
         setIsError(true);
@@ -194,4 +197,9 @@ export const deleteEventById = (id) => {
 export const incrementSeriesInHabit = (id) => {
     authAxios.patch(`${INCREMENT_SERIES_URL}${id}`)
         .then((r) => console.log(r.data.message));
+}
+
+export const setTaskDoneApi = (id) => {
+    authAxios.patch(`${TASK_DONE_URL}${id}`)
+        .then(r => console.log(r.data.message));
 }

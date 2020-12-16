@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import cx from "classnames";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
-import {deleteTaskById} from "../../api";
+import {deleteTaskById, setTaskDoneApi} from "../../api";
 import {changeToCss} from "../../constants/utils";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -10,9 +10,12 @@ import Badge from "react-bootstrap/Badge";
 
 const Task = ({ task, tasks, setTasks }) => {
 
-    const {task_text, color} = task
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
 
-    const [isDone, setIsDone] = useState(false);
+    const {task_text, color, done} = task
+
     const [modalShow, setModalShow] = useState(false);
 
 
@@ -23,6 +26,12 @@ const Task = ({ task, tasks, setTasks }) => {
         setTasks(newTasks);
     }
 
+    const setTaskDone = () => {
+        const id = task.id;
+        setTaskDoneApi(id);
+        refreshPage();
+    }
+
     return(
         <div>
             <DeleteConfirmationModal
@@ -31,7 +40,7 @@ const Task = ({ task, tasks, setTasks }) => {
                 deleteData = { deleteTask }
             >
             </DeleteConfirmationModal>
-            <ListGroup.Item className={cx("d-flex", isDone && "bg-success")}>
+            <ListGroup.Item className={cx("d-flex", done && "bg-success")}>
                 <div>
                     <Badge variant="primary" className={cx("h-100", "p-1", "mr-2", changeToCss(color))}> </Badge>
                     <div className="float-right">
@@ -41,8 +50,8 @@ const Task = ({ task, tasks, setTasks }) => {
                 <div className="ml-auto mb-auto mt-auto">
                     <div
                         role={"button"}
-                        className={cx("float-left", "pl-2", "pr-2", "text-success", isDone && "invisible")}
-                        onClick={() => setIsDone(!isDone)}>
+                        className={cx("float-left", "pl-2", "pr-2", "text-success", done && "invisible")}
+                        onClick={setTaskDone}>
                         <FontAwesomeIcon icon={faCheck} />
                     </div>
                     <div

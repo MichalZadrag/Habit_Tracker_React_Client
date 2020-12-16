@@ -1,4 +1,3 @@
-import {changeDateBy} from "./utils";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAward, faBiking, faBook, faCircle, faDumbbell, faMoneyBillAlt} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
@@ -6,10 +5,9 @@ import styles from "../components/HabitAddModal/HabitAddModal.module.css";
 import {faCalendar, faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 
 
+export const API_URL = `https://habt-tracker.herokuapp.com/api`;
 
-// export const API_URL = `https://habt-tracker.herokuapp.com/api`;
-
-export const API_URL = `http://localhost:8080/api`;
+// export const API_URL = `http://localhost:8080/api`;
 
 export const LOGIN_URL = `/auth/signin`;
 
@@ -43,6 +41,8 @@ export const FETCH_EVENT_DATA_URL = `/event/all/`;
 
 export const INCREMENT_SERIES_URL = `/habit/increment/`;
 
+export const TASK_DONE_URL = `/task/done/`;
+
 export const NAME_REGEXP = /^[a-zA-Z0-9ąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,}$/;
 
 export const USERNAME_REGEXP = /^[a-zA-Z0-9]{4,}$/;
@@ -61,25 +61,18 @@ export const ONE_DAY_IN_MS = 86400000;
 
 export const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-export const DATES = [
-    new Date(),
-    changeDateBy(new Date(), 1, "+"),
-    changeDateBy(new Date(), 2, "+"),
-    changeDateBy(new Date(), 3, "+"),
-];
-
 export const ICONS = [
-    { tag: <FontAwesomeIcon icon={faBiking}/>, string: "faBiking" },
-    { tag: <FontAwesomeIcon icon={faBook} />, string: "faBook" },
-    { tag: <FontAwesomeIcon icon={faDumbbell} />, string: "faDumbbell" },
-    { tag: <FontAwesomeIcon icon={faMoneyBillAlt} />, string: "faMoneyBillAlt" },
+    {tag: <FontAwesomeIcon icon={faBiking}/>, string: "faBiking"},
+    {tag: <FontAwesomeIcon icon={faBook}/>, string: "faBook"},
+    {tag: <FontAwesomeIcon icon={faDumbbell}/>, string: "faDumbbell"},
+    {tag: <FontAwesomeIcon icon={faMoneyBillAlt}/>, string: "faMoneyBillAlt"},
 ];
 
 export const COLORS = [
-    { tag: <FontAwesomeIcon className={styles.lightGreen} size="lg" icon={faCircle} />, string: "lightGreen" },
-    { tag: <FontAwesomeIcon className={styles.salmon} size="lg" icon={faCircle} />, string: "salmon" },
-    { tag: <FontAwesomeIcon className={styles.lightGrey} size="lg" icon={faCircle} />, string: "lightGrey" },
-    { tag: <FontAwesomeIcon className={styles.lightBlue} size="lg" icon={faCircle} />, string: "lightBlue" },
+    {tag: <FontAwesomeIcon className={styles.lightGreen} size="lg" icon={faCircle}/>, string: "lightGreen"},
+    {tag: <FontAwesomeIcon className={styles.salmon} size="lg" icon={faCircle}/>, string: "salmon"},
+    {tag: <FontAwesomeIcon className={styles.lightGrey} size="lg" icon={faCircle}/>, string: "lightGrey"},
+    {tag: <FontAwesomeIcon className={styles.lightBlue} size="lg" icon={faCircle}/>, string: "lightBlue"},
 
 ];
 

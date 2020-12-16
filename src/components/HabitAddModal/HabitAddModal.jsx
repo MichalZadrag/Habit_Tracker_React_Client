@@ -22,8 +22,6 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
         color: '',
     });
     useEffect(() => {
-        console.log("USE EFFECT HABIT ADD FORM MODAL");
-
         const {habitText, icon, color} = habit;
         if (Object.keys(errors).length === 0 && isSubmitting) {
             addNewHabit(habitText, icon, color, currentUserId);

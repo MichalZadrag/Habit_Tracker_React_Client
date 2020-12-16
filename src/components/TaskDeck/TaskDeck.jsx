@@ -15,7 +15,7 @@ const TaskDeck = ({currentUserId}) => {
 
 
     useEffect(() => {
-        setCurrentDays(setCurrentDaysDependOnDate(todayDate));
+        setCurrentDays(setCurrentDaysDependOnDate(todayDate,  4));
     }, [laterDate])
 
 

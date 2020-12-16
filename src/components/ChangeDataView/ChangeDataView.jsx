@@ -7,8 +7,7 @@ import cx from 'classnames';
 import {appendLeadingZeroes, changeDateBy} from "../../constants/utils";
 
 
-
-const ChangeDataView = ({todayDate, setTodayDate, laterDate,  setLaterDate}) => {
+const ChangeDataView = ({todayDate, setTodayDate, laterDate, setLaterDate}) => {
 
 
     useEffect(() => {
@@ -40,7 +39,7 @@ const ChangeDataView = ({todayDate, setTodayDate, laterDate,  setLaterDate}) => 
     const onClickData = (id) => {
 
         if (id === "left") {
-           changeDate("-");
+            changeDate("-");
         } else if (id === "right") {
             changeDate("+");
         }
@@ -54,7 +53,7 @@ const ChangeDataView = ({todayDate, setTodayDate, laterDate,  setLaterDate}) => 
                 className="btn mt-3 ml-2 pl-3 pr-3"
                 onClick={() => onClickData("left")}
             >
-                <FontAwesomeIcon size={"sm"} icon={faCaretLeft}></FontAwesomeIcon>
+                <FontAwesomeIcon size={"sm"} icon={faCaretLeft}/>
             </Button>
             <Button
                 className={cx("btn", "mt-3", "ml-2", "pl-4", "pr-4", styles.dataButton)}
@@ -66,7 +65,7 @@ const ChangeDataView = ({todayDate, setTodayDate, laterDate,  setLaterDate}) => 
                 className="btn mt-3 ml-2 pl-3 pr-3"
                 onClick={() => onClickData("right")}
             >
-                <FontAwesomeIcon size={"sm"} icon={faCaretRight}></FontAwesomeIcon>
+                <FontAwesomeIcon size={"sm"} icon={faCaretRight}/>
             </Button>
         </div>
     )
