@@ -3,23 +3,23 @@ import Container from "react-bootstrap/Container";
 import {
     Sidebar,
     HabitList,
-    Navbar,
     LoginForm,
     RegisterForm,
     TaskDeck,
-    EventDeck, UserEditForm, HabitSeriesSummary,
+    EventDeck, UserEditForm, HabitSeriesSummary, CustomNavbar,
 } from "./components";
 import styles from './App.module.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {getCurrentUser} from "./api";
 import {Spinner} from "react-bootstrap";
 import NoMatch from "./components/NoMatch/NoMatch"
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 const App = () => {
 
     const [currentUser, setCurrentUser] = useState({id: '', username: '', first_name: '',last_name: '', email: ''})
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [isSidebarActive, setIsSidebarActive] = useState(true);
     const [isDataChange, setIsDataChange] = useState(false);
 
 
@@ -47,27 +47,25 @@ const App = () => {
                           <Route path="/register">
                                  <RegisterForm/>
                              </Route>
-                          <Route path={["/habits", "/statistics","/tasks", "/events", "/userEditForm"]} >
+                          <Route path={["/habits", "/regularity","/tasks", "/events", "/userEditForm"]} >
                                  {(!currentUser.id ) ?
                                      (<Spinner
                                          animation="border"
                                          variant={"primary"}
                                          className ={"mt-5 ml-auto mr-auto"}
                                      /> ) :
-                                     (<Route path={["/habits", "/statistics", "/tasks", "/events", "/userEditForm"]} >
+                                     (<Route path={["/habits", "/regularity", "/tasks", "/events", "/userEditForm"]} >
                                      <Sidebar
                                          setIsAuthenticated = { setIsAuthenticated }
                                          currentUser = { currentUser }
-                                         isSidebarActive = { isSidebarActive }
                                      />
                                      <Container
                                          fluid
-                                         className={!isSidebarActive && styles.test}
                                      >
                                          <Route path="/userEditForm" >
-                                             <Navbar
-                                                 setIsSidebarActive = { setIsSidebarActive }
-                                                 isSidebarActive = { isSidebarActive }
+                                             <CustomNavbar
+                                                 setIsAuthenticated = { setIsAuthenticated }
+                                                 currentUser = { currentUser }
                                              />
                                              <UserEditForm
                                                  currentUser = { currentUser }
@@ -75,36 +73,36 @@ const App = () => {
                                              />
                                          </Route>
                                          <Route path="/habits" >
-                                             <Navbar
-                                                 setIsSidebarActive = { setIsSidebarActive }
-                                                 isSidebarActive = { isSidebarActive }
+                                             <CustomNavbar
+                                                 setIsAuthenticated = { setIsAuthenticated }
+                                                 currentUser = { currentUser }
                                              />
                                              <HabitList
                                                 currentUserId = { currentUser.id }
                                              />
                                          </Route>
-                                         <Route path="/statistics">
-                                             <Navbar
-                                                 setIsSidebarActive = { setIsSidebarActive }
-                                                 isSidebarActive = { isSidebarActive }
+                                         <Route path="/regularity">
+                                             <CustomNavbar
+                                                 setIsAuthenticated = { setIsAuthenticated }
+                                                 currentUser = { currentUser }
                                              />
                                              <HabitSeriesSummary
                                                  currentUserId = { currentUser.id }
                                              />
                                          </Route>
                                          <Route path="/tasks">
-                                             <Navbar
-                                                 setIsSidebarActive = { setIsSidebarActive }
-                                                 isSidebarActive = { isSidebarActive }
+                                             <CustomNavbar
+                                                 setIsAuthenticated = { setIsAuthenticated }
+                                                 currentUser = { currentUser }
                                              />
                                              <TaskDeck
                                                  currentUserId = { currentUser.id }
                                              />
                                          </Route>
                                          <Route path="/events">
-                                             <Navbar
-                                                 setIsSidebarActive = { setIsSidebarActive }
-                                                 isSidebarActive = { isSidebarActive }
+                                             <CustomNavbar
+                                                 setIsAuthenticated = { setIsAuthenticated }
+                                                 currentUser = { currentUser }
                                              />
                                             <EventDeck
                                                 currentUserId = { currentUser.id }

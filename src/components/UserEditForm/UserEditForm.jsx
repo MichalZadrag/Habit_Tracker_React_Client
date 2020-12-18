@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styles from "./UserEditForm.module.css"
-import {Button, Col, Form, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen} from "@fortawesome/free-solid-svg-icons";
 import {changeDataUser} from "../../api";
@@ -31,7 +31,7 @@ const UserEditForm = ({currentUser}) => {
 
 
     const handleChange = (evt) => {
-        const { name, value } = evt.target;
+        const {name, value} = evt.target;
         setValues({
             ...values,
             [name]: value
@@ -39,7 +39,7 @@ const UserEditForm = ({currentUser}) => {
     }
 
 
-    useEffect( () => {
+    useEffect(() => {
 
         const {firstName, lastName, username, email, password} = values
 
@@ -56,95 +56,120 @@ const UserEditForm = ({currentUser}) => {
 
 
     return (
-        <div className="mb-0 mt-0 ml-auto mr-auto text-center">
-            <div className={styles.formContainer}>
-                <h5 className="p-1 mt-2 mb-2">
-                    Edycja danych
-                </h5>
-                <Form onSubmit={handleSubmit} noValidate>
-                    <Row>
-                        <Col>
-                            <Form.Group controlId={values.firstName}>
-                                <Form.Label>Imie</Form.Label>
-                                <Form.Control
-                                    className ={`${errors.firstName && styles.inputError}`}
-                                    type="text"
-                                    name="firstName"
-                                    value={values.firstName}
-                                    onChange={handleChange}
-                                />
-                                {errors.firstName && <p className={styles.error}>{errors.firstName}</p>}
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Form.Group controlId={values.lastName}>
-                                <Form.Label>Nazwisko</Form.Label>
-                                <Form.Control
-                                    className ={`${errors.lastName && styles.inputError}`}
-                                    type="text"
-                                    name="lastName"
-                                    value={values.lastName}
-                                    onChange={handleChange}
-                                />
-                                {errors.lastName && <p className={styles.error}>{errors.lastName}</p>}
-                            </Form.Group>
-                        </Col>
+        <Container className="mb-0 mt-0 ml-auto mr-auto">
+            <Row className="p-3 mt-0 mb-4 justify-content-center">
+                <div className={styles.formContainer}>
+                    <Row md={8} className="pt-md-3 justify-content-center">
+                        <h5 className="p-1">
+                            Edycja Danych
+                        </h5>
                     </Row>
-                    <Form.Group controlId={values.username}>
-                        <Form.Label>Login</Form.Label>
-                        <Form.Control
-                            className ={`${( errors.username || isUsernameAvailable )&& styles.inputError}`}
-                            type="text"
-                            name="username"
-                            value={values.username}
-                            onChange={handleChange}
-                        />
-                        {errors.username && <p className={styles.error}>{errors.username}</p>}
-                        {isUsernameAvailable && <p className={styles.error}>{isUsernameAvailable}</p>}
-                    </Form.Group>
-                    <Form.Group controlId={values.password}>
-                        <Form.Label>Hasło</Form.Label>
-                        <Form.Control
-                            className ={`${errors.password && styles.inputError}`}
-                            type="password"
-                            name="password"
-                            placeholder="*********"
-                            onChange={handleChange}
-                        />
-                        {errors.password && <p className={styles.error}>{errors.password}</p>}
-                    </Form.Group>
-                    <Form.Group controlId={values.confirmPassword}>
-                        <Form.Label>Powtórz hasło</Form.Label>
-                        <Form.Control
-                            className ={`${errors.password && styles.inputError}`}
-                            type="password"
-                            name="confirmPassword"
-                            placeholder="*********"
-                            onChange={handleChange}
-                        />
-                    </Form.Group>
-                    <Form.Group controlId={values.email}>
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control
-                            className ={`${( errors.email || isEmailAvailable ) && styles.inputError}`}
-                            type="text"
-                            name="email"
-                            value={values.email}
-                            onChange={handleChange}
-                        />
-                        {errors.email && <p className={styles.error}>{errors.email}</p>}
-                        {isEmailAvailable && <p className={styles.error}>{isEmailAvailable}</p>}
-                    </Form.Group>
-                    <Button variant={"success"} type="submit" className="mb-1 mt-1 text-center w-50">
-                        <div className="float-left" >
-                            <FontAwesomeIcon icon={faPen} />
-                        </div>
-                        Edytuj
-                    </Button>
-                    {alerts.success && <p className={cx("text-center", styles.success)}>{alerts.success}</p>}
-                </Form>
-            </div>
-        </div>
+                    <Form onSubmit={handleSubmit} noValidate>
+                        <Row className="text-center justify-content-center">
+                            <Col>
+                                <Form.Group controlId={values.firstName}>
+                                    <Form.Label>Imie</Form.Label>
+                                    <Form.Control
+                                        className={`${errors.firstName && styles.inputError}`}
+                                        type="text"
+                                        name="firstName"
+                                        value={values.firstName}
+                                        onChange={handleChange}
+                                    />
+                                    {errors.firstName && <p className={styles.error}>{errors.firstName}</p>}
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Form.Group controlId={values.lastName}>
+                                    <Form.Label>Nazwisko</Form.Label>
+                                    <Form.Control
+                                        className={`${errors.lastName && styles.inputError}`}
+                                        type="text"
+                                        name="lastName"
+                                        value={values.lastName}
+                                        onChange={handleChange}
+                                    />
+                                    {errors.lastName && <p className={styles.error}>{errors.lastName}</p>}
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="text-center justify-content-center">
+                            <Col>
+                                <Form.Group controlId={values.username}>
+                                    <Form.Label>Login</Form.Label>
+                                    <Form.Control
+                                        className={`${(errors.username || isUsernameAvailable) && styles.inputError}`}
+                                        type="text"
+                                        name="username"
+                                        value={values.username}
+                                        onChange={handleChange}
+                                    />
+                                    {errors.username && <p className={styles.error}>{errors.username}</p>}
+                                    {isUsernameAvailable && <p className={styles.error}>{isUsernameAvailable}</p>}
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="text-center justify-content-center">
+                            <Col>
+                                <Form.Group controlId={values.password}>
+                                    <Form.Label>Hasło</Form.Label>
+                                    <Form.Control
+                                        className={`${errors.password && styles.inputError}`}
+                                        type="password"
+                                        name="password"
+                                        placeholder="*********"
+                                        onChange={handleChange}
+                                    />
+                                    {errors.password && <p className={styles.error}>{errors.password}</p>}
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="text-center justify-content-center">
+                            <Col>
+                                <Form.Group controlId={values.confirmPassword}>
+                                    <Form.Label>Powtórz hasło</Form.Label>
+                                    <Form.Control
+                                        className={`${errors.password && styles.inputError}`}
+                                        type="password"
+                                        name="confirmPassword"
+                                        placeholder="*********"
+                                        onChange={handleChange}
+                                    />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="text-center justify-content-center">
+                            <Col>
+                                <Form.Group controlId={values.email}>
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control
+                                        className={`${(errors.email || isEmailAvailable) && styles.inputError}`}
+                                        type="text"
+                                        name="email"
+                                        value={values.email}
+                                        onChange={handleChange}
+                                    />
+                                    {errors.email && <p className={styles.error}>{errors.email}</p>}
+                                    {isEmailAvailable && <p className={styles.error}>{isEmailAvailable}</p>}
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="text-center justify-content-center">
+                            <Col md={10}>
+                                <Button variant={"success"} type="submit" className="mb-1 mt-1 text-center w-50">
+                                    <div className="float-left">
+                                        <FontAwesomeIcon icon={faPen}/>
+                                    </div>
+                                    Edytuj
+                                </Button>
+                                {alerts.success &&
+                                <p className={cx("text-center", styles.success)}>{alerts.success}</p>}
+                            </Col>
+                        </Row>
+                    </Form>
+                </div>
+            </Row>
+        </Container>
     )
 }
 

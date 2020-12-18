@@ -35,13 +35,11 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
             refreshPage();
         }
 
-    },[errors])
-
-
+    }, [errors])
 
 
     const handleChange = (evt) => {
-        const { name, value } = evt.target;
+        const {name, value} = evt.target;
 
         setHabit({
             ...habit,
@@ -58,8 +56,7 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
     }
 
 
-
-    return(
+    return (
         <Modal
             show={show}
             onHide={onHide}
@@ -70,63 +67,79 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className={styles.mBody}>
-                <Form onSubmit={ handleSubmit } noValidate>
-                    <Form.Group as={Row} controlId={habit.habitText}>
-                        <Form.Label className="text-center" column sm="2">
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                className ={`${errors.habitText && styles.inputError}`}
-                                type="text"
-                                name="habitText"
-                                onChange={ handleChange } />
-                            {errors.habitText && <p className={styles.error}>{errors.habitText}</p>}
-                        </Col>
+                <Form onSubmit={handleSubmit} noValidate>
+                    <Form.Group controlId={habit.habitText}>
+                        <Row className="justify-content-center">
+                            <Col xs={2}>
+                                <Form.Label className="text-left">
+                                    <FontAwesomeIcon icon={faAngleRight}/>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={8}>
+                                <Form.Control
+                                    className={`${errors.habitText && styles.inputError}`}
+                                    type="text"
+                                    name="habitText"
+                                    onChange={handleChange}/>
+                                {errors.habitText && <p className={styles.error}>{errors.habitText}</p>}
+                            </Col>
+                        </Row>
                     </Form.Group>
-                    <Form.Group as={Row} controlId={habit.icon} className="display-flex">
-                        <Form.Label column className="text-center" sm="2">
-                            <FontAwesomeIcon icon={faAngleDoubleRight} />
-                        </Form.Label>
-                            <div key={"habit-icon"} className="ml-5 mt-auto mb-auto ">
-                                {ICONS.map((icon, i) => (
-                                    <Form.Check
-                                        type = {"radio"}
-                                        custom
-                                        inline
-                                        label = { icon.tag }
-                                        id = {`icon ${i}`}
-                                        key = {`icon ${i}`}
-                                        onChange = { handleChange }
-                                        name = {"icon"}
-                                        value = { icon.string }
-                                    />
-                                ))}
-                            </div>
+                    <Form.Group controlId={habit.icon}>
+                        <Row className="justify-content-center">
+                            <Col xs={1}>
+                                <Form.Label className="text-center">
+                                    <FontAwesomeIcon icon={faAngleDoubleRight}/>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={9}>
+                                <div key={"habit-icon"} className="ml-5 mt-auto mb-auto ">
+                                    {ICONS.map((icon, i) => (
+                                        <Form.Check
+                                            type={"radio"}
+                                            custom
+                                            inline
+                                            label={icon.tag}
+                                            id={`icon ${i}`}
+                                            key={`icon ${i}`}
+                                            onChange={handleChange}
+                                            name={"icon"}
+                                            value={icon.string}
+                                        />
+                                    ))}
+                                </div>
+                            </Col>
+                        </Row>
                     </Form.Group>
-                    <Form.Group as={Row} controlId={habit.color} className="display-flex">
-                        <Form.Label column className="text-center" sm="2">
-                            <FontAwesomeIcon icon={faPalette} />
-                        </Form.Label>
-                        <div key={"habit-color"} className="ml-5 mt-auto mb-auto ">
-                            {COLORS.map((color, i) => (
-                                <Form.Check
-                                    type = {"radio"}
-                                    custom
-                                    inline
-                                    label = {color.tag}
-                                    id = {`color ${i}`}
-                                    key = {`color ${i}`}
-                                    onChange = { handleChange }
-                                    name = {"color"}
-                                    value = {color.string}
-                                />
-                            ))}
-                        </div>
+                    <Form.Group controlId={habit.color}>
+                        <Row className="justify-content-center">
+                            <Col xs={1}>
+                                <Form.Label className="text-center">
+                                    <FontAwesomeIcon icon={faPalette}/>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={9}>
+                                <div key={"habit-color"} className="ml-5 mt-auto mb-auto ">
+                                    {COLORS.map((color, i) => (
+                                        <Form.Check
+                                            type={"radio"}
+                                            custom
+                                            inline
+                                            label={color.tag}
+                                            id={`color ${i}`}
+                                            key={`color ${i}`}
+                                            onChange={handleChange}
+                                            name={"color"}
+                                            value={color.string}
+                                        />
+                                    ))}
+                                </div>
+                            </Col>
+                        </Row>
                     </Form.Group>
                     <Button variant={"primary"} type={"submit"}>
-                        <div className="mr-2 float-left" >
-                            <FontAwesomeIcon size="lg" icon={faPlus} />
+                        <div className="mr-2 float-left">
+                            <FontAwesomeIcon size="lg" icon={faPlus}/>
                         </div>
                         Dodaj
                     </Button>

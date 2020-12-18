@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {CardGroup} from "react-bootstrap";
+import {CardGroup, Col, Container, Row} from "react-bootstrap";
 import TaskCard from "../TaskCard/TaskCard";
 import ChangeDataView from "../ChangeDataView/ChangeDataView";
 import {changeDateBy, formatDate, setCurrentDaysDependOnDate} from "../../constants/utils";
@@ -20,24 +20,30 @@ const TaskDeck = ({currentUserId}) => {
 
 
     return (
-        <div>
-            <ChangeDataView
-                todayDate = { todayDate }
-                setTodayDate = { setTodayDate }
-                laterDate = { laterDate }
-                setLaterDate = { setLaterDate }
-            />
-            <CardGroup className={"ml-2 mr-2"}>
+        <Container>
+            <Row>
+                <Col>
+                    <ChangeDataView
+                        todayDate={todayDate}
+                        setTodayDate={setTodayDate}
+                        laterDate={laterDate}
+                        setLaterDate={setLaterDate}
+                    />
+                </Col>
+            </Row>
+            <Row>
                 {currentDays.map((currentDay, i) => (
+                    <Col xl={4}>
                     <TaskCard
                         key = { i }
                         date = { formatDate(currentDay.date) }
                         day = { currentDay.day }
                         currentUserId = { currentUserId }
                     />
+                    </Col>
                 ))}
-            </CardGroup>
-        </div>
+            </Row>
+        </Container>
     )
 }
 

@@ -24,7 +24,7 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
     });
 
     useEffect(() => {
-        const { taskText, color } = task;
+        const {taskText, color} = task;
         if (Object.keys(errors).length === 0 && isSubmitting) {
             addNewTask(taskText, color, currentUserId, date);
             setTask({
@@ -36,10 +36,10 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
             onHide();
             refreshPage();
         }
-    },[errors])
+    }, [errors])
 
     const handleChange = (evt) => {
-        const { name, value } = evt.target;
+        const {name, value} = evt.target;
 
         setTask({
             ...task,
@@ -54,7 +54,7 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
 
     }
 
-    return(
+    return (
         <Modal
             show={show}
             onHide={onHide}
@@ -66,43 +66,53 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
             </Modal.Header>
             <Modal.Body className={styles.mBody}>
                 <Form noValidate onSubmit={handleSubmit}>
-                    <Form.Group as={Row} controlId={task.taskText}>
-                        <Form.Label className="text-center" column sm="2">
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                className ={`${errors.taskText && styles.inputError}`}
-                                type="text"
-                                name="taskText"
-                                onChange={ handleChange }
-                                 />
-                            {errors.taskText && <p className={styles.error}>{errors.taskText}</p>}
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId={task.color} className="display-flex">
-                        <Form.Label column className="text-center" sm="2">
-                            <FontAwesomeIcon icon={faPalette} />
-                        </Form.Label>
-                        <div key={"task-color"} className="ml-5 mt-auto mb-auto ">
-                            {COLORS.map((color, i) => (
-                                <Form.Check
-                                    type = {"radio"}
-                                    custom
-                                    inline
-                                    label = {color.tag}
-                                    id = {`color ${i}`}
-                                    key = {`color ${i}`}
-                                    onChange = { handleChange }
-                                    name = {"color"}
-                                    value = {color.string}
+                    <Form.Group controlId={task.taskText}>
+                        <Row className="justify-content-center text-center">
+                            <Col xs={2}>
+                                <Form.Label className="text-left">
+                                    <FontAwesomeIcon icon={faAngleRight}/>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={9}>
+                                <Form.Control
+                                    className={`${errors.taskText && styles.inputError}`}
+                                    type="text"
+                                    name="taskText"
+                                    onChange={handleChange}
                                 />
-                            ))}
-                        </div>
+                                {errors.taskText && <p className={styles.error}>{errors.taskText}</p>}
+                            </Col>
+                        </Row>
+                    </Form.Group>
+                    <Form.Group controlId={task.color}>
+                        <Row className="justify-content-center text-center">
+                            <Col xs={1}>
+                                <Form.Label className="text-center">
+                                    <FontAwesomeIcon icon={faPalette}/>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={9}>
+                                <div key={"task-color"} className="ml-5 mt-auto mb-auto ">
+                                    {COLORS.map((color, i) => (
+                                        <Form.Check
+                                            type={"radio"}
+                                            custom
+                                            inline
+                                            label={color.tag}
+                                            id={`color ${i}`}
+                                            key={`color ${i}`}
+                                            onChange={handleChange}
+                                            name={"color"}
+                                            value={color.string}
+                                        />
+                                    ))}
+                                </div>
+                            </Col>
+                        </Row>
                     </Form.Group>
                     <Button variant={"primary"} type={"submit"}>
-                        <div className="mr-2 float-left" >
-                            <FontAwesomeIcon size="lg" icon={faPlus} />
+                        <div className="mr-2 float-left">
+                            <FontAwesomeIcon size="lg" icon={faPlus}/>
                         </div>
                         Dodaj
                     </Button>

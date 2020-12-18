@@ -7,9 +7,11 @@ import {Link} from "react-router-dom";
 import { Collapse} from "react-bootstrap";
 import {ACCESS_TOKEN} from "../../constants";
 import CurrentUserInfoModal from "../CurrentUserInfoModal/CurrentUserInfoModal";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.css';
 
 
-const Sidebar = ({setIsAuthenticated, currentUser, isSidebarActive}) => {
+const Sidebar = ({setIsAuthenticated, currentUser}) => {
 
 
     const [open, setOpen] = useState(false);
@@ -19,7 +21,7 @@ const Sidebar = ({setIsAuthenticated, currentUser, isSidebarActive}) => {
 
     return(
             <nav
-                className={!isSidebarActive ? styles.active : styles.sidebar}
+                className={styles.sidebar}
             >
                 <div className={styles.sidebarHeader}>
                     <h3>Habit Tracker</h3>
@@ -90,7 +92,7 @@ const Sidebar = ({setIsAuthenticated, currentUser, isSidebarActive}) => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="/statistics">
+                        <Link to="/regularity">
                             <div className="mr-3 ml-1 float-left" >
                                 <FontAwesomeIcon  icon={faClock} />
                             </div>

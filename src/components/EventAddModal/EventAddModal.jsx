@@ -30,7 +30,7 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
 
     useEffect(() => {
 
-        const { eventText, color, location } = event;
+        const {eventText, color, location} = event;
         if (Object.keys(errors).length === 0 && isSubmitting) {
             addNewEvent(eventText, color, currentUserId, date, location, startTime, endTime);
             setEvent({
@@ -45,7 +45,7 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
             onHide();
             refreshPage();
         }
-    },[errors])
+    }, [errors])
 
     const handleStartTimeChange = (time) => {
         setStartTime(secondsToHHmmss(time))
@@ -72,7 +72,7 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
     }
 
     const handleChange = (evt) => {
-        const { name, value } = evt.target;
+        const {name, value} = evt.target;
 
         setEvent({
             ...event,
@@ -90,8 +90,8 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
 
     return (
         <Modal
-            show={ show }
-            onHide={ onHide }
+            show={show}
+            onHide={onHide}
         >
             <Modal.Header closeButton className={styles.mHeader}>
                 <Modal.Title id="contained-modal-title-vcenter">
@@ -100,84 +100,102 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
             </Modal.Header>
             <Modal.Body className={styles.mBody}>
                 <Form noValidate onSubmit={handleSubmit}>
-                    <Form.Group as={Row} controlId={event.eventText}>
-                        <Form.Label className="text-center" column sm="2">
-                            <FontAwesomeIcon icon={faAngleRight} />
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                className ={`${errors.eventText && styles.inputError}`}
-                                type="text"
-                                name="eventText"
-                                onChange={ handleChange }
-                            />
-                            {errors.eventText && <p className={styles.error}>{errors.eventText}</p>}
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId={event.location}>
-                        <Form.Label className="text-center" column  sm="2">
-                            <FontAwesomeIcon icon={faMapPin} />
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                className ={`${errors.location && styles.inputError}`}
-                                type="text"
-                                name="location"
-                                onChange={ handleChange }
-                            />
-                            {errors.location && <p className={styles.error}>{errors.location}</p>}
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId={event.color} className="display-flex">
-                        <Form.Label column className="text-center" sm="2">
-                            <FontAwesomeIcon icon={faPalette} />
-                        </Form.Label>
-                        <div key={"event-color"} className="ml-5 mt-auto mb-auto ">
-                            {COLORS.map((color, i) => (
-                                <Form.Check
-                                    type = {"radio"}
-                                    custom
-                                    inline
-                                    label = {color.tag}
-                                    id = {`color ${i}`}
-                                    key = {`color ${i}`}
-                                    onChange = { handleChange }
-                                    name = {"color"}
-                                    value = {color.string}
+                    <Form.Group controlId={event.eventText}>
+                        <Row className="justify-content-center text-center">
+                            <Col xs={1}>
+                                <Form.Label>
+                                    <FontAwesomeIcon icon={faAngleRight}/>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={8}>
+                                <Form.Control
+                                    className={`${errors.eventText && styles.inputError}`}
+                                    type="text"
+                                    name="eventText"
+                                    onChange={handleChange}
                                 />
-                            ))}
-                        </div>
+                                {errors.eventText && <p className={styles.error}>{errors.eventText}</p>}
+                            </Col>
+                        </Row>
                     </Form.Group>
-                    <Form.Group as={Row} controlId={event.color} className="display-flex">
-                        <Form.Label column className="text-center" sm="2">
-                            <FontAwesomeIcon icon={faClock} />
-                        </Form.Label>
-                        <Col sm="3" className="ml-4">
-                            <TimePicker
-                                onChange={handleStartTimeChange}
-                                format={24}
-                                value={startTime}
-                                step={15}
-                            />
-                        </Col>
-                        <Col sm="0">
-                            <Form.Text className="text-center">
-                                <h5 className="mt-auto mb-auto">-</h5>
-                            </Form.Text>
-                        </Col>
-                        <Col sm="3">
-                            <TimePicker
-                                onChange={handleEndTimeChange}
-                                start={startTime}
-                                format={24}
-                                value={endTime}
-                                step={15}
-                            />
-                        </Col>
+                    <Form.Group controlId={event.location}>
+                        <Row className="justify-content-center text-center">
+                            <Col xs={1}>
+                                <Form.Label className="text-center">
+                                    <FontAwesomeIcon icon={faMapPin}/>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={8}>
+                                <Form.Control
+                                    className={`${errors.location && styles.inputError}`}
+                                    type="text"
+                                    name="location"
+                                    onChange={handleChange}
+                                />
+                                {errors.location && <p className={styles.error}>{errors.location}</p>}
+                            </Col>
+                        </Row>
+                    </Form.Group>
+                    <Form.Group controlId={event.color}>
+                        <Row className="justify-content-center text-center">
+                            <Col xs={1}>
+                                <Form.Label column className="text-center">
+                                    <FontAwesomeIcon icon={faPalette}/>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={9}>
+                                <div key={"event-color"} className="ml-5 mt-auto mb-auto ">
+                                    {COLORS.map((color, i) => (
+                                        <Form.Check
+                                            type={"radio"}
+                                            custom
+                                            inline
+                                            label={color.tag}
+                                            id={`color ${i}`}
+                                            key={`color ${i}`}
+                                            onChange={handleChange}
+                                            name={"color"}
+                                            value={color.string}
+                                        />
+                                    ))}
+                                </div>
+                            </Col>
+                        </Row>
+                    </Form.Group>
+                    <Form.Group controlId="event-time">
+                        <Row className="text-center">
+                            <Col xs={4}>
+                                <Form.Label className="text-center">
+                                    <FontAwesomeIcon icon={faClock}/>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={3}>
+                                <TimePicker
+                                    onChange={handleStartTimeChange}
+                                    format={24}
+                                    value={startTime}
+                                    step={15}
+                                />
+                            </Col>
+                            <Col xs={1}>
+                                <Form.Text className="text-center">
+                                    <h5 className="mt-auto mb-auto">-</h5>
+                                </Form.Text>
+                            </Col>
+                            <Col xs={3}>
+                                <TimePicker
+                                    onChange={handleEndTimeChange}
+                                    start={startTime}
+                                    format={24}
+                                    value={endTime}
+                                    step={15}
+                                />
+                            </Col>
+                        </Row>
                     </Form.Group>
                     <Button variant={"primary"} type={"submit"}>
-                        <div className="mr-2 float-left" >
-                            <FontAwesomeIcon size="lg" icon={faPlus} />
+                        <div className="mr-2 float-left">
+                            <FontAwesomeIcon size="lg" icon={faPlus}/>
                         </div>
                         Dodaj
                     </Button>
