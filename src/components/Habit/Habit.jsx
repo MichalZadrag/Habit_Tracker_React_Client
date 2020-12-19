@@ -9,6 +9,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
 import {Button, Row} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
+import styles from "./Habit.module.css";
 
 
 const Habit = ({habit, habits, setHabits}) => {
@@ -61,7 +62,7 @@ const Habit = ({habit, habits, setHabits}) => {
     }
 
     return (
-        <ListGroup.Item className="w-100 ml-auto mr-auto">
+        <ListGroup.Item className={cx("w-100", "ml-auto", "mr-auto", styles.backgroundColor)}>
             <Row className={"justify-content-between align-items-center"}>
                 <Col xs={7}>
                     <Row>
@@ -85,7 +86,7 @@ const Habit = ({habit, habits, setHabits}) => {
                         <Col xs={2} >
                             <div
                                 role={"button"}
-                                className={"mt-1 text-danger"}
+                                className={cx("mt-1", "text-danger", styles.cursorPointer)}
                                 onClick={() => setModalShow(true)}>
                                 <FontAwesomeIcon icon={faTrashAlt}/>
                             </div>

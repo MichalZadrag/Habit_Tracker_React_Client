@@ -6,22 +6,24 @@
     position: sticky;
     top: 0;
     z-index: 1;
-    background:  #CCCCCC;
-    color: #3b3933;
+    background: #0078a2;
+    color: #fafafa;
     transition: all 0.3s;
 }
 
+
 .sidebar .sidebarHeader {
     padding: 20px;
-    background: #bbbbbb;
+
+    border-bottom: 1px solid #07575B;
 }
 
 .sidebar ul li {
-    border-bottom: 1px solid #999999;
+    border-bottom: 1px solid #07575B;
 }
 
 .sidebar ul p {
-    color: #3b3933;
+    color: #fafafa;
     padding: 10px;
 }
 
@@ -32,14 +34,13 @@
 
 }
 .sidebar ul li a:hover {
-    color: #fff;
-    background: #878E88;
+    background: #00678b;
 }
 
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: #bbbbbb;
+    background: #1a86ab;
 }
 
 
@@ -76,6 +77,6 @@ a[data-toggle="collapse"] {
 }
 
 .sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #3b3933;
-    background: #CCCCCC;
+    color: #fafafa;
+    background: #00678b;
 }

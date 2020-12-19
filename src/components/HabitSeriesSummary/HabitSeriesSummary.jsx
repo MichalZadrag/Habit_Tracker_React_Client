@@ -7,6 +7,8 @@ import {fetchHabitData} from "../../api";
 import cx from "classnames";
 import moment from "moment";
 import HabitChart from "../HabitChart/HabitChart";
+import styles from "../HabitSeriesSummary/HabitSeriesSummary.module.css";
+
 
 
 const HabitSeriesSummary = ({currentUserId}) => {
@@ -58,14 +60,14 @@ const HabitSeriesSummary = ({currentUserId}) => {
         <Row className="justify-content-center ">
             {console.log(habits)}
             <Col xs={12} lg={10}>
-                <Card className="mt-3">
+                <Card className={"mt-3"}>
                     {isError && <div>Coś poszło nie tak ...</div>}
                     {isLoading ? (<Spinner
                             animation="border"
                             variant={"primary"}
                             className={"ml-auto mr-auto"}
                         />) :
-                        (<Card.Footer>
+                        (<Card.Footer className={styles.backgroundColor}>
                             <Row className={"justify-content-between align-items-center"}>
                                 <Col xs={6}>
                                     <div>
@@ -100,7 +102,7 @@ const HabitSeriesSummary = ({currentUserId}) => {
                     <Card.Body className="p-0">
                         <ListGroup>
                             {currentHabit &&
-                            <ListGroup.Item className="w-100 ml-auto mr-auto">
+                            <ListGroup.Item className={cx("w-100", "ml-auto", "mr-auto", styles.backgroundColorElem)}>
                                 <Row className="justify-content-center">
                                     <Col xs={4} className={"text-right"}>
                                         <FontAwesomeIcon

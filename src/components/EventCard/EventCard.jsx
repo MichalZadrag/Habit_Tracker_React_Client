@@ -7,6 +7,8 @@ import EventAddModal from "../EventAddModal/EventAddModal";
 import {fetchEventData} from "../../api";
 import Event from "../Event/Event";
 import ListGroup from "react-bootstrap/ListGroup";
+import cx from "classnames";
+import styles from "../EventCard/EventCard.module.css";
 
 
 const EventCard = ({ day, currentUserId, date }) => {
@@ -58,10 +60,9 @@ const EventCard = ({ day, currentUserId, date }) => {
 
     return (
         <Card>
-            <Card.Footer>
-                <h5 className="text-muted float-left">{currentDayToString(day)}</h5>
+            <Card.Footer className={styles.backgroundColor}>
+                <h5 className={cx("float-left", styles.fontColor)}>{currentDayToString(day)}</h5>
                 <Button
-                    variant={"secondary"}
                     size={"sm"}
                     className={"pl-2 pr-2 float-right"}
                     onClick={ () => {

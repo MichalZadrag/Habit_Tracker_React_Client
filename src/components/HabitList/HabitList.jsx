@@ -7,6 +7,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTasks} from "@fortawesome/free-solid-svg-icons";
 import HabitAddModal from "../HabitAddModal/HabitAddModal";
 import {faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
+import styles from "./HabitList.module.css"
+import cx from 'classnames';
 
 
 const HabitList = ({currentUserId}) => {
@@ -36,11 +38,10 @@ const HabitList = ({currentUserId}) => {
         <Row className="justify-content-center">
             <Col lg={9}>
                 <Card className="mt-5">
-                    <Card.Footer>
+                    <Card.Footer className={styles.backgroundColor}>
                         <FontAwesomeIcon icon={faCalendarCheck} className={"mt-2 mr-2"}/>
                         <span>Nawyki</span>
                         <Button
-                            variant={"secondary"}
                             size={"sm"}
                             className={"pl-2 pr-2 float-right"}
                             onClick={() => setModalShow(true)}>

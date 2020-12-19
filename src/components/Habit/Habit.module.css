@@ -1,47 +1,7 @@
-
-
-.listGroupItem {
-    background: #CCCCCC;
-    color: #3b3933;
-    transition: all 0.3s;
-    font-size: 1.1em;
-    margin: 15px;
-    border-radius: 7px !important;
+.backgroundColor{
+    background: #fffbfc !important;
+    cursor: default;
 }
-.checkboxInline {
-    padding-left: 5px;
-    padding-right: 5px;
-}
-
-.checkbox {
-    margin: 3px;
-}
-
-.listGroupItem:hover {
-    background: #878E88;
-    color: #fff;
-}
-
-.deleteIcon {
-    background: darkgray;
-    border-radius: 5px;
-    color: #3b3933 ;
-    border: 0 !important;
-}
-
-.deleteIcon:hover {
-    background: #850b03;
-    color: #fff;
-}
-
-.infoIcon {
-    background: #24a0ed;
-    border-radius: 5px;
-    color: #3b3933 ;
-    border: 0 !important;
-}
-
-.infoIcon:hover {
-    background: #008dd8;
-    color: #fff;
+.cursorPointer {
+    cursor: pointer;
 }

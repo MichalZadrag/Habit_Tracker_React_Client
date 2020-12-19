@@ -7,6 +7,8 @@ import TaskAddModal from "../TaskAddModal/TaskAddModal";
 import {fetchTaskData} from "../../api";
 import {currentDayToString} from "../../constants/utils";
 import ListGroup from "react-bootstrap/ListGroup";
+import cx from "classnames";
+import styles from "../TaskCard/TaskCard.module.css";
 
 const TaskCard = ({ day, currentUserId, date }) => {
 
@@ -36,10 +38,9 @@ const TaskCard = ({ day, currentUserId, date }) => {
 
     return(
             <Card>
-                <Card.Footer>
-                    <h5 className="text-muted float-left">{currentDayToString(day)}</h5>
+                <Card.Footer className={styles.backgroundColor}>
+                    <h5 className={cx("float-left", styles.fontColor)}>{currentDayToString(day)}</h5>
                     <Button
-                        variant={"secondary"}
                         size={"sm"}
                         className={"pl-2 pr-2 float-right"}
                         onClick={ () => {

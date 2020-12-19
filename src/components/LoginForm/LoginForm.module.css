@@ -1,5 +1,6 @@
 .formContainer {
-    background: #CCCCCC;
+    background: #0078a2;
+    color: #fafafa;
     border-radius: 20px;
 }
 
@@ -18,5 +19,5 @@ hr {
 }
 
 .inputError {
-    border: 1px solid red;
+    border: 2px solid red;
 }

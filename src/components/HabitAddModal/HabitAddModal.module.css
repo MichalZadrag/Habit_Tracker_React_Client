@@ -1,8 +1,9 @@
 .mHeader {
-    background: #CCCCCC;
+    background: #0081AF !important;
+    color: #fafafa;
 }
 .mBody {
-    background: #fafafa;
+    background: #fffbfc
 }
 
 .error {

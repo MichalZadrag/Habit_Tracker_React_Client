@@ -8,6 +8,7 @@ import {changeToCss} from "../../constants/utils";
 import {faClock} from "@fortawesome/free-regular-svg-icons";
 import {deleteEventById} from "../../api";
 import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
+import styles from "../Event/Event.module.css";
 
 const Event = ({event, events, setEvents}) => {
 
@@ -23,7 +24,7 @@ const Event = ({event, events, setEvents}) => {
     }
 
     return (
-            <ListGroup.Item className="d-flex">
+            <ListGroup.Item className={cx("d-flex", styles.backgroundColor)}>
                 <DeleteConfirmationModal
                     show = { modalShow }
                     onHide = { () => setModalShow(false) }
@@ -51,7 +52,7 @@ const Event = ({event, events, setEvents}) => {
                 <div className="ml-auto mb-auto mt-auto">
                     <div
                         role={"button"}
-                        className={"float-left pl-2 text-danger"}
+                        className={cx("float-left", "pl-2", "text-danger", styles.cursorPointer)}
                         onClick={() => setModalShow(true)}>
                         <FontAwesomeIcon icon={faTrashAlt} />
                     </div>

@@ -6,7 +6,6 @@ import {faAngleDoubleRight, faAngleRight, faPalette, faPlus} from "@fortawesome/
 import {addNewHabit} from "../../api";
 import {COLORS, ICONS} from "../../constants";
 import {validateHabit} from "../../constants/validation";
-import cx from "classnames";
 
 
 const HabitAddModal = ({show, onHide, currentUserId}) => {

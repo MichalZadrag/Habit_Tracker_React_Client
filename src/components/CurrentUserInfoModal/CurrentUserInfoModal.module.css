@@ -1,10 +1,12 @@
 .mHeader {
-    background: #CCCCCC;
+    background: #0081AF !important;
+    color: #fafafa;
 }
 .mBody {
-    background: #fafafa;
+    background: #fffbfc;
 }
 
 .lightBlue {
-    background: lightblue;
+    background: #0081AF !important;
+    color: #fafafa !important;
 }
