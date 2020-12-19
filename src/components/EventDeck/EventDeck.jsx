@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {CardGroup, Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row} from "react-bootstrap";
 import EventCard from "../EventCard/EventCard";
 import {changeDateBy, formatDate, setCurrentDaysDependOnDate} from "../../constants/utils";
 import ChangeDataView from "../ChangeDataView/ChangeDataView";
@@ -14,7 +14,7 @@ const EventDeck = ({currentUserId}) => {
 
     useEffect(() => {
         setCurrentDays(setCurrentDaysDependOnDate(todayDate, 4));
-    }, [laterDate])
+    }, [laterDate, todayDate])
 
 
     return (
@@ -31,7 +31,7 @@ const EventDeck = ({currentUserId}) => {
             </Row>
             <Row>
                 {currentDays.map((currentDay, i) => (
-                    <Col xl={4}>
+                    <Col xl={4} key={i}>
                         <EventCard
                             key={i}
                             date={formatDate(currentDay.date)}

@@ -24,7 +24,7 @@ const TaskCard = ({ day, currentUserId, date }) => {
         }
         fetchAPI();
 
-    },[])
+    },[currentUserId])
 
     const currentTasks = (date) => {
 

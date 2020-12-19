@@ -30,7 +30,6 @@ const HabitList = ({currentUserId}) => {
 
     return (
         <Row className="justify-content-center">
-            {console.log(habits)}
             <Col lg={9}>
                 <Card className="mt-5">
                     <Card.Footer>

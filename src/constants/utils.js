@@ -125,6 +125,9 @@ export const currentDayToString = (day) => {
         case "Sunday":
             dayToString = "Niedziela";
             break
+        default:
+            dayToString = "Error";
+            break
     }
 
     return dayToString;

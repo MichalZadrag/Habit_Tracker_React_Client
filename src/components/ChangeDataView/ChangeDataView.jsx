@@ -15,10 +15,6 @@ const ChangeDataView = ({todayDate, setTodayDate, laterDate, setLaterDate}) => {
     }, [laterDate]);
 
 
-    useEffect(() => {
-        setFormattedDate();
-    }, [laterDate]);
-
     const setFormattedDate = () => {
         let formatted_todayDate = appendLeadingZeroes(todayDate.getDate()) +
             "." + appendLeadingZeroes(todayDate.getMonth() + 1);

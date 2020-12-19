@@ -26,7 +26,7 @@ const EventCard = ({ day, currentUserId, date }) => {
         }
         fetchAPI();
 
-    },[])
+    },[currentUserId])
 
 
     const currentEvents = (date) => {
