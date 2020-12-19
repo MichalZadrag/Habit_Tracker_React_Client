@@ -57,6 +57,8 @@ export const CHECK_EMAIL_AVAILABILITY_URL = `http://localhost:8080/api/user/chec
 
 export const CHECK_USERNAME_AVAILABILITY_URL = `http://localhost:8080/api/user/checkUsernameAvailability?username=`
 
+export const CHECK_HABIT_AVAILABILITY_URL = `http://localhost:8080/api/habit/checkHabitAvailability?habit=`
+
 export const ONE_DAY_IN_MS = 86400000;
 
 export const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

@@ -4,7 +4,7 @@ import {
     ADD_NEW_HABIT_URL, ADD_NEW_TASK_URL,
     ADD_NEW_USER_URL,
     API_URL, CHANGE_DATA_USER_URL,
-    CHECK_EMAIL_AVAILABILITY_URL,
+    CHECK_EMAIL_AVAILABILITY_URL, CHECK_HABIT_AVAILABILITY_URL,
     CHECK_USERNAME_AVAILABILITY_URL, DELETE_EVENT_BY_ID_URL,
     DELETE_HABIT_BY_ID_URL, DELETE_TASK_BY_ID_URL, DELETE_USER_BY_ID_URL, FETCH_EVENT_DATA_URL,
     FETCH_HABIT_DATA_URL,
@@ -64,7 +64,7 @@ export const changeDataUser = (oldUserId, firstName, lastName, username, email, 
         })
 }
 
-export const addNewHabit = (habitText, icon, color, user_id) => {
+export const addNewHabit = (habitText, icon, color, user_id, setAlerts) => {
 
     authAxios.post(ADD_NEW_HABIT_URL, {
         habit_text: habitText,
@@ -72,7 +72,7 @@ export const addNewHabit = (habitText, icon, color, user_id) => {
         color: color,
         user_id: user_id,
         done: false
-    }).then(r => (null))
+    }).then(r => setAlerts({success: "Pomyślnie dodano"}))
         .catch(e => {
             console.log("error");
         })
@@ -90,6 +90,11 @@ export const deleteUserById = (id) => {
 
 export const checkUsernameAvailability = async (username) => {
     const {data} = await axios.get(`${CHECK_USERNAME_AVAILABILITY_URL}${username}`)
+    return data.available;
+}
+
+export const checkHabitAvailability = async (habit_text) => {
+    const {data} = await axios.get(`${CHECK_HABIT_AVAILABILITY_URL}${habit_text}`);
     return data.available;
 }
 

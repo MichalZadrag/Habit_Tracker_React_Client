@@ -1,4 +1,4 @@
-import {checkEmailAvailability, checkUsernameAvailability} from "../api";
+import {checkEmailAvailability, checkHabitAvailability, checkUsernameAvailability} from "../api";
 import {
     EMAIL_REGEXP,
     HABIT_AND_TASK_AND_EVENT_REGEXP,
@@ -131,6 +131,25 @@ export const validateTask = (task) => {
     return errors;
 }
 
+export const isHabitAvailable = async (values, setIsHabitAvailable) => {
+
+    const isGood = await checkHabitAvailability(values.habitText);
+
+    if (!isGood) {
+        setIsHabitAvailable("Nawyk o takiej już nazwie istnieje");
+    } else {
+        setIsHabitAvailable("");
+    }
+}
+
+const isHabitValid = (values, errors) => {
+    if (!values.habitText) {
+        errors.habitText = "Nawyk jest wymagany";
+    } else if (!HABIT_AND_TASK_AND_EVENT_REGEXP.test(values.habitText)) {
+        errors.habitText = "Nawyk jest nieprawidłowy";
+    }
+}
+
 export const validateLogin = (values) => {
 
     let errors ={};
@@ -146,14 +165,12 @@ export const validateLogin = (values) => {
     return errors;
 }
 
-export const validateHabit = (habit) => {
+export const validateHabit = (values, setIsHabitAvailable) => {
     let errors ={}
 
-    if (!habit.habitText) {
-        errors.habitText = "Nawyk jest wymagany";
-    } else if (!HABIT_AND_TASK_AND_EVENT_REGEXP.test(habit.habitText)) {
-        errors.habitText = "Nawyk jest nieprawidłowy";
-    }
+    isHabitValid(values, errors);
+    isHabitAvailable(values, setIsHabitAvailable);
+
     return errors;
 }
 

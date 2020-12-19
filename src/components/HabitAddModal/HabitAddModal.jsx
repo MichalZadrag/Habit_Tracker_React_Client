@@ -6,33 +6,32 @@ import {faAngleDoubleRight, faAngleRight, faPalette, faPlus} from "@fortawesome/
 import {addNewHabit} from "../../api";
 import {COLORS, ICONS} from "../../constants";
 import {validateHabit} from "../../constants/validation";
+import cx from "classnames";
 
 
 const HabitAddModal = ({show, onHide, currentUserId}) => {
 
-    const refreshPage = () => {
-        window.location.reload(false);
-    }
 
+    const [isHabitAvailable, setIsHabitAvailable] = useState("");
     const [errors, setErrors] = useState({});
+    const [alerts, setAlerts] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [habit, setHabit] = useState({
         habitText: '',
         icon: '',
         color: '',
     });
+
     useEffect(() => {
         const {habitText, icon, color} = habit;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewHabit(habitText, icon, color, currentUserId);
+            addNewHabit(habitText, icon, color, currentUserId, setAlerts);
             setHabit({
                 habitText: '',
                 icon: '',
                 color: '',
                 user_id: ''
             })
-            onHide();
-            refreshPage();
         }
 
     }, [errors])
@@ -50,9 +49,9 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
     const handleSubmit = (evt) => {
 
         evt.preventDefault();
-        setErrors(validateHabit(habit))
+        setErrors(validateHabit(habit, setIsHabitAvailable));
         setIsSubmitting(true);
-
+        evt.target.reset();
     }
 
 
@@ -69,6 +68,11 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
             <Modal.Body className={styles.mBody}>
                 <Form onSubmit={handleSubmit} noValidate>
                     <Form.Group controlId={habit.habitText}>
+                        <Row className={"justify-content-center"}>
+                            <Col>
+                                {alerts.success && <p className={"text-center text-success"}>{alerts.success}</p>}
+                            </Col>
+                        </Row>
                         <Row className="justify-content-center">
                             <Col xs={2}>
                                 <Form.Label className="text-left">
@@ -77,11 +81,12 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
                             </Col>
                             <Col xs={8}>
                                 <Form.Control
-                                    className={`${errors.habitText && styles.inputError}`}
+                                    className={`${(errors.habitText || isHabitAvailable) && styles.inputError}`}
                                     type="text"
                                     name="habitText"
                                     onChange={handleChange}/>
                                 {errors.habitText && <p className={styles.error}>{errors.habitText}</p>}
+                                {isHabitAvailable && <p className={styles.error}>{isHabitAvailable}</p>}
                             </Col>
                         </Row>
                     </Form.Group>

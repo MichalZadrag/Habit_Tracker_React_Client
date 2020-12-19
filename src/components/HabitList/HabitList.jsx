@@ -11,6 +11,10 @@ import {faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 
 const HabitList = ({currentUserId}) => {
 
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
+
     const [habits, setHabits] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -64,7 +68,10 @@ const HabitList = ({currentUserId}) => {
                     </Card.Body>
                     <HabitAddModal
                         show={modalShow}
-                        onHide={() => setModalShow(false)}
+                        onHide={() => {
+                            setModalShow(false);
+                            refreshPage();
+                        }}
                         currentUserId={currentUserId}
                     />
                 </Card>
