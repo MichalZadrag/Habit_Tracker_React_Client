@@ -56,7 +56,7 @@ const UserEditForm = ({currentUser}) => {
 
 
     return (
-        <Container className="mb-0 mt-0 ml-auto mr-auto">
+        <Container className="ml-auto mr-auto">
             <Row className="p-3 mt-0 mb-4 justify-content-center">
                 <div className={styles.formContainer}>
                     <Row md={8} className="pt-md-3 justify-content-center">
@@ -162,12 +162,15 @@ const UserEditForm = ({currentUser}) => {
                                     </div>
                                     Edytuj
                                 </Button>
-                                {alerts.success &&
-                                <p className={cx("text-center", styles.success)}>{alerts.success}</p>}
                             </Col>
                         </Row>
                     </Form>
                 </div>
+            </Row>
+            <Row className={"justify-content-center"}>
+                <Col>
+                    {alerts.success && <p className={"text-center text-success"}>{alerts.success}</p>}
+                </Col>
             </Row>
         </Container>
     )
