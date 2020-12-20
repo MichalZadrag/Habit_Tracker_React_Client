@@ -9,9 +9,14 @@ import Event from "../Event/Event";
 import ListGroup from "react-bootstrap/ListGroup";
 import cx from "classnames";
 import styles from "../EventCard/EventCard.module.css";
+import TaskAddModal from "../TaskAddModal/TaskAddModal";
 
 
 const EventCard = ({ day, currentUserId, date }) => {
+
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
 
 
     const [events, setEvents] = useState([]);
@@ -91,7 +96,10 @@ const EventCard = ({ day, currentUserId, date }) => {
             </Card.Body>
             <EventAddModal
                 show = { modalShow }
-                onHide = { () => setModalShow(false) }
+                onHide={() => {
+                    setModalShow(false);
+                    refreshPage();
+                }}
                 currentUserId = { currentUserId }
                 date = { date }
             />

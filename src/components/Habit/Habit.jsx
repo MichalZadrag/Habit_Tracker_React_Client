@@ -71,7 +71,7 @@ const Habit = ({habit, habits, setHabits}) => {
                                    className={cx("h-100", "p-1", "mr-2", changeToCss(color))}> </Badge>
                         </Col>
                         <Col xs={1}>
-                            <FontAwesomeIcon icon={changeToIcon(icon)}/>
+                            {changeToIcon(icon) && <FontAwesomeIcon icon={changeToIcon(icon)}/>}
                         </Col>
                         <Col lg={8} xs={9}>
                             <span className="p-1 m-1">{habit_text}</span>

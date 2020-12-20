@@ -89,17 +89,17 @@ export const deleteUserById = (id) => {
 }
 
 export const checkUsernameAvailability = async (username) => {
-    const {data} = await axios.get(`${CHECK_USERNAME_AVAILABILITY_URL}${username}`)
+    const {data} = await authAxios.get(`${CHECK_USERNAME_AVAILABILITY_URL}${username}`)
     return data.available;
 }
 
 export const checkHabitAvailability = async (habit_text) => {
-    const {data} = await axios.get(`${CHECK_HABIT_AVAILABILITY_URL}${habit_text}`);
+    const {data} = await authAxios.get(`${CHECK_HABIT_AVAILABILITY_URL}${habit_text}`);
     return data.available;
 }
 
 export const checkEmailAvailability = async (email) => {
-    const {data} = await axios.get(`${CHECK_EMAIL_AVAILABILITY_URL}${email}`)
+    const {data} = await authAxios.get(`${CHECK_EMAIL_AVAILABILITY_URL}${email}`)
     return data.available;
 
 }
@@ -156,14 +156,14 @@ export const fetchTaskData = async (id, setIsError) => {
     }
 }
 
-export const addNewTask = (taskText, color, user_id, date) => {
+export const addNewTask = (taskText, color, user_id, date, setAlerts) => {
     authAxios.post(ADD_NEW_TASK_URL, {
         task_text: taskText,
         color: color,
         user_id: user_id,
         date: date,
         isDone: false
-    }).then(r => null)
+    }).then(r => setAlerts({success: "Pomyślnie dodano"}))
         .catch(e => console.log("error"));
 }
 
@@ -172,7 +172,7 @@ export const deleteTaskById = (id) => {
         .then((r) => console.log(r.data.message));
 }
 
-export const addNewEvent = (eventText, color, user_id, date, location, startTime, endTime) => {
+export const addNewEvent = (eventText, color, user_id, date, location, startTime, endTime, setAlerts) => {
     authAxios.post(ADD_NEW_EVENT_URL, {
         event_text: eventText,
         color: color,
@@ -181,7 +181,7 @@ export const addNewEvent = (eventText, color, user_id, date, location, startTime
         location: location,
         startTime: startTime,
         endTime: endTime
-    }).then(r => console.log(r))
+    }).then(r => setAlerts({success: "Pomyślnie dodano"}))
         .catch(e => console.log("error"));
 }
 

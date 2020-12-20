@@ -12,23 +12,22 @@ import {faCalendarAlt, faCalendarCheck, faClock} from "@fortawesome/free-regular
 
 const CustomNavbar = ({setIsAuthenticated, currentUser}) => {
 
-    const [open, setOpen] = useState(false);
     const [modalShow, setModalShow] = useState(false);
 
     return (
-        <Navbar variant={"light"} bg="light" className={"d-lg-none d-md-none"} expand="md">
-            <Navbar.Brand>Habit Tracker</Navbar.Brand>
+        <Navbar className={cx("d-lg-none", "d-md-none", styles.navbarBackground)} expand="md">
+            <Navbar.Brand className={styles.navbarBackground}>Habit Tracker</Navbar.Brand>
             <Navbar.Toggle/>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
                     <NavDropdown
-                        title={<div className="mr-1 float-left">
+                        title={<div className={cx("mr-1", "float-left", styles.fontColor)}>
                             <FontAwesomeIcon icon={faAddressBook}/>
                             <span className="ml-2">{currentUser.username}</span>
                         </div>}
                         id="basic-nav-dropdown"
+                        className={styles.itemColor}
                     >
-                        <NavDropdown.Divider/>
                         <NavDropdown.Item
                             onClick={() => {
                                 setModalShow(true);
@@ -54,25 +53,25 @@ const CustomNavbar = ({setIsAuthenticated, currentUser}) => {
                             Wyloguj
                         </Link>
                     </NavDropdown>
-                    <Nav.Link href="/tasks">
+                    <Nav.Link href="/tasks" className={styles.itemColor}>
                         <div className="mr-1 float-left" >
                             <FontAwesomeIcon icon={faTasks} />
                         </div>
                         <span className="ml-2">Zadania</span>
                     </Nav.Link>
-                    <Nav.Link href="/events">
+                    <Nav.Link href="/events" className={styles.itemColor}>
                         <div className="mr-1 float-left" >
                             <FontAwesomeIcon icon={faCalendarAlt} />
                         </div>
                         <span className="ml-2">Wydarzenia</span>
                     </Nav.Link>
-                    <Nav.Link href="/habits">
+                    <Nav.Link href="/habits" className={styles.itemColor}>
                         <div className="mr-1 float-left" >
                             <FontAwesomeIcon icon={faCalendarCheck} />
                         </div>
                         <span className="ml-2">Nawyki</span>
                     </Nav.Link>
-                    <Nav.Link href="/regularity">
+                    <Nav.Link href="/regularity" className={styles.itemColor}>
                         <div className="mr-1 float-left" >
                             <FontAwesomeIcon  icon={faClock} />
                         </div>

@@ -10,11 +10,8 @@ import {validateTask} from "../../constants/validation";
 
 const TaskAddModal = ({show, onHide, currentUserId, date}) => {
 
-    const refreshPage = () => {
-        window.location.reload(false);
-    }
-
     const [errors, setErrors] = useState({});
+    const [alerts, setAlerts] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [task, setTask] = useState({
         taskText: '',
@@ -26,15 +23,13 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
     useEffect(() => {
         const {taskText, color} = task;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewTask(taskText, color, currentUserId, date);
+            addNewTask(taskText, color, currentUserId, date, setAlerts);
             setTask({
                 taskText: '',
                 color: '',
                 user_id: '',
                 date: '',
             })
-            onHide();
-            refreshPage();
         }
     }, [errors])
 
@@ -51,7 +46,7 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
         evt.preventDefault();
         setErrors(validateTask(task));
         setIsSubmitting(true);
-
+        evt.target.reset();
     }
 
     return (
@@ -67,6 +62,11 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
             <Modal.Body className={styles.mBody}>
                 <Form noValidate onSubmit={handleSubmit}>
                     <Form.Group controlId={task.taskText}>
+                        <Row className={"justify-content-center"}>
+                            <Col>
+                                {alerts.success && <p className={"text-center text-success"}>{alerts.success}</p>}
+                            </Col>
+                        </Row>
                         <Row className="justify-content-center text-center">
                             <Col xs={2}>
                                 <Form.Label className="text-left">

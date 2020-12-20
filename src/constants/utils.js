@@ -1,5 +1,5 @@
 import stylesCustom from "../components/HabitAddModal/HabitAddModal.module.css";
-import {faBiking, faBook, faDumbbell, faMoneyBillAlt, faQuestion} from "@fortawesome/free-solid-svg-icons";
+import {faBiking, faBook, faDumbbell, faMoneyBillAlt} from "@fortawesome/free-solid-svg-icons";
 import {DAYS, ONE_DAY_IN_MS} from "./index";
 import moment from "moment";
 
@@ -44,7 +44,7 @@ export const changeToIcon = (icon) => {
             iconToString = faMoneyBillAlt;
             break
         default:
-            iconToString = faQuestion;
+            iconToString = "";
             break
     }
     return iconToString;

@@ -4,11 +4,10 @@ import {fetchHabitData} from "../../api";
 import {Button, Card, Col, Row, Spinner} from "react-bootstrap";
 import ListGroup from "react-bootstrap/ListGroup";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus, faTasks} from "@fortawesome/free-solid-svg-icons";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import HabitAddModal from "../HabitAddModal/HabitAddModal";
 import {faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 import styles from "./HabitList.module.css"
-import cx from 'classnames';
 
 
 const HabitList = ({currentUserId}) => {

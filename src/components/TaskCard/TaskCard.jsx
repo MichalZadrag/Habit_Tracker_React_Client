@@ -12,6 +12,10 @@ import styles from "../TaskCard/TaskCard.module.css";
 
 const TaskCard = ({ day, currentUserId, date }) => {
 
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
+
     const [tasks, setTasks] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
@@ -69,7 +73,10 @@ const TaskCard = ({ day, currentUserId, date }) => {
                 </Card.Body>
                 <TaskAddModal
                     show = { modalShow }
-                    onHide = { () => setModalShow(false) }
+                    onHide={() => {
+                        setModalShow(false);
+                        refreshPage();
+                    }}
                     currentUserId = { currentUserId }
                     date = { date }
                 />

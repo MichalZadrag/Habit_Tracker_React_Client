@@ -12,11 +12,8 @@ import {appendLeadingZeroes} from "../../constants/utils";
 
 const EventAddModal = ({show, onHide, currentUserId, date}) => {
 
-    const refreshPage = () => {
-        window.location.reload(false);
-    }
-
     const [errors, setErrors] = useState({});
+    const [alerts, setAlerts] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [event, setEvent] = useState({
         eventText: '',
@@ -32,7 +29,7 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
 
         const {eventText, color, location} = event;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewEvent(eventText, color, currentUserId, date, location, startTime, endTime);
+            addNewEvent(eventText, color, currentUserId, date, location, startTime, endTime, setAlerts);
             setEvent({
                 eventText: '',
                 color: '',
@@ -42,8 +39,6 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
             })
             setStartTime("00:00:00");
             setEndTime("00:00:00");
-            onHide();
-            refreshPage();
         }
     }, [errors])
 
@@ -85,6 +80,7 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
         evt.preventDefault();
         setErrors(validateEvent(event));
         setIsSubmitting(true);
+        evt.target.reset();
 
     }
 
@@ -101,6 +97,11 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
             <Modal.Body className={styles.mBody}>
                 <Form noValidate onSubmit={handleSubmit}>
                     <Form.Group controlId={event.eventText}>
+                        <Row className={"justify-content-center"}>
+                            <Col>
+                                {alerts.success && <p className={"text-center text-success"}>{alerts.success}</p>}
+                            </Col>
+                        </Row>
                         <Row className="justify-content-center text-center">
                             <Col xs={1}>
                                 <Form.Label>
