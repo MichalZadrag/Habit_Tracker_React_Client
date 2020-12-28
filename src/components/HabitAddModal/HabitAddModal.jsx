@@ -48,7 +48,7 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
     const handleSubmit = (evt) => {
 
         evt.preventDefault();
-        setErrors(validateHabit(habit, setIsHabitAvailable));
+        setErrors(validateHabit(habit, setIsHabitAvailable, currentUserId));
         setIsSubmitting(true);
         evt.target.reset();
     }

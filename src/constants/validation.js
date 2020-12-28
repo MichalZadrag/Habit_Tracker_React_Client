@@ -131,9 +131,9 @@ export const validateTask = (task) => {
     return errors;
 }
 
-export const isHabitAvailable = async (values, setIsHabitAvailable) => {
+export const isHabitAvailable = async (values, setIsHabitAvailable, currentUserId) => {
 
-    const isGood = await checkHabitAvailability(values.habitText);
+    const isGood = await checkHabitAvailability(values.habitText, currentUserId);
 
     if (!isGood) {
         setIsHabitAvailable("Nawyk o takiej już nazwie istnieje");
@@ -165,11 +165,11 @@ export const validateLogin = (values) => {
     return errors;
 }
 
-export const validateHabit = (values, setIsHabitAvailable) => {
+export const validateHabit = (values, setIsHabitAvailable, currentUserId) => {
     let errors ={}
 
     isHabitValid(values, errors);
-    isHabitAvailable(values, setIsHabitAvailable);
+    isHabitAvailable(values, setIsHabitAvailable, currentUserId);
 
     return errors;
 }

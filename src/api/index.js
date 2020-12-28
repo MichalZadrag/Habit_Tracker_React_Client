@@ -1,16 +1,28 @@
 import axios from 'axios';
 import {
-    ACCESS_TOKEN, ADD_NEW_EVENT_URL,
-    ADD_NEW_HABIT_URL, ADD_NEW_TASK_URL,
+    ACCESS_TOKEN,
+    ADD_NEW_EVENT_URL,
+    ADD_NEW_HABIT_URL,
+    ADD_NEW_TASK_URL,
     ADD_NEW_USER_URL,
-    API_URL, CHANGE_DATA_USER_URL,
-    CHECK_EMAIL_AVAILABILITY_URL, CHECK_HABIT_AVAILABILITY_URL,
-    CHECK_USERNAME_AVAILABILITY_URL, DELETE_EVENT_BY_ID_URL,
-    DELETE_HABIT_BY_ID_URL, DELETE_TASK_BY_ID_URL, DELETE_USER_BY_ID_URL, FETCH_EVENT_DATA_URL,
+    API_URL,
+    CHANGE_DATA_USER_URL,
+    CHECK_EMAIL_AVAILABILITY_URL,
+    CHECK_HABIT_AVAILABILITY_URL,
+    CHECK_HABIT_AVAILABILITY_URL_CONT,
+    CHECK_HABIT_AVAILABILITY_URL_SECOND_PARAM,
+    CHECK_USERNAME_AVAILABILITY_URL,
+    DELETE_EVENT_BY_ID_URL,
+    DELETE_HABIT_BY_ID_URL,
+    DELETE_TASK_BY_ID_URL,
+    DELETE_USER_BY_ID_URL,
+    FETCH_EVENT_DATA_URL,
     FETCH_HABIT_DATA_URL,
     FETCH_TASK_DATA_URL,
-    GET_CURRENT_USER_URL, INCREMENT_SERIES_URL,
-    LOGIN_URL, TASK_DONE_URL
+    GET_CURRENT_USER_URL,
+    INCREMENT_SERIES_URL,
+    LOGIN_URL,
+    TASK_DONE_URL
 } from "../constants";
 
 let access_token = '';
@@ -93,8 +105,8 @@ export const checkUsernameAvailability = async (username) => {
     return data.available;
 }
 
-export const checkHabitAvailability = async (habit_text) => {
-    const {data} = await authAxios.get(`${CHECK_HABIT_AVAILABILITY_URL}${habit_text}`);
+export const checkHabitAvailability = async (habit_text, currentUserId) => {
+    const {data} = await authAxios.get(`${CHECK_HABIT_AVAILABILITY_URL}${habit_text}${CHECK_HABIT_AVAILABILITY_URL_SECOND_PARAM}${currentUserId}`);
     return data.available;
 }
 

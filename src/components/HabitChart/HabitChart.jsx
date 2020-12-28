@@ -53,7 +53,6 @@ const HabitChart = ({currentHabit, currentSeries, maxSeries}) => {
             </Row>
         </div>
     )
-
 }
 
 
