@@ -43,15 +43,17 @@ export const INCREMENT_SERIES_URL = `/habit/increment/`;
 
 export const TASK_DONE_URL = `/task/done/`;
 
-export const NAME_REGEXP = /^[a-zA-Z0-9ąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,}$/;
+export const NAME_REGEXP = /^[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,10}$/;
 
-export const USERNAME_REGEXP = /^[a-zA-Z0-9]{4,}$/;
+export const USERNAME_REGEXP = /^[a-zA-Z0-9]{4,10}$/;
 
 export const EMAIL_REGEXP = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-export const PASSWORD_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$/.!%*?&])[A-Za-z\d@$!/.%*?&]{8,}$/;
+export const PASSWORD_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$/.!%*?&])[A-Za-z\d@$!/.%*?&]{8,20}$/;
 
-export const HABIT_AND_TASK_AND_EVENT_REGEXP = /^[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,}?( +[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]+)?( +[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{2,})?$/;
+export const HABIT_AND_TASK_AND_EVENT_REGEXP = /^[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,15}?( +[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{2,6})?( +[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{2,7})?$/;
+
+export const LOCATION_REGEXP = /^[a-zA-Z0-9ąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,10}$/;
 
 export const CHECK_EMAIL_AVAILABILITY_URL = `http://localhost:8080/api/user/checkEmailAvailability?email=`
 

@@ -1,7 +1,7 @@
 import {checkEmailAvailability, checkHabitAvailability, checkUsernameAvailability} from "../api";
 import {
     EMAIL_REGEXP,
-    HABIT_AND_TASK_AND_EVENT_REGEXP,
+    HABIT_AND_TASK_AND_EVENT_REGEXP, LOCATION_REGEXP,
     NAME_REGEXP,
     PASSWORD_REGEXP,
     USERNAME_REGEXP
@@ -184,6 +184,8 @@ export const validateEvent = (event) => {
     }
     if (!event.location) {
         errors.location = "Lokalizacja jest wymagana";
+    } else if (!LOCATION_REGEXP.test(event.location)) {
+        errors.location = "Lokalizacja jest nieprawidłowa";
     }
 
     return errors;
