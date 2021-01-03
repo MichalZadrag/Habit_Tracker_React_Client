@@ -9,7 +9,6 @@ import {
     CHANGE_DATA_USER_URL,
     CHECK_EMAIL_AVAILABILITY_URL,
     CHECK_HABIT_AVAILABILITY_URL,
-    CHECK_HABIT_AVAILABILITY_URL_CONT,
     CHECK_HABIT_AVAILABILITY_URL_SECOND_PARAM,
     CHECK_USERNAME_AVAILABILITY_URL,
     DELETE_EVENT_BY_ID_URL,
@@ -42,7 +41,7 @@ export const authAxios = axios.create({
     }
 })
 
-export const addNewUser = (firstName, lastName, username, email, password, setErrors, setAlerts) => {
+export const addNewUser = (firstName, lastName, username, email, password, setErrors, setAlerts, setShowToast) => {
 
     authAxios.post(ADD_NEW_USER_URL, {
         first_name: firstName,
@@ -53,13 +52,14 @@ export const addNewUser = (firstName, lastName, username, email, password, setEr
     })
         .then(r => {
             setAlerts({success: r.data.message});
+            setShowToast(true);
         })
         .catch(e => {
             setErrors({overall: "Wystąpił błąd"});
         })
 }
 
-export const changeDataUser = (oldUserId, firstName, lastName, username, email, password, setErrors, setAlerts) => {
+export const changeDataUser = (oldUserId, firstName, lastName, username, email, password, setErrors, setAlerts, setShowToast) => {
 
     authAxios.put(`${CHANGE_DATA_USER_URL}${oldUserId}`, {
         first_name: firstName,
@@ -70,13 +70,14 @@ export const changeDataUser = (oldUserId, firstName, lastName, username, email, 
     })
         .then(r => {
             setAlerts({success: r.data.message});
+            setShowToast(true);
         })
         .catch(e => {
             setErrors({overall: "Wystąpił błąd"});
         })
 }
 
-export const addNewHabit = (habitText, icon, color, user_id, setAlerts) => {
+export const addNewHabit = (habitText, icon, color, user_id, setAlerts, setShowToast) => {
 
     authAxios.post(ADD_NEW_HABIT_URL, {
         habit_text: habitText,
@@ -84,7 +85,10 @@ export const addNewHabit = (habitText, icon, color, user_id, setAlerts) => {
         color: color,
         user_id: user_id,
         done: false
-    }).then(r => setAlerts({success: "Pomyślnie dodano"}))
+    }).then(r => {
+        setAlerts({success: "Pomyślnie dodano"});
+        setShowToast(true);
+    })
         .catch(e => {
             console.log("error");
         })
@@ -168,14 +172,17 @@ export const fetchTaskData = async (id, setIsError) => {
     }
 }
 
-export const addNewTask = (taskText, color, user_id, date, setAlerts) => {
+export const addNewTask = (taskText, color, user_id, date, setAlerts, setShowToast) => {
     authAxios.post(ADD_NEW_TASK_URL, {
         task_text: taskText,
         color: color,
         user_id: user_id,
         date: date,
         isDone: false
-    }).then(r => setAlerts({success: "Pomyślnie dodano"}))
+    }).then(r => {
+        setAlerts({success: "Pomyślnie dodano"});
+        setShowToast(true);
+    })
         .catch(e => console.log("error"));
 }
 
@@ -184,7 +191,7 @@ export const deleteTaskById = (id) => {
         .then((r) => console.log(r.data.message));
 }
 
-export const addNewEvent = (eventText, color, user_id, date, location, startTime, endTime, setAlerts) => {
+export const addNewEvent = (eventText, color, user_id, date, location, startTime, endTime, setAlerts, setShowToast) => {
     authAxios.post(ADD_NEW_EVENT_URL, {
         event_text: eventText,
         color: color,
@@ -193,7 +200,10 @@ export const addNewEvent = (eventText, color, user_id, date, location, startTime
         location: location,
         startTime: startTime,
         endTime: endTime
-    }).then(r => setAlerts({success: "Pomyślnie dodano"}))
+    }).then(r => {
+        setAlerts({success: "Pomyślnie dodano"});
+        setShowToast(true);
+    })
         .catch(e => console.log("error"));
 }
 

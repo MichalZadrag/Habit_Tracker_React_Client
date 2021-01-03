@@ -3,11 +3,11 @@ import styles from '../HabitAddModal/HabitAddModal.module.css';
 import {Button, Col, Modal, Row} from "react-bootstrap";
 
 const DeleteConfirmationModal = ({show, onHide, deleteData}) => {
-    return(
+    return (
         <Modal
             size="sm"
-            show = { show }
-            onHide = { onHide }
+            show={show}
+            onHide={onHide}
         >
             <Modal.Header className={styles.mHeader} closeButton>
                 <Modal.Title>
@@ -19,14 +19,14 @@ const DeleteConfirmationModal = ({show, onHide, deleteData}) => {
                     <Col className="text-center">
                         <Button variant={"danger"}
                                 className="w-75"
-                                onClick={ deleteData }>
+                                onClick={deleteData}>
                             <small>Potwierdź</small>
                         </Button>
                     </Col>
                     <Col className="text-center">
                         <Button variant={"primary"}
                                 className="w-75"
-                                onClick={ onHide }>
+                                onClick={onHide}>
                             <small>Cofnij</small>
                         </Button>
                     </Col>

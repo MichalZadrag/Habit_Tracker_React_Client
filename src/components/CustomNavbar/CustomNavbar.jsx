@@ -54,26 +54,26 @@ const CustomNavbar = ({setIsAuthenticated, currentUser}) => {
                         </Link>
                     </NavDropdown>
                     <Nav.Link href="/tasks" className={styles.itemColor}>
-                        <div className="mr-1 float-left" >
-                            <FontAwesomeIcon icon={faTasks} />
+                        <div className="mr-1 float-left">
+                            <FontAwesomeIcon icon={faTasks}/>
                         </div>
                         <span className="ml-2">Zadania</span>
                     </Nav.Link>
                     <Nav.Link href="/events" className={styles.itemColor}>
-                        <div className="mr-1 float-left" >
-                            <FontAwesomeIcon icon={faCalendarAlt} />
+                        <div className="mr-1 float-left">
+                            <FontAwesomeIcon icon={faCalendarAlt}/>
                         </div>
                         <span className="ml-2">Wydarzenia</span>
                     </Nav.Link>
                     <Nav.Link href="/habits" className={styles.itemColor}>
-                        <div className="mr-1 float-left" >
-                            <FontAwesomeIcon icon={faCalendarCheck} />
+                        <div className="mr-1 float-left">
+                            <FontAwesomeIcon icon={faCalendarCheck}/>
                         </div>
                         <span className="ml-2">Nawyki</span>
                     </Nav.Link>
                     <Nav.Link href="/regularity" className={styles.itemColor}>
-                        <div className="mr-1 float-left" >
-                            <FontAwesomeIcon  icon={faClock} />
+                        <div className="mr-1 float-left">
+                            <FontAwesomeIcon icon={faClock}/>
                         </div>
                         <span className="ml-2">Systematyczność</span>
                     </Nav.Link>

@@ -8,7 +8,8 @@ import {addNewEvent} from "../../api";
 import {validateEvent} from "../../constants/validation";
 import {faClock} from "@fortawesome/free-regular-svg-icons";
 import TimePicker from 'react-bootstrap-time-picker';
-import {appendLeadingZeroes} from "../../constants/utils";
+import {secondsToHHmmss} from "../../constants/utils";
+import SuccessToast from "../SuccessToast/SuccessToast";
 
 const EventAddModal = ({show, onHide, currentUserId, date}) => {
 
@@ -24,12 +25,13 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
     });
     const [startTime, setStartTime] = useState("00:00:00");
     const [endTime, setEndTime] = useState("00:00:00");
+    const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
 
         const {eventText, color, location} = event;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewEvent(eventText, color, currentUserId, date, location, startTime, endTime, setAlerts);
+            addNewEvent(eventText, color, currentUserId, date, location, startTime, endTime, setAlerts, setShowToast);
             setEvent({
                 eventText: '',
                 color: '',
@@ -50,21 +52,6 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
         setEndTime(secondsToHHmmss(time));
     }
 
-
-    const secondsToHHmmss = (seconds) => {
-        const h = Math.floor(seconds / 3600);
-        const m = Math.floor(seconds % 3600 / 60);
-        const s = Math.floor(seconds % 3600 % 60);
-
-        const hDisplay = appendLeadingZeroes(h);
-        const mDisplay = appendLeadingZeroes(m);
-        const sDisplay = appendLeadingZeroes(s);
-
-
-        const time = hDisplay + ":" + mDisplay + ":" + sDisplay;
-
-        return time;
-    }
 
     const handleChange = (evt) => {
         const {name, value} = evt.target;
@@ -89,7 +76,13 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
             show={show}
             onHide={onHide}
         >
-            <Modal.Header closeButton className={styles.mHeader}>
+            <Modal.Header className={styles.mHeader}>
+                {alerts.success &&
+                <SuccessToast
+                    message={alerts.success}
+                    showToast={showToast}
+                    setShowToast={setShowToast}
+                />}
                 <Modal.Title id="contained-modal-title-vcenter">
                     Dodaj wydarzenie
                 </Modal.Title>
@@ -97,11 +90,6 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
             <Modal.Body className={styles.mBody}>
                 <Form noValidate onSubmit={handleSubmit}>
                     <Form.Group controlId={event.eventText}>
-                        <Row className={"justify-content-center"}>
-                            <Col>
-                                {alerts.success && <p className={"text-center text-success"}>{alerts.success}</p>}
-                            </Col>
-                        </Row>
                         <Row className="justify-content-center text-center">
                             <Col xs={1}>
                                 <Form.Label>

@@ -11,10 +11,10 @@ const CurrentUserInfoModal = ({show, onHide, currentUser, setIsAuthenticated}) =
 
     const {id, first_name, last_name, username, email} = currentUser;
 
-    return(
+    return (
         <Modal
-            show = { show }
-            onHide = { onHide }
+            show={show}
+            onHide={onHide}
         >
             <Modal.Header className={styles.mHeader} closeButton>
                 <Modal.Title>
@@ -47,20 +47,20 @@ const CurrentUserInfoModal = ({show, onHide, currentUser, setIsAuthenticated}) =
                     <FormControl type="text" value={username} readOnly className={"text-center"}/>
                 </InputGroup>
                 <InputGroup size="sm" className="mb-3">
-                <InputGroup.Prepend>
-                    <InputGroup.Text className={styles.lightBlue}>
-                        Email
-                    </InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl type="text" value={email} readOnly className={"text-center"} />
+                    <InputGroup.Prepend>
+                        <InputGroup.Text className={styles.lightBlue}>
+                            Email
+                        </InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl type="text" value={email} readOnly className={"text-center"}/>
 
-            </InputGroup>
+                </InputGroup>
                 <Row>
                     <Col className="text-center">
                         <Link to={"/userEditForm"}>
                             <Button variant={"primary"}
-                                    onClick={ onHide }
-                                    >
+                                    onClick={onHide}
+                            >
                                 <small>Edytuj dane</small>
                             </Button>
                         </Link>

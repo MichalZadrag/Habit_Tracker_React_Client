@@ -4,8 +4,8 @@ import {Button, Col, Container, Form, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen} from "@fortawesome/free-solid-svg-icons";
 import {changeDataUser} from "../../api";
-import cx from "classnames";
 import {validateNewData} from "../../constants/validation";
+import SuccessToast from "../SuccessToast/SuccessToast";
 
 
 const UserEditForm = ({currentUser}) => {
@@ -28,6 +28,7 @@ const UserEditForm = ({currentUser}) => {
     const [alerts, setAlerts] = useState({})
     const [isUsernameAvailable, setIsUsernameAvailable] = useState('');
     const [isEmailAvailable, setIsEmailAvailable] = useState('');
+    const [showToast, setShowToast] = useState(false);
 
 
     const handleChange = (evt) => {
@@ -44,7 +45,7 @@ const UserEditForm = ({currentUser}) => {
         const {firstName, lastName, username, email, password} = values
 
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            changeDataUser(id, firstName, lastName, username, email, password, setErrors, setAlerts);
+            changeDataUser(id, firstName, lastName, username, email, password, setErrors, setAlerts, setShowToast);
         }
     }, [errors]);
 
@@ -112,7 +113,7 @@ const UserEditForm = ({currentUser}) => {
                         <Row className="text-center justify-content-center">
                             <Col>
                                 <Form.Group controlId={values.password}>
-                                    <Form.Label>Hasło</Form.Label>
+                                    <Form.Label>Nowe hasło</Form.Label>
                                     <Form.Control
                                         className={`${errors.password && styles.inputError}`}
                                         type="password"
@@ -167,11 +168,12 @@ const UserEditForm = ({currentUser}) => {
                     </Form>
                 </div>
             </Row>
-            <Row className={"justify-content-center"}>
-                <Col>
-                    {alerts.success && <p className={"text-center text-success"}>{alerts.success}</p>}
-                </Col>
-            </Row>
+            {alerts.success &&
+            <SuccessToast
+                message={alerts.success}
+                showToast={showToast}
+                setShowToast={setShowToast}
+            />}
         </Container>
     )
 }

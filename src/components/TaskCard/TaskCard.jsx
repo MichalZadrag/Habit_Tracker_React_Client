@@ -10,7 +10,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import cx from "classnames";
 import styles from "../TaskCard/TaskCard.module.css";
 
-const TaskCard = ({ day, currentUserId, date }) => {
+const TaskCard = ({day, currentUserId, date}) => {
 
     const refreshPage = () => {
         window.location.reload(false);
@@ -30,57 +30,55 @@ const TaskCard = ({ day, currentUserId, date }) => {
         }
         fetchAPI();
 
-    },[currentUserId])
+    }, [currentUserId])
 
     const currentTasks = (date) => {
-
 
         return tasks.filter(task => task.date === date);
     }
 
 
-
-    return(
-            <Card>
-                <Card.Footer className={styles.backgroundColor}>
-                    <h5 className={cx("float-left", styles.fontColor)}>{currentDayToString(day)}</h5>
-                    <Button
-                        size={"sm"}
-                        className={"pl-2 pr-2 float-right"}
-                        onClick={ () => {
-                            setModalShow(true);
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faPlus} />
-                    </Button>
-                </Card.Footer>
-                <Card.Body className="p-0">
-                    {isError && <div>Something went wrong...</div>}
-                    {isLoading ? (<Spinner
-                            animation="border"
-                            variant={"primary"}
-                            className ={"ml-auto mr-auto"}
-                        />) :
-                        (<ListGroup>
-                            {currentTasks(date).map(task => (
-                                <Task
-                                    key = { task.id }
-                                    task = { task }
-                                    tasks = { currentTasks(date) }
-                                    setTasks = { setTasks }
-                                />))}
-                        </ListGroup>)}
-                </Card.Body>
-                <TaskAddModal
-                    show = { modalShow }
-                    onHide={() => {
-                        setModalShow(false);
-                        refreshPage();
+    return (
+        <Card>
+            <Card.Footer className={styles.backgroundColor}>
+                <h5 className={cx("float-left", styles.fontColor)}>{currentDayToString(day)}</h5>
+                <Button
+                    size={"sm"}
+                    className={"pl-2 pr-2 float-right"}
+                    onClick={() => {
+                        setModalShow(true);
                     }}
-                    currentUserId = { currentUserId }
-                    date = { date }
-                />
-            </Card>
+                >
+                    <FontAwesomeIcon icon={faPlus}/>
+                </Button>
+            </Card.Footer>
+            <Card.Body className="p-0">
+                {isError && <div>Something went wrong...</div>}
+                {isLoading ? (<Spinner
+                        animation="border"
+                        variant={"primary"}
+                        className={"ml-auto mr-auto"}
+                    />) :
+                    (<ListGroup>
+                        {currentTasks(date).map(task => (
+                            <Task
+                                key={task.id}
+                                task={task}
+                                tasks={currentTasks(date)}
+                                setTasks={setTasks}
+                            />))}
+                    </ListGroup>)}
+            </Card.Body>
+            <TaskAddModal
+                show={modalShow}
+                onHide={() => {
+                    setModalShow(false);
+                    refreshPage();
+                }}
+                currentUserId={currentUserId}
+                date={date}
+            />
+        </Card>
     )
 }
 

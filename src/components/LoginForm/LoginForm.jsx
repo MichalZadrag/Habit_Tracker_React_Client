@@ -8,6 +8,7 @@ import {useHistory} from 'react-router';
 import cx from 'classnames';
 import {login} from "../../api";
 import {validateLogin} from "../../constants/validation";
+import SuccessToast from "../SuccessToast/SuccessToast";
 
 
 const LoginForm = ({setIsAuthenticated}) => {
@@ -22,6 +23,8 @@ const LoginForm = ({setIsAuthenticated}) => {
     })
     const [errors, setErrors] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [showToast, setShowToast] = useState(false);
+    const [changeShowToast, setChangeShowToast] = useState(true);
 
     const handleChange = (evt) => {
         const {name, value} = evt.target;
@@ -34,10 +37,13 @@ const LoginForm = ({setIsAuthenticated}) => {
 
     useEffect(() => {
 
-        const {usernameOrEmail, password} = values
+        const {usernameOrEmail, password} = values;
 
         if (Object.keys(errors).length === 0 && isSubmitting) {
             login(usernameOrEmail, password, setErrors, history, setIsAuthenticated);
+        }
+        if (location.state && changeShowToast) {
+            setShowToast(location.state.showToast);
         }
     }, [errors])
 
@@ -45,19 +51,22 @@ const LoginForm = ({setIsAuthenticated}) => {
         event.preventDefault();
         setErrors(validateLogin(values));
         setIsSubmitting(true);
-
-
+        setChangeShowToast(false);
     }
 
     return (
-        <Container className="mb-0 mt-0 ml-auto mr-auto">
+        <Container fluid>
             <Row>
                 <Col>
                     <h3 className="text-center p-1 mt-4 mb-2">
                         Habit Tracker
                     </h3>
-                    {(location.state) ?
-                        <p className={cx(styles.success, "text-center", "mt-1")}>{location.state.message}</p> : <p></p>}
+                    {(location.state) &&
+                    <SuccessToast
+                        message={location.state.message}
+                        showToast={showToast}
+                        setShowToast={setShowToast}
+                    />}
                 </Col>
             </Row>
             <Row className="justify-content-center">
@@ -109,7 +118,8 @@ const LoginForm = ({setIsAuthenticated}) => {
                                     <Button
                                         variant={"success"}
                                         type={"submit"}
-                                        className="mt-1 mb-1 w-100">
+                                        className="mt-1 mb-1 w-100"
+                                    >
                                         <div className="mr-3 ml-1 float-left">
                                             <FontAwesomeIcon icon={faSignInAlt}/>
                                         </div>

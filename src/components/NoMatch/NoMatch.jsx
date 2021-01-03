@@ -1,4 +1,3 @@
-
 import React from "react";
 import {Button} from "react-bootstrap";
 import styles from "./NoMatch.module.css"
@@ -8,7 +7,7 @@ import {faSignInAlt} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {ACCESS_TOKEN} from "../../constants";
 
-const NoMatch = ({ setIsAuthenticated }) => {
+const NoMatch = ({setIsAuthenticated}) => {
 
     return (
         <div className="mb-0 mt-0 ml-auto mr-auto text-center">
@@ -18,12 +17,11 @@ const NoMatch = ({ setIsAuthenticated }) => {
                 <h5>Coś poszło nie tak :( </h5>
                 <Link to="/login">
                     <Button className="mt-2"
-                            onClick={() =>
-                            {
+                            onClick={() => {
                                 localStorage.removeItem(ACCESS_TOKEN);
                                 setIsAuthenticated(false);
                             }}>
-                        <FontAwesomeIcon icon={faSignInAlt}  className="mr-2"/>
+                        <FontAwesomeIcon icon={faSignInAlt} className="mr-2"/>
                         Powrót do logowania
                     </Button>
                 </Link>

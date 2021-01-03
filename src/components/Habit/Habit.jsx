@@ -83,7 +83,7 @@ const Habit = ({habit, habits, setHabits}) => {
                         <Col xl={4} md={6} xs={6}>
                             {renderButton()}
                         </Col>
-                        <Col xs={2} >
+                        <Col xs={2}>
                             <div
                                 role={"button"}
                                 className={cx("mt-1", "text-danger", styles.cursorPointer)}

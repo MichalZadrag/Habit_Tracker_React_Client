@@ -1,7 +1,8 @@
-.backgroundColor{
+.backgroundColor {
     background: #fffbfc;
     cursor: default;
 }
+
 .cursorPointer {
     cursor: pointer;
 }

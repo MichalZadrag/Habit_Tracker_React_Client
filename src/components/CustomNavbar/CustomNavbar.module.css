@@ -2,13 +2,16 @@
     background: #0078a2 !important;
     color: #fafafa !important;
 }
+
 .itemColor {
     color: #fafafa !important;
     border-bottom: 1px solid #07575B;
 }
+
 .fontColor {
     color: #fafafa !important;
 }
+
 .itemColor:hover {
     background: #00678b !important;
 }

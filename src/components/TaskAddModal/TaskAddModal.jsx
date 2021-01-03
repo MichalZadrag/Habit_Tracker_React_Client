@@ -6,6 +6,7 @@ import styles from "../HabitAddModal/HabitAddModal.module.css";
 import {addNewTask} from "../../api";
 import {COLORS} from "../../constants";
 import {validateTask} from "../../constants/validation";
+import SuccessToast from "../SuccessToast/SuccessToast";
 
 
 const TaskAddModal = ({show, onHide, currentUserId, date}) => {
@@ -19,11 +20,12 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
         user_id: '',
         date: ''
     });
+    const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
         const {taskText, color} = task;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewTask(taskText, color, currentUserId, date, setAlerts);
+            addNewTask(taskText, color, currentUserId, date, setAlerts, setShowToast);
             setTask({
                 taskText: '',
                 color: '',
@@ -54,7 +56,13 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
             show={show}
             onHide={onHide}
         >
-            <Modal.Header closeButton className={styles.mHeader}>
+            <Modal.Header className={styles.mHeader}>
+                {alerts.success &&
+                <SuccessToast
+                    message={alerts.success}
+                    showToast={showToast}
+                    setShowToast={setShowToast}
+                />}
                 <Modal.Title id="contained-modal-title-vcenter">
                     Dodaj zadanie
                 </Modal.Title>
@@ -62,11 +70,6 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
             <Modal.Body className={styles.mBody}>
                 <Form noValidate onSubmit={handleSubmit}>
                     <Form.Group controlId={task.taskText}>
-                        <Row className={"justify-content-center"}>
-                            <Col>
-                                {alerts.success && <p className={"text-center text-success"}>{alerts.success}</p>}
-                            </Col>
-                        </Row>
                         <Row className="justify-content-center text-center">
                             <Col xs={2}>
                                 <Form.Label className="text-left">

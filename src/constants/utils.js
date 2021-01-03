@@ -4,7 +4,6 @@ import {DAYS, ONE_DAY_IN_MS} from "./index";
 import moment from "moment";
 
 
-
 export const changeToCss = (color) => {
     let cssClass = '';
     switch (color) {
@@ -51,7 +50,7 @@ export const changeToIcon = (icon) => {
 }
 
 export const appendLeadingZeroes = (n) => {
-    if(n <= 9){
+    if (n <= 9) {
         return "0" + n;
     }
     return n
@@ -74,11 +73,26 @@ export const formatDate = (date) => {
 export const changeDateBy = (date, times, action) => {
     let newDate;
     if (action === "+") {
-         newDate = new Date(date.getTime() + (times * ONE_DAY_IN_MS));
+        newDate = new Date(date.getTime() + (times * ONE_DAY_IN_MS));
     } else if (action === "-") {
         newDate = new Date(date.getTime() - (times * ONE_DAY_IN_MS));
     }
     return newDate;
+}
+
+export const secondsToHHmmss = (seconds) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor(seconds % 3600 / 60);
+    const s = Math.floor(seconds % 3600 % 60);
+
+    const hDisplay = appendLeadingZeroes(h);
+    const mDisplay = appendLeadingZeroes(m);
+    const sDisplay = appendLeadingZeroes(s);
+
+
+    const time = hDisplay + ":" + mDisplay + ":" + sDisplay;
+
+    return time;
 }
 
 export const setCurrentDaysDependOnDate = (todayDate, number_of_repeat) => {
@@ -97,7 +111,7 @@ export const setCurrentDaysDependOnDate = (todayDate, number_of_repeat) => {
         }
         i++;
     }
-   return tempDays;
+    return tempDays;
 }
 
 export const currentDayToString = (day) => {
@@ -131,5 +145,26 @@ export const currentDayToString = (day) => {
     }
 
     return dayToString;
+}
+
+export const sortEventAsc = (firstDay, secondDay) => {
+    let startTimeFirstDay = firstDay.startTime.toUpperCase();
+    let startTimeSecondDay = secondDay.startTime.toUpperCase();
+    let endTimeFirstDay = firstDay.endTime.toUpperCase();
+    let endTimeSecondDay = secondDay.endTime.toUpperCase();
+    if (startTimeFirstDay < startTimeSecondDay) {
+        return -1;
+    }
+    if (startTimeFirstDay > startTimeSecondDay) {
+        return 1;
+    }
+    if (startTimeFirstDay === startTimeSecondDay) {
+        if (endTimeFirstDay < endTimeSecondDay) {
+            return -1;
+        }
+        if (endTimeFirstDay > endTimeSecondDay) {
+            return 1;
+        }
+    }
 }
 

@@ -1,8 +1,9 @@
-.backgroundColor{
+.backgroundColor {
     background: #0081AF !important;
     color: #fafafa;
 }
-.fontColor{
+
+.fontColor {
     color: #fafafa;
     cursor: default;
 }
@@ -10,6 +11,7 @@
 .cursorDefault {
     cursor: default;
 }
+
 .cursorPointer {
     cursor: pointer;
 }

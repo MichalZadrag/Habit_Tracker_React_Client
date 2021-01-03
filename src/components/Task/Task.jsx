@@ -9,7 +9,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
 import styles from "../Task/Task.module.css";
 
-const Task = ({ task, tasks, setTasks }) => {
+const Task = ({task, tasks, setTasks}) => {
 
     const refreshPage = () => {
         window.location.reload(false);
@@ -33,12 +33,12 @@ const Task = ({ task, tasks, setTasks }) => {
         refreshPage();
     }
 
-    return(
+    return (
         <div>
             <DeleteConfirmationModal
-                show = { modalShow }
-                onHide = { () => setModalShow(false) }
-                deleteData = { deleteTask }
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                deleteData={deleteTask}
             >
             </DeleteConfirmationModal>
             <ListGroup.Item className={cx("d-flex", done && "bg-success", styles.backgroundColor)}>
@@ -51,15 +51,15 @@ const Task = ({ task, tasks, setTasks }) => {
                 <div className="ml-auto mb-auto mt-auto">
                     <div
                         role={"button"}
-                        className={cx("float-left", "pl-2", "pr-2", "text-success",styles.cursorPointer , done && "invisible")}
+                        className={cx("float-left", "pl-2", "pr-2", "text-success", styles.cursorPointer, done && "invisible")}
                         onClick={setTaskDone}>
-                        <FontAwesomeIcon icon={faCheck} />
+                        <FontAwesomeIcon icon={faCheck}/>
                     </div>
                     <div
                         role={"button"}
                         className={cx("float-left", "pl-2", "text-danger", styles.cursorPointer)}
                         onClick={() => setModalShow(true)}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
+                        <FontAwesomeIcon icon={faTrashAlt}/>
                     </div>
                 </div>
             </ListGroup.Item>

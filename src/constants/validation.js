@@ -31,7 +31,6 @@ const isUsernameValid = (values, errors) => {
 const isEmailAvailable = async (values, setIsEmailAvailable) => {
 
 
-
     const isGood = await checkEmailAvailability(values.email);
     if (!isGood) {
         setIsEmailAvailable("Email jest zajety");
@@ -121,7 +120,7 @@ export const validateNewData = (currentUser, values, setIsUsernameAvailable, set
 }
 
 export const validateTask = (task) => {
-    let errors ={}
+    let errors = {}
 
     if (!task.taskText) {
         errors.taskText = "Zadanie jest wymagane";
@@ -152,7 +151,7 @@ const isHabitValid = (values, errors) => {
 
 export const validateLogin = (values) => {
 
-    let errors ={};
+    let errors = {};
 
     if (!values.usernameOrEmail) {
         errors.usernameOrEmail = "Podaj login lub email";
@@ -166,7 +165,7 @@ export const validateLogin = (values) => {
 }
 
 export const validateHabit = (values, setIsHabitAvailable, currentUserId) => {
-    let errors ={}
+    let errors = {}
 
     isHabitValid(values, errors);
     isHabitAvailable(values, setIsHabitAvailable, currentUserId);
@@ -175,7 +174,7 @@ export const validateHabit = (values, setIsHabitAvailable, currentUserId) => {
 }
 
 export const validateEvent = (event) => {
-    let errors ={}
+    let errors = {}
 
     if (!event.eventText) {
         errors.eventText = "Wydarzenie jest wymagane";

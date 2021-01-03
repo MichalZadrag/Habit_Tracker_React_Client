@@ -33,6 +33,7 @@
     display: block;
 
 }
+
 .sidebar ul li a:hover {
     background: #00678b;
 }
@@ -48,6 +49,7 @@ ul ul a {
     .sidebar {
         margin-left: -250px;
     }
+
     .sidebar.active {
         margin-left: 0;
     }

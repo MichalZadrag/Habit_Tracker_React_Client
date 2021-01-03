@@ -12,7 +12,7 @@ import styles from "../Event/Event.module.css";
 
 const Event = ({event, events, setEvents}) => {
 
-    const {event_name, color, location,startTime, endTime} = event;
+    const {event_name, color, location, startTime, endTime} = event;
 
     const [modalShow, setModalShow] = useState(false);
 
@@ -24,40 +24,40 @@ const Event = ({event, events, setEvents}) => {
     }
 
     return (
-            <ListGroup.Item className={cx("d-flex", styles.backgroundColor)}>
-                <DeleteConfirmationModal
-                    show = { modalShow }
-                    onHide = { () => setModalShow(false) }
-                    deleteData = { deleteEvent }
-                >
-                </DeleteConfirmationModal>
-                <div>
-                    <Badge variant="primary" className={cx("h-100", "p-1", "mr-2", changeToCss(color))}> </Badge>
-                    <div className="float-right">
-                        <p className="p-0 m-0">{event_name}</p>
-                        <p className="p-0 m-0">
-                            <small>
-                                <FontAwesomeIcon icon={faMapPin} className="mr-1" />
-                                {location}
-                            </small>
-                        </p>
-                        <p className="p-0 m-0">
-                            <small>
-                                <FontAwesomeIcon icon={faClock} className="mr-1" />
-                                {startTime.slice(0, 5)} - {endTime.slice(0, 5)}
-                            </small>
-                        </p>
-                    </div>
+        <ListGroup.Item className={cx("d-flex", styles.backgroundColor)}>
+            <DeleteConfirmationModal
+                show={modalShow}
+                onHide={() => setModalShow(false)}
+                deleteData={deleteEvent}
+            >
+            </DeleteConfirmationModal>
+            <div>
+                <Badge variant="primary" className={cx("h-100", "p-1", "mr-2", changeToCss(color))}> </Badge>
+                <div className="float-right">
+                    <p className="p-0 m-0">{event_name}</p>
+                    <p className="p-0 m-0">
+                        <small>
+                            <FontAwesomeIcon icon={faMapPin} className="mr-1"/>
+                            {location}
+                        </small>
+                    </p>
+                    <p className="p-0 m-0">
+                        <small>
+                            <FontAwesomeIcon icon={faClock} className="mr-1"/>
+                            {startTime.slice(0, 5)} - {endTime.slice(0, 5)}
+                        </small>
+                    </p>
                 </div>
-                <div className="ml-auto mb-auto mt-auto">
-                    <div
-                        role={"button"}
-                        className={cx("float-left", "pl-2", "text-danger", styles.cursorPointer)}
-                        onClick={() => setModalShow(true)}>
-                        <FontAwesomeIcon icon={faTrashAlt} />
-                    </div>
+            </div>
+            <div className="ml-auto mb-auto mt-auto">
+                <div
+                    role={"button"}
+                    className={cx("float-left", "pl-2", "text-danger", styles.cursorPointer)}
+                    onClick={() => setModalShow(true)}>
+                    <FontAwesomeIcon icon={faTrashAlt}/>
                 </div>
-            </ListGroup.Item>
+            </div>
+        </ListGroup.Item>
     )
 }
 

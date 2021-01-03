@@ -4,6 +4,7 @@
     border-radius: 20px;
     padding: 10px 60px;
 }
+
 hr {
     border-top: 1px solid #999999;
 }
@@ -15,9 +16,4 @@ hr {
 
 .inputError {
     border: 2px solid red;
-}
-
-.success {
-    font-size: 15px;
-    color: green;
 }

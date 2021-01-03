@@ -5,7 +5,6 @@ import ChangeDataView from "../ChangeDataView/ChangeDataView";
 import {changeDateBy, formatDate, setCurrentDaysDependOnDate} from "../../constants/utils";
 
 
-
 const TaskDeck = ({currentUserId}) => {
 
     const [todayDate, setTodayDate] = useState(new Date());
@@ -13,9 +12,8 @@ const TaskDeck = ({currentUserId}) => {
     const [currentDays, setCurrentDays] = useState([{day: '', date: ''}]);
 
 
-
     useEffect(() => {
-        setCurrentDays(setCurrentDaysDependOnDate(todayDate,  4));
+        setCurrentDays(setCurrentDaysDependOnDate(todayDate, 4));
     }, [laterDate, todayDate])
 
 
@@ -33,13 +31,13 @@ const TaskDeck = ({currentUserId}) => {
             </Row>
             <Row>
                 {currentDays.map((currentDay, i) => (
-                    <Col xl={4} key = { i }>
-                    <TaskCard
-                        key = { i }
-                        date = { formatDate(currentDay.date) }
-                        day = { currentDay.day }
-                        currentUserId = { currentUserId }
-                    />
+                    <Col xl={4} key={i}>
+                        <TaskCard
+                            key={i}
+                            date={formatDate(currentDay.date)}
+                            day={currentDay.day}
+                            currentUserId={currentUserId}
+                        />
                     </Col>
                 ))}
             </Row>

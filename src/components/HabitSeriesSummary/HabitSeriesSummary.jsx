@@ -2,13 +2,12 @@ import React, {useEffect, useState} from "react";
 import {Card, Col, ListGroup, Row, Spinner} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClock} from "@fortawesome/free-regular-svg-icons";
-import {changeDateBy, changeToCss, changeToIcon, setCurrentDaysDependOnDate} from "../../constants/utils";
+import {changeDateBy, changeToCss, changeToIcon} from "../../constants/utils";
 import {fetchHabitData} from "../../api";
 import cx from "classnames";
 import moment from "moment";
 import HabitChart from "../HabitChart/HabitChart";
 import styles from "../HabitSeriesSummary/HabitSeriesSummary.module.css";
-
 
 
 const HabitSeriesSummary = ({currentUserId}) => {
@@ -37,7 +36,7 @@ const HabitSeriesSummary = ({currentUserId}) => {
 
         if (currentSeries === 0) {
             return "Brak serii";
-        } else if(lastDayOfSeries === firstDayOfSeries) {
+        } else if (lastDayOfSeries === firstDayOfSeries) {
             return `${firstDayOfSeries}`;
         } else {
             return `${firstDayOfSeries} - ${lastDayOfSeries}`;

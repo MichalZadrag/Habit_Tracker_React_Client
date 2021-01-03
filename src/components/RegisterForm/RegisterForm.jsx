@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import styles from './RegisterForm.module.css';
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Row, Toast} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
+import {faCheckCircle, faSignInAlt, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom";
 import {addNewUser} from "../../api";
 import cx from 'classnames';
 import {validateRegister} from "../../constants/validation";
+import SuccessToast from "../SuccessToast/SuccessToast";
 
 const RegisterForm = () => {
 
@@ -23,14 +24,15 @@ const RegisterForm = () => {
     const [alerts, setAlerts] = useState({})
     const [isUsernameAvailable, setIsUsernameAvailable] = useState('');
     const [isEmailAvailable, setIsEmailAvailable] = useState('');
+    const [showToast, setShowToast] = useState(false);
 
     useEffect(() => {
-
-        const {firstName, lastName, username, email, password} = values
+        const {firstName, lastName, username, email, password} = values;
 
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewUser(firstName, lastName, username, email, password, setErrors, setAlerts);
+            addNewUser(firstName, lastName, username, email, password, setErrors, setAlerts, setShowToast);
         }
+        window.scrollTo(0, 0);
     }, [errors])
 
 
@@ -50,13 +52,12 @@ const RegisterForm = () => {
     }
 
     return (
-        <Container className="mb-0 mt-0 ml-auto mr-auto">
+        <Container fluid>
             <Row>
                 <Col>
                     <h3 className="text-center p-1 mt-4">
                         Habit Tracker
                     </h3>
-                {alerts.success && <p className={cx("text-center", styles.success)}>{alerts.success}</p>}
                 </Col>
             </Row>
             <Row className="p-3 mt-0 mb-4 justify-content-center">
@@ -180,6 +181,12 @@ const RegisterForm = () => {
                     </Form>
                 </div>
             </Row>
+            {alerts.success &&
+            <SuccessToast
+                message={alerts.success}
+                showToast={showToast}
+                setShowToast={setShowToast}
+            />}
         </Container>
     )
 }
