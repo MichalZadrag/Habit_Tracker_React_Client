@@ -5,9 +5,9 @@ import styles from "../components/HabitAddModal/HabitAddModal.module.css";
 import {faCalendar, faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 
 
-// export const API_URL = `https://habt-tracker.herokuapp.com/api`;
+export const API_URL = `https://habt-tracker.herokuapp.com/api`;
 
-export const API_URL = `http://localhost:8080/api`;
+// export const API_URL = `http://localhost:8080/api`;
 
 export const LOGIN_URL = `/auth/signin`;
 
@@ -51,7 +51,7 @@ export const EMAIL_REGEXP = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 export const PASSWORD_REGEXP = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$/.!%*?&])[A-Za-z\d@$!/.%*?&]{8,20}$/;
 
-export const HABIT_AND_TASK_AND_EVENT_REGEXP = /^[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,15}?( +[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{2,6})?( +[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{2,7})?$/;
+export const HABIT_AND_TASK_AND_EVENT_REGEXP = /^[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,15}?( +[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{2,9})?( +[a-zA-ZąćęłńóśźżĄĘŁŃÓŚŹŻ]{2,9})?$/;
 
 export const LOCATION_REGEXP = /^[a-zA-Z0-9ąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,10}$/;
 

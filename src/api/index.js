@@ -221,9 +221,12 @@ export const deleteEventById = (id) => {
         .then((r) => console.log(r.data.message));
 }
 
-export const incrementSeriesInHabit = (id) => {
+export const incrementSeriesInHabit = (id, refreshPage) => {
     authAxios.patch(`${INCREMENT_SERIES_URL}${id}`)
-        .then((r) => console.log(r.data.message));
+        .then((r) => {
+            console.log(r.data.message);
+            refreshPage();
+        });
 }
 
 export const setTaskDoneApi = (id) => {

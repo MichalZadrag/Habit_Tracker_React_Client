@@ -2,7 +2,7 @@ import React from "react";
 import styles from '../HabitAddModal/HabitAddModal.module.css';
 import {Button, Col, Modal, Row} from "react-bootstrap";
 
-const DeleteConfirmationModal = ({show, onHide, deleteData}) => {
+const ConfirmationModal = ({show, onHide, handleData}) => {
     return (
         <Modal
             size="sm"
@@ -11,7 +11,7 @@ const DeleteConfirmationModal = ({show, onHide, deleteData}) => {
         >
             <Modal.Header className={styles.mHeader} closeButton>
                 <Modal.Title>
-                    Na pewno ?
+                    Na pewno?
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className={styles.mBody}>
@@ -19,7 +19,7 @@ const DeleteConfirmationModal = ({show, onHide, deleteData}) => {
                     <Col className="text-center">
                         <Button variant={"danger"}
                                 className="w-75"
-                                onClick={deleteData}>
+                                onClick={handleData}>
                             <small>Potwierdź</small>
                         </Button>
                     </Col>
@@ -38,4 +38,4 @@ const DeleteConfirmationModal = ({show, onHide, deleteData}) => {
     )
 }
 
-export default DeleteConfirmationModal;
+export default ConfirmationModal;

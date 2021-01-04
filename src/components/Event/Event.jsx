@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import {faCheck, faMapPin, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
+import {faMapPin, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Badge from "react-bootstrap/Badge";
 import cx from "classnames";
 import {changeToCss} from "../../constants/utils";
 import {faClock} from "@fortawesome/free-regular-svg-icons";
 import {deleteEventById} from "../../api";
-import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import styles from "../Event/Event.module.css";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
 const Event = ({event, events, setEvents}) => {
 
@@ -25,12 +25,12 @@ const Event = ({event, events, setEvents}) => {
 
     return (
         <ListGroup.Item className={cx("d-flex", styles.backgroundColor)}>
-            <DeleteConfirmationModal
+            <ConfirmationModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                deleteData={deleteEvent}
+                handleData={deleteEvent}
             >
-            </DeleteConfirmationModal>
+            </ConfirmationModal>
             <div>
                 <Badge variant="primary" className={cx("h-100", "p-1", "mr-2", changeToCss(color))}> </Badge>
                 <div className="float-right">

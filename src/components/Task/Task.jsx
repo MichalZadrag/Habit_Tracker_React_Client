@@ -4,10 +4,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faTrashAlt} from "@fortawesome/free-solid-svg-icons";
 import {deleteTaskById, setTaskDoneApi} from "../../api";
 import {changeToCss} from "../../constants/utils";
-import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import ListGroup from "react-bootstrap/ListGroup";
 import Badge from "react-bootstrap/Badge";
 import styles from "../Task/Task.module.css";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
 const Task = ({task, tasks, setTasks}) => {
 
@@ -35,12 +35,12 @@ const Task = ({task, tasks, setTasks}) => {
 
     return (
         <div>
-            <DeleteConfirmationModal
+            <ConfirmationModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}
-                deleteData={deleteTask}
+                handleData={deleteTask}
             >
-            </DeleteConfirmationModal>
+            </ConfirmationModal>
             <ListGroup.Item className={cx("d-flex", done && "bg-success", styles.backgroundColor)}>
                 <div>
                     <Badge variant="primary" className={cx("h-100", "p-1", "mr-2", changeToCss(color))}> </Badge>

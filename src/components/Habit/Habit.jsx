@@ -2,7 +2,6 @@ import React, {useState} from "react";
 import cx from "classnames";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrashAlt} from "@fortawesome/free-solid-svg-icons";
-import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmationModal";
 import {deleteHabitById, incrementSeriesInHabit} from "../../api";
 import {changeToCss, changeToIcon} from "../../constants/utils";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -10,12 +9,14 @@ import Badge from "react-bootstrap/Badge";
 import {Button, Row} from "react-bootstrap";
 import Col from "react-bootstrap/Col";
 import styles from "./Habit.module.css";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
 
 
 const Habit = ({habit, habits, setHabits}) => {
 
     const {id, icon, color, habit_text, done} = habit;
-    const [modalShow, setModalShow] = useState(false);
+    const [deleteModalShow, setDeleteModalShow] = useState(false);
+    const [confirmModalShow, setConfirmModalShow] = useState(false);
 
     const refreshPage = () => {
         window.location.reload(false);
@@ -40,7 +41,7 @@ const Habit = ({habit, habits, setHabits}) => {
                     className="float-left"
                     variant="primary"
                     size={"sm"}
-                    onClick={incrementSeries}>
+                    onClick={() => {setConfirmModalShow(true)}}>
                     Zrobione?
                 </Button>
             )
@@ -57,8 +58,7 @@ const Habit = ({habit, habits, setHabits}) => {
     }
 
     const incrementSeries = () => {
-        incrementSeriesInHabit(id);
-        refreshPage();
+        incrementSeriesInHabit(id, refreshPage);
     }
 
     return (
@@ -87,18 +87,24 @@ const Habit = ({habit, habits, setHabits}) => {
                             <div
                                 role={"button"}
                                 className={cx("mt-1", "text-danger", styles.cursorPointer)}
-                                onClick={() => setModalShow(true)}>
+                                onClick={() => {setDeleteModalShow(true)}}>
                                 <FontAwesomeIcon icon={faTrashAlt}/>
                             </div>
                         </Col>
                     </Row>
                 </Col>
-                <DeleteConfirmationModal
-                    show={modalShow}
-                    onHide={() => setModalShow(false)}
-                    deleteData={deleteHabit}
+                <ConfirmationModal
+                    show={deleteModalShow}
+                    onHide={() => setDeleteModalShow(false)}
+                    handleData={deleteHabit}
                 >
-                </DeleteConfirmationModal>
+                </ConfirmationModal>
+                <ConfirmationModal
+                    show={confirmModalShow}
+                    onHide={() => setConfirmModalShow(false)}
+                    handleData={incrementSeries}
+                >
+                </ConfirmationModal>
             </Row>
         </ListGroup.Item>
     )
