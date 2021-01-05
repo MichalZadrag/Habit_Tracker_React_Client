@@ -55,11 +55,11 @@ export const HABIT_AND_TASK_AND_EVENT_REGEXP = /^[a-zA-ZąćęłńóśźżĄĘŁ
 
 export const LOCATION_REGEXP = /^[a-zA-Z0-9ąćęłńóśźżĄĘŁŃÓŚŹŻ]{3,10}$/;
 
-export const CHECK_EMAIL_AVAILABILITY_URL = `http://localhost:8080/api/user/checkEmailAvailability?email=`
+export const CHECK_EMAIL_AVAILABILITY_URL = `/user/checkEmailAvailability?email=`
 
-export const CHECK_USERNAME_AVAILABILITY_URL = `http://localhost:8080/api/user/checkUsernameAvailability?username=`
+export const CHECK_USERNAME_AVAILABILITY_URL = `/user/checkUsernameAvailability?username=`
 
-export const CHECK_HABIT_AVAILABILITY_URL = `http://localhost:8080/api/habit/checkHabitAvailability?habit=`
+export const CHECK_HABIT_AVAILABILITY_URL = `/habit/checkHabitAvailability?habit=`
 
 export const CHECK_HABIT_AVAILABILITY_URL_SECOND_PARAM = `&user_id=`
 
