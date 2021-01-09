@@ -129,10 +129,10 @@ const HabitSeriesSummary = ({currentUserId}) => {
                                 </Row>
                                 <Row className={"mt-2 text-center justify-content-center"}>
                                     <Col xs={6}>
-                                        <h6>Najlepsza: {currentHabit.max_series}</h6>
+                                        <h6>Aktualna: {currentHabit.series}</h6>
                                     </Col>
                                     <Col xs={6}>
-                                        <h6>Aktualna: {currentHabit.series}</h6>
+                                        <h6>Najlepsza: {currentHabit.max_series}</h6>
                                     </Col>
                                 </Row>
                                 <HabitChart

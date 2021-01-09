@@ -26,13 +26,16 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
     useEffect(() => {
         const {habitText, icon, color} = habit;
         if (Object.keys(errors).length === 0 && isSubmitting) {
-            addNewHabit(habitText, icon, color, currentUserId, setAlerts, setShowToast);
+            addNewHabit(habitText, icon, color, currentUserId, setAlerts, setShowToast, setIsHabitAvailable);
             setHabit({
                 habitText: '',
                 icon: '',
                 color: '',
                 user_id: ''
             })
+            if (isHabitAvailable !== "") {
+                setIsHabitAvailable("");
+            }
         }
 
     }, [errors])
@@ -48,11 +51,12 @@ const HabitAddModal = ({show, onHide, currentUserId}) => {
     }
 
     const handleSubmit = (evt) => {
-
         evt.preventDefault();
         setErrors(validateHabit(habit, setIsHabitAvailable, currentUserId));
         setIsSubmitting(true);
         evt.target.reset();
+        setShowToast(false);
+
     }
 
 

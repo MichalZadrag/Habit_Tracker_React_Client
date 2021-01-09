@@ -49,6 +49,7 @@ const TaskAddModal = ({show, onHide, currentUserId, date}) => {
         setErrors(validateTask(task));
         setIsSubmitting(true);
         evt.target.reset();
+        setShowToast(false);
     }
 
     return (

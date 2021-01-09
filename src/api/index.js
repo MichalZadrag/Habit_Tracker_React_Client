@@ -55,7 +55,7 @@ export const addNewUser = (firstName, lastName, username, email, password, setEr
             setShowToast(true);
         })
         .catch(e => {
-            setErrors({overall: "Wystąpił błąd"});
+            setErrors({overall: e.response.data.message});
         })
 }
 
@@ -73,11 +73,11 @@ export const changeDataUser = (oldUserId, firstName, lastName, username, email, 
             setShowToast(true);
         })
         .catch(e => {
-            setErrors({overall: "Wystąpił błąd"});
+            setErrors({overall: e.response.data.message});
         })
 }
 
-export const addNewHabit = (habitText, icon, color, user_id, setAlerts, setShowToast) => {
+export const addNewHabit = (habitText, icon, color, user_id, setAlerts, setShowToast, setIsHabitAvailable) => {
 
     authAxios.post(ADD_NEW_HABIT_URL, {
         habit_text: habitText,
@@ -86,11 +86,10 @@ export const addNewHabit = (habitText, icon, color, user_id, setAlerts, setShowT
         user_id: user_id,
         done: false
     }).then(r => {
-        setAlerts({success: "Pomyślnie dodano"});
+        setAlerts({success: r.data.message});
         setShowToast(true);
-    })
-        .catch(e => {
-            console.log("error");
+    }).catch(e => {
+            setIsHabitAvailable(e.response.data.message);
         })
 }
 
@@ -180,10 +179,10 @@ export const addNewTask = (taskText, color, user_id, date, setAlerts, setShowToa
         date: date,
         isDone: false
     }).then(r => {
-        setAlerts({success: "Pomyślnie dodano"});
+        setAlerts({success: r.data.message});
         setShowToast(true);
     })
-        .catch(e => console.log("error"));
+        .catch(e => console.log(e.response.data.message));
 }
 
 export const deleteTaskById = (id) => {
@@ -201,10 +200,10 @@ export const addNewEvent = (eventText, color, user_id, date, location, startTime
         startTime: startTime,
         endTime: endTime
     }).then(r => {
-        setAlerts({success: "Pomyślnie dodano"});
+        setAlerts({success: r.data.message});
         setShowToast(true);
     })
-        .catch(e => console.log("error"));
+        .catch(e => console.log(e.response.data.message));
 }
 
 export const fetchEventData = async (id, setIsError) => {

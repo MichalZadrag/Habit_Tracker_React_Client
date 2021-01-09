@@ -68,6 +68,7 @@ const EventAddModal = ({show, onHide, currentUserId, date}) => {
         setErrors(validateEvent(event));
         setIsSubmitting(true);
         evt.target.reset();
+        setShowToast(false);
 
     }
 

@@ -5,9 +5,9 @@ import styles from "../components/HabitAddModal/HabitAddModal.module.css";
 import {faCalendar, faCalendarCheck} from "@fortawesome/free-regular-svg-icons";
 
 
-export const API_URL = `https://habt-tracker.herokuapp.com/api`;
+// export const API_URL = `https://habt-tracker.herokuapp.com/api`;
 
-// export const API_URL = `http://localhost:8080/api`;
+export const API_URL = `http://localhost:8080/api`;
 
 export const LOGIN_URL = `/auth/signin`;
 
