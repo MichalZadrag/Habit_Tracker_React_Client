@@ -65,6 +65,10 @@ export const CHECK_HABIT_AVAILABILITY_URL_SECOND_PARAM = `&user_id=`
 
 export const ONE_DAY_IN_MS = 86400000;
 
+export const TODAY_DATE = new Date();
+
+export const YESTERDAY_DATE = ( date => new Date(date.setDate(date.getDate() - 1)) )(TODAY_DATE);
+
 export const DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 export const ICONS = [

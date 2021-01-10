@@ -90,9 +90,7 @@ export const secondsToHHmmss = (seconds) => {
     const sDisplay = appendLeadingZeroes(s);
 
 
-    const time = hDisplay + ":" + mDisplay + ":" + sDisplay;
-
-    return time;
+    return hDisplay + ":" + mDisplay + ":" + sDisplay;
 }
 
 export const setCurrentDaysDependOnDate = (todayDate, number_of_repeat) => {

@@ -8,6 +8,7 @@ import cx from "classnames";
 import moment from "moment";
 import HabitChart from "../HabitChart/HabitChart";
 import styles from "../HabitSeriesSummary/HabitSeriesSummary.module.css";
+import {TODAY_DATE, YESTERDAY_DATE} from "../../constants";
 
 
 const HabitSeriesSummary = ({currentUserId}) => {
@@ -16,7 +17,6 @@ const HabitSeriesSummary = ({currentUserId}) => {
     const [isError, setIsError] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [currentHabit, setCurrentHabit] = useState(null);
-    const [startDate] = useState(new Date());
 
 
     const handleChange = (evt) => {
@@ -30,14 +30,24 @@ const HabitSeriesSummary = ({currentUserId}) => {
 
     const displaySeriesDates = () => {
 
-        let currentSeries = currentHabit.series;
-        let lastDayOfSeries = moment(startDate).format("DD.MM");
-        let firstDayOfSeries = moment(changeDateBy(startDate, currentSeries - 1, "-")).format("DD.MM");
+        const { series } = currentHabit;
 
-        if (currentSeries === 0) {
+        let lastDayOfSeries;
+        let firstDayOfSeries;
+
+        if(!currentHabit.done) {
+            lastDayOfSeries = moment(YESTERDAY_DATE).format("DD.MM");
+            firstDayOfSeries = moment(changeDateBy(YESTERDAY_DATE, series - 1, "-")).format("DD.MM")
+        } else {
+            lastDayOfSeries = moment(TODAY_DATE).format("DD.MM");
+            firstDayOfSeries = moment(changeDateBy(TODAY_DATE, series - 1, "-")).format("DD.MM");
+        }
+
+
+        if (series === 0) {
             return "Brak serii";
         } else if (lastDayOfSeries === firstDayOfSeries) {
-            return `${firstDayOfSeries}`;
+            return `${lastDayOfSeries}`;
         } else {
             return `${firstDayOfSeries} - ${lastDayOfSeries}`;
         }
@@ -52,12 +62,11 @@ const HabitSeriesSummary = ({currentUserId}) => {
             setIsLoading(false);
         }
         fetchAPI();
-    }, [currentHabit])
+    }, [])
 
 
     return (
         <Row className="justify-content-center ">
-            {console.log(habits)}
             <Col xs={12} lg={10}>
                 <Card className={"mt-3"}>
                     {isError && <div>Coś poszło nie tak ...</div>}

@@ -4,7 +4,8 @@ import {Button} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCaretLeft, faCaretRight} from "@fortawesome/free-solid-svg-icons";
 import cx from 'classnames';
-import {appendLeadingZeroes, changeDateBy} from "../../constants/utils";
+import {changeDateBy} from "../../constants/utils";
+import moment from "moment";
 
 
 const ChangeDataView = ({todayDate, setTodayDate, laterDate, setLaterDate}) => {
@@ -12,15 +13,13 @@ const ChangeDataView = ({todayDate, setTodayDate, laterDate, setLaterDate}) => {
 
     useEffect(() => {
         setFormattedDate();
-    }, [laterDate]);
+    });
 
 
     const setFormattedDate = () => {
-        let formatted_todayDate = appendLeadingZeroes(todayDate.getDate()) +
-            "." + appendLeadingZeroes(todayDate.getMonth() + 1);
 
-        let formatted_threeDaysLaterDate = appendLeadingZeroes(laterDate.getDate()) +
-            "." + appendLeadingZeroes(laterDate.getMonth() + 1);
+        const formatted_todayDate = moment(todayDate).format("DD.MM");
+        const formatted_threeDaysLaterDate = moment(laterDate).format("DD.MM");
 
         return `${formatted_todayDate} - ${formatted_threeDaysLaterDate}`;
 
