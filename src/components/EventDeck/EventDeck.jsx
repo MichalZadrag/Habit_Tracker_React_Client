@@ -3,13 +3,14 @@ import {Col, Container, Row} from "react-bootstrap";
 import EventCard from "../EventCard/EventCard";
 import {changeDateBy, formatDate, setCurrentDaysDependOnDate} from "../../constants/utils";
 import ChangeDataView from "../ChangeDataView/ChangeDataView";
+import {TODAY_DATE} from "../../constants";
 
 
 const EventDeck = ({currentUserId}) => {
 
 
-    const [todayDate, setTodayDate] = useState(new Date());
-    const [laterDate, setLaterDate] = useState(changeDateBy(new Date(), 2, "+"));
+    const [todayDate, setTodayDate] = useState(TODAY_DATE);
+    const [laterDate, setLaterDate] = useState(changeDateBy(TODAY_DATE, 2, "+"));
     const [currentDays, setCurrentDays] = useState([{day: '', date: ''}]);
 
     useEffect(() => {

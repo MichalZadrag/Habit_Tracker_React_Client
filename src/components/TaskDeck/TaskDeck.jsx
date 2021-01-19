@@ -3,12 +3,13 @@ import {Col, Container, Row} from "react-bootstrap";
 import TaskCard from "../TaskCard/TaskCard";
 import ChangeDataView from "../ChangeDataView/ChangeDataView";
 import {changeDateBy, formatDate, setCurrentDaysDependOnDate} from "../../constants/utils";
+import {TODAY_DATE} from "../../constants";
 
 
 const TaskDeck = ({currentUserId}) => {
 
-    const [todayDate, setTodayDate] = useState(new Date());
-    const [laterDate, setLaterDate] = useState(changeDateBy(new Date(), 2, "+"));
+    const [todayDate, setTodayDate] = useState(TODAY_DATE);
+    const [laterDate, setLaterDate] = useState(changeDateBy(TODAY_DATE, 2, "+"));
     const [currentDays, setCurrentDays] = useState([{day: '', date: ''}]);
 
 

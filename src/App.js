@@ -10,7 +10,7 @@ import {
 } from "./components";
 import styles from './App.module.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {getCurrentUser} from "./api";
+import {getCurrentUser, login} from "./api";
 import {Spinner} from "react-bootstrap";
 import NoMatch from "./components/NoMatch/NoMatch"
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -29,10 +29,11 @@ const App = () => {
             setCurrentUser(await getCurrentUser());
         }
         fetchCurrentUser();
-    }, [isAuthenticated, isDataChange]);
+    }, []);
 
 
     return (
+
         <Router>
             <div className="App">
                 <div className={styles.wrapper}>

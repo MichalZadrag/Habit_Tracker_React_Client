@@ -19,7 +19,7 @@ const HabitList = ({currentUserId}) => {
     const [habits, setHabits] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
-    const [modalShow, setModalShow] = React.useState(false);
+    const [modalShow, setModalShow] = useState(false);
 
     useEffect(() => {
         const fetchAPI = async () => {
