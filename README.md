@@ -1,5 +1,19 @@
 ## Habit Tracker React Client
 
+### Uruchamianie
+
+Po wypakowaniu pliku należy uruchomić projekt w dowolnym IDE następnie w terminalu uruchomić komendę:
+
+``` 
+yarn install
+```
+
+Gdy proces się zakończy, w celu uruchomienia aplikacji należy wpisać:
+
+```
+npm start
+```
+
 Strona uruchamia się na http://localhost:3000.
 
 ### Konfiguracja API
